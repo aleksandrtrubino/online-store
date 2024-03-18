@@ -17,8 +17,12 @@ public class Main {
         user.setPassword("4321");
         user.setEnabled(true);
 
+        Authority authority = new Authority();
+        authority.setName("admin");
+
         entityManager.getTransaction().begin();
         entityManager.persist(user);
+        entityManager.persist(authority);
         entityManager.getTransaction().commit();
     }
 }
