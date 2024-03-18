@@ -1,6 +1,7 @@
 package ru.vistar;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "authorities")
 public class Authority {
@@ -10,6 +11,8 @@ public class Authority {
     private Long id;
     @Column(name = "authority_name")
     private String name;
+    @ManyToMany(mappedBy = "authorities")
+    private Set<User> users;
 
     public Authority() {}
 
@@ -23,5 +26,13 @@ public class Authority {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

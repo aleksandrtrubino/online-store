@@ -1,5 +1,6 @@
 package ru.vistar;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "users")
 public class User {
@@ -10,6 +11,14 @@ public class User {
     private String password;
     private String email;
     private Boolean enabled;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_authorities",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "authority_id", referencedColumnName = "authority_id"))
+    private Set<Authority> authorities;
 
 
     public User(){}
@@ -40,6 +49,14 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 }
 
