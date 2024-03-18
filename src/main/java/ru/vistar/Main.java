@@ -12,5 +12,13 @@ public class Main {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.vistar.persistence-unit");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+        User user = new User();
+        user.setEmail("string1234@mail.com");
+        user.setPassword("4321");
+        user.setEnabled(true);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
     }
 }
