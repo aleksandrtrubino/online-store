@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="202403202011001" author="Karavaev2024">
+        <createTable tableName="cities">
+            <column name="city_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="city_name" type="varchar(128)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403202011002" author="Karavaev2024">
+        <createTable tableName="streets">
+            <column name="street_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="street_name" type="varchar(128)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403202011003" author="Karavaev2024">
+        <createTable tableName="houses">
+            <column name="house_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="house_number" type="varchar(128)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403202011004" author="Karavaev2024">
+        <createSequence sequenceName="cities_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="202403202011005" author="Karavaev2024">
+        <createSequence sequenceName="streets_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="202403202011006" author="Karavaev2024">
+        <createSequence sequenceName="houses_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+</databaseChangeLog>

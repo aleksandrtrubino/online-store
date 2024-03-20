@@ -7,6 +7,8 @@
     <include file="changelog/20240317204700_add_users.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240317210400_add_authorities.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240317210700_add_users_authorities.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20240320201100_add_tables_cities_streets_houses.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20240320221400_add_tables_addresses.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240320205400_add_shops.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240320205600_add_suppliers.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

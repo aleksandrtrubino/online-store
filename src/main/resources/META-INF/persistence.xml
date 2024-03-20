@@ -10,6 +10,10 @@
         <class>ru.vistar.Authority</class>
         <class>ru.vistar.Shop</class>
         <class>ru.vistar.Supplier</class>
+        <class>ru.vistar.Address</class>
+        <class>ru.vistar.City</class>
+        <class>ru.vistar.House</class>
+        <class>ru.vistar.Street</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

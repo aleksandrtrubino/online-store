@@ -14,25 +14,13 @@ public class Main {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.vistar.persistence-unit");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-//        User user = new User();
-//        user.setEmail("string1234@mail.com");
-//        user.setPassword("4321");
-//        user.setEnabled(true);
-//        user.setFirstName("Иван");
-//        user.setMiddleName("Иванович");
-//        user.setLastName("Иванов");
-//
-//        Authority authority = new Authority();
-//        authority.setName("admin");
-//
-//        Set<Authority> authorities = new HashSet<>();
-//        authorities.add(authority);
-//
-//        user.setAuthorities(authorities);
-//
-//        Shop shop = new Shop();
-//        shop.setName("Магнит");
+        City city = new City("voronezh");
+        Street street = new Street("voroshilova");
+        House house1 = new House("49");
+        House house2 = new House("40");
 
+        Address address1 = new Address(city, street, house1);
+        Address address2 = new Address(city, street, house2);
         Supplier supplier = new Supplier();
         supplier.setEmail("pterov@mail.com");
         supplier.setPassword("1234");
@@ -45,14 +33,13 @@ public class Main {
         supplier.setShop(shop);
 
         entityManager.getTransaction().begin();
-//        entityManager.persist(user);
-//        entityManager.persist(authority);
-//        authority = entityManager.getReference(Authority.class,1151L);
-//        entityManager.persist(shop);
-        entityManager.persist(shop);
-        entityManager.persist(supplier);
+        entityManager.persist(city);
+        entityManager.persist(street);
+        entityManager.persist(house1);
+        entityManager.persist(house2);
+        entityManager.persist(address1);
+        entityManager.persist(address2);
         entityManager.getTransaction().commit();
-
 
     }
 }
