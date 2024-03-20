@@ -14,26 +14,30 @@ public class Main {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.vistar.persistence-unit");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        User user = new User();
-        user.setEmail("string1234@mail.com");
-        user.setPassword("4321");
-        user.setEnabled(true);
-        user.setFirstName("Иван");
-        user.setMiddleName("Иванович");
-        user.setLastName("Иванов");
+//        User user = new User();
+//        user.setEmail("string1234@mail.com");
+//        user.setPassword("4321");
+//        user.setEnabled(true);
+//        user.setFirstName("Иван");
+//        user.setMiddleName("Иванович");
+//        user.setLastName("Иванов");
+//
+//        Authority authority = new Authority();
+//        authority.setName("admin");
+//
+//        Set<Authority> authorities = new HashSet<>();
+//        authorities.add(authority);
+//
+//        user.setAuthorities(authorities);
 
-        Authority authority = new Authority();
-        authority.setName("admin");
-
-        Set<Authority> authorities = new HashSet<>();
-        authorities.add(authority);
-
-        user.setAuthorities(authorities);
+        Shop shop = new Shop();
+        shop.setName("Магнит");
 
         entityManager.getTransaction().begin();
-        entityManager.persist(user);
-        entityManager.persist(authority);
-        authority = entityManager.getReference(Authority.class,1151L);
+//        entityManager.persist(user);
+//        entityManager.persist(authority);
+//        authority = entityManager.getReference(Authority.class,1151L);
+        entityManager.persist(shop);
         entityManager.getTransaction().commit();
 
     }

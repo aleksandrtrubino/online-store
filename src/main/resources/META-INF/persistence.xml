@@ -8,6 +8,7 @@
         <description>Persistence Unit</description>
         <class>ru.vistar.User</class>
         <class>ru.vistar.Authority</class>
+        <class>ru.vistar.Shop</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
