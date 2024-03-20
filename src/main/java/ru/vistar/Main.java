@@ -29,16 +29,30 @@ public class Main {
 //        authorities.add(authority);
 //
 //        user.setAuthorities(authorities);
+//
+//        Shop shop = new Shop();
+//        shop.setName("Магнит");
 
+        Supplier supplier = new Supplier();
+        supplier.setEmail("pterov@mail.com");
+        supplier.setPassword("1234");
+        supplier.setEnabled(true);
+        supplier.setFirstName("Петр");
+        supplier.setMiddleName("Петрович");
+        supplier.setLastName("Петров");
         Shop shop = new Shop();
-        shop.setName("Магнит");
+        shop.setName("Пятерочка");
+        supplier.setShop(shop);
 
         entityManager.getTransaction().begin();
 //        entityManager.persist(user);
 //        entityManager.persist(authority);
 //        authority = entityManager.getReference(Authority.class,1151L);
+//        entityManager.persist(shop);
         entityManager.persist(shop);
+        entityManager.persist(supplier);
         entityManager.getTransaction().commit();
+
 
     }
 }

@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")

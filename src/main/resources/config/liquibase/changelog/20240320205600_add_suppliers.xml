@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="202403202056001" author="aleksandrtrubino">
+        <createTable tableName="suppliers">
+            <column name="user_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="shop_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403202056002" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="suppliers"
+                baseColumnNames="shop_id"
+                constraintName="fk_suppliers_shop_id"
+                referencedTableName="shops"
+                referencedColumnNames="shop_id"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+</databaseChangeLog>

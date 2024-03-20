@@ -9,6 +9,7 @@
         <class>ru.vistar.User</class>
         <class>ru.vistar.Authority</class>
         <class>ru.vistar.Shop</class>
+        <class>ru.vistar.Supplier</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
