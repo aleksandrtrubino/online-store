@@ -18,6 +18,9 @@ public class Main {
         user.setEmail("string1234@mail.com");
         user.setPassword("4321");
         user.setEnabled(true);
+        user.setFirstName("Иван");
+        user.setMiddleName("Иванович");
+        user.setLastName("Иванов");
 
         Authority authority = new Authority();
         authority.setName("admin");

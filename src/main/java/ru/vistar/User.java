@@ -11,6 +11,12 @@ public class User {
     private String password;
     private String email;
     private Boolean enabled;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "middle_name")
+    private String middleName;
+    @Column(name = "last_name")
+    private String lastName;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_authorities",
@@ -57,6 +63,30 @@ public class User {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
 
