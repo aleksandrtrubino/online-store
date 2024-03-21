@@ -17,5 +17,6 @@
     <include file="changelog/20240321204900_add_products.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240321204400_add_pickup_points_table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240321210000_add_purchase_statuses_table.xml" relativeToChangelogFile="true"/>
-
+    <include file="changelog/20240321214700_add_favorites_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20240321214800_add_reviews_table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
