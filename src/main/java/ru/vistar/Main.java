@@ -32,6 +32,15 @@ public class Main {
         shop.setName("Пятерочка");
         supplier.setShop(shop);
 
+        Buyer buyer = new Buyer();
+        buyer.setFirstName("a");
+        buyer.setMiddleName("b");
+        buyer.setLastName("c");
+        buyer.setEmail("d");
+        buyer.setPassword("e");
+        buyer.setEnabled(true);
+        buyer.setAddress(address1);
+
         entityManager.getTransaction().begin();
         entityManager.persist(city);
         entityManager.persist(street);
@@ -39,6 +48,7 @@ public class Main {
         entityManager.persist(house2);
         entityManager.persist(address1);
         entityManager.persist(address2);
+        entityManager.persist(buyer);
         entityManager.getTransaction().commit();
 
     }
