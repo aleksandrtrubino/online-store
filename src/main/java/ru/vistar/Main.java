@@ -14,41 +14,50 @@ public class Main {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.vistar.persistence-unit");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        City city = new City("voronezh");
-        Street street = new Street("voroshilova");
-        House house1 = new House("49");
-        House house2 = new House("40");
+//        City city = new City("voronezh");
+//        Street street = new Street("voroshilova");
+//        House house1 = new House("49");
+//        House house2 = new House("40");
+//
+//        Address address1 = new Address(city, street, house1);
+//        Address address2 = new Address(city, street, house2);
+//        Supplier supplier = new Supplier();
+//        supplier.setEmail("pterov@mail.com");
+//        supplier.setPassword("1234");
+//        supplier.setEnabled(true);
+//        supplier.setFirstName("Петр");
+//        supplier.setMiddleName("Петрович");
+//        supplier.setLastName("Петров");
+//        Shop shop = new Shop();
+//        shop.setName("Пятерочка");
+//        supplier.setShop(shop);
+//
+//        Buyer buyer = new Buyer();
+//        buyer.setFirstName("a");
+//        buyer.setMiddleName("b");
+//        buyer.setLastName("c");
+//        buyer.setEmail("d");
+//        buyer.setPassword("e");
+//        buyer.setEnabled(true);
+//        buyer.setAddress(address1);
 
-        Address address1 = new Address(city, street, house1);
-        Address address2 = new Address(city, street, house2);
-        Supplier supplier = new Supplier();
-        supplier.setEmail("pterov@mail.com");
-        supplier.setPassword("1234");
-        supplier.setEnabled(true);
-        supplier.setFirstName("Петр");
-        supplier.setMiddleName("Петрович");
-        supplier.setLastName("Петров");
-        Shop shop = new Shop();
-        shop.setName("Пятерочка");
-        supplier.setShop(shop);
+        Category category = new Category();
+        category.setName("Электроника");
 
-        Buyer buyer = new Buyer();
-        buyer.setFirstName("a");
-        buyer.setMiddleName("b");
-        buyer.setLastName("c");
-        buyer.setEmail("d");
-        buyer.setPassword("e");
-        buyer.setEnabled(true);
-        buyer.setAddress(address1);
+        Subcategory subcategory = new Subcategory();
+        subcategory.setName("Стиральные машины");
+        subcategory.setCategory(category);
 
         entityManager.getTransaction().begin();
-        entityManager.persist(city);
-        entityManager.persist(street);
-        entityManager.persist(house1);
-        entityManager.persist(house2);
-        entityManager.persist(address1);
-        entityManager.persist(address2);
-        entityManager.persist(buyer);
+//        entityManager.persist(city);
+//        entityManager.persist(street);
+//        entityManager.persist(house1);
+//        entityManager.persist(house2);
+//        entityManager.persist(address1);
+//        entityManager.persist(address2);
+//        entityManager.persist(buyer);
+        entityManager.persist(category);
+        entityManager.persist(subcategory);
         entityManager.getTransaction().commit();
 
     }
