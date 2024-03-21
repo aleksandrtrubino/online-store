@@ -15,6 +15,7 @@
     <include file="changelog/20240321202300_add_categories.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240321202400_add_subcategories.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240321204900_add_products.xml" relativeToChangelogFile="true"/>
-
+    <include file="changelog/20240321204400_add_pickup_points_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20240321210000_add_purchase_statuses_table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
