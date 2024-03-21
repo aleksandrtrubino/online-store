@@ -14,6 +14,7 @@
     <include file="changelog/20240321201100_add_buyers.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240321202300_add_categories.xml" relativeToChangelogFile="true"/>
     <include file="changelog/20240321202400_add_subcategories.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/20240321204900_add_products.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>

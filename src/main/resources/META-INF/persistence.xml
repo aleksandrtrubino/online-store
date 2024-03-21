@@ -17,6 +17,7 @@
         <class>ru.vistar.Street</class>
         <class>ru.vistar.Category</class>
         <class>ru.vistar.Subcategory</class>
+        <class>ru.vistar.Product</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

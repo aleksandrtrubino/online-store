@@ -14,50 +14,30 @@ public class Main {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.vistar.persistence-unit");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-//        City city = new City("voronezh");
-//        Street street = new Street("voroshilova");
-//        House house1 = new House("49");
-//        House house2 = new House("40");
-//
-//        Address address1 = new Address(city, street, house1);
-//        Address address2 = new Address(city, street, house2);
-//        Supplier supplier = new Supplier();
-//        supplier.setEmail("pterov@mail.com");
-//        supplier.setPassword("1234");
-//        supplier.setEnabled(true);
-//        supplier.setFirstName("Петр");
-//        supplier.setMiddleName("Петрович");
-//        supplier.setLastName("Петров");
-//        Shop shop = new Shop();
-//        shop.setName("Пятерочка");
-//        supplier.setShop(shop);
-//
-//        Buyer buyer = new Buyer();
-//        buyer.setFirstName("a");
-//        buyer.setMiddleName("b");
-//        buyer.setLastName("c");
-//        buyer.setEmail("d");
-//        buyer.setPassword("e");
-//        buyer.setEnabled(true);
-//        buyer.setAddress(address1);
+        Shop shop = new Shop();
+        shop.setName("Спортмастер");
 
         Category category = new Category();
-        category.setName("Электроника");
+        category.setName("Спорттовары");
 
         Subcategory subcategory = new Subcategory();
-        subcategory.setName("Стиральные машины");
+        subcategory.setName("Товары для футбола");
         subcategory.setCategory(category);
 
+        Product product = new Product();
+        product.setName("Футбольный мяч");
+        product.setDescription("Футбольный мяч прочный хороший");
+        product.setPrice(100.0);
+        product.setPrevPrice(null);
+        product.setShop(shop);
+        product.setSubcategory(subcategory);
+
+
         entityManager.getTransaction().begin();
-//        entityManager.persist(city);
-//        entityManager.persist(street);
-//        entityManager.persist(house1);
-//        entityManager.persist(house2);
-//        entityManager.persist(address1);
-//        entityManager.persist(address2);
-//        entityManager.persist(buyer);
+        entityManager.persist(shop);
         entityManager.persist(category);
         entityManager.persist(subcategory);
+        entityManager.persist(product);
         entityManager.getTransaction().commit();
 
     }
