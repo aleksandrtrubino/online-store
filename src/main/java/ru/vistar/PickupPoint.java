@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "pickup_points")
 public class PickupPoint {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pickup_point_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pickup_points_seq")
     @Column(name = "pickup_point_id")
     private Long id;
 
@@ -14,7 +14,7 @@ public class PickupPoint {
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
-    PickupPoint(){}
+    public PickupPoint(){}
 
     public PickupPoint(Address address) {
         this.address = address;

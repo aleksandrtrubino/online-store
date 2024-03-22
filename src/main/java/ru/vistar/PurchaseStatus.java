@@ -6,14 +6,14 @@ import javax.persistence.*;
 @Table(name = "purchase_statuses")
 public class PurchaseStatus {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_status_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_statuses_seq")
     @Column(name = "purchase_status_id")
     private Long id;
 
     @Column(name = "purchase_status_name")
     private String name;
 
-    PurchaseStatus(){}
+    public PurchaseStatus(){}
 
     public PurchaseStatus(String name) {
         this.name = name;

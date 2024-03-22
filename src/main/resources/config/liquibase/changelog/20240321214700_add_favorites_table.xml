@@ -17,4 +17,26 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="202403212147002" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="favorites"
+                baseColumnNames="user_id"
+                constraintName="fk_favorites_user_id"
+                referencedTableName="users"
+                referencedColumnNames="user_id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+    <changeSet id="202403212147003" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="favorites"
+                baseColumnNames="product_id"
+                constraintName="fk_favorites_product_id"
+                referencedTableName="products"
+                referencedColumnNames="product_id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
 </databaseChangeLog>

@@ -19,6 +19,8 @@
     </changeSet>
 
     <changeSet id="202403212100002" author="Karavaev2024">
-        <createSequence sequenceName="purchase_status_seq" startValue="1050" incrementBy="50"/>
+        <createSequence sequenceName="purchase_statuses_seq" startValue="1050" incrementBy="50"/>
     </changeSet>
+
+
 </databaseChangeLog>

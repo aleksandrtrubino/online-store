@@ -27,6 +27,15 @@ public class User {
                     name = "authority_id", referencedColumnName = "authority_id"))
     private Set<Authority> authorities;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "favorites",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "product_id", referencedColumnName = "product_id"))
+    private Set<Product> favorites;
+
 
     public User(){}
 
@@ -90,6 +99,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Product> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Product> favorites) {
+        this.favorites = favorites;
     }
 }
 

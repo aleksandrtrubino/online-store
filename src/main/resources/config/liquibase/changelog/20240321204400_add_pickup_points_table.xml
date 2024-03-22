@@ -22,13 +22,14 @@
         <addForeignKeyConstraint
                 baseTableName="pickup_points"
                 baseColumnNames="address_id"
-                constraintName="fk_pickup_point_address_id"
+                constraintName="fk_pickup_points_address_id"
                 referencedTableName="addresses"
                 referencedColumnNames="address_id"
-                onUpdate="RESTRICT"/>
+                onDelete="CASCADE"
+                />
     </changeSet>
 
     <changeSet id="202403212044003" author="Karavaev2024">
-        <createSequence sequenceName="pickup_point_seq" startValue="1050" incrementBy="50"/>
+        <createSequence sequenceName="pickup_points_seq" startValue="1050" incrementBy="50"/>
     </changeSet>
 </databaseChangeLog>

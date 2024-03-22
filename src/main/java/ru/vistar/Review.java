@@ -4,18 +4,20 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
 public class Review {
     @Id
     @Column(name = "review_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reviews_seq")
     private Long id;
 
     @Column(name = "rating")
-    private int rating;
+    private Integer rating;
 
     @Column(name = "review_content")
     private String content;
@@ -28,19 +30,16 @@ public class Review {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Instant updatedAt;
+    @Column(name = "updated_at",columnDefinition = "TIMESTAMP")
+    private LocalDateTime updatedAt;
 
     public Review(){}
 
-    public Review(int rating, String content, User user, Product product, Instant createdAt, Instant updatedAt) {
+    public Review(Integer rating, String content, User user, Product product, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.rating = rating;
         this.content = content;
         this.user = user;
@@ -52,11 +51,11 @@ public class Review {
     public Long getId() {
         return id;
     }
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
@@ -84,19 +83,19 @@ public class Review {
         this.product = product;
     }
 
-    public Instant getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
