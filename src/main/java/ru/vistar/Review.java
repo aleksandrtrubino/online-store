@@ -34,18 +34,19 @@ public class Review {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at",columnDefinition = "TIMESTAMP")
+    @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     public Review(){}
 
-    public Review(Integer rating, String content, User user, Product product, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Review(Integer rating, String content, User user, Product product, LocalDateTime createdAt) {
         this.rating = rating;
         this.content = content;
         this.user = user;
         this.product = product;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        //this.updatedAt = updatedAt;
     }
 
     public Long getId() {

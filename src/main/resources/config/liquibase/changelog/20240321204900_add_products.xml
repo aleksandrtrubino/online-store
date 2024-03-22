@@ -31,7 +31,12 @@
                 <constraints nullable="false" />
             </column>
             <column name="prev_price" type="float">
-
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="true" unique="false"/>
             </column>
         </createTable>
     </changeSet>

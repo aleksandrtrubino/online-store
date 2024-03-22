@@ -1,5 +1,9 @@
 package ru.vistar;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -11,7 +15,7 @@ public class User {
     private Long id;
     private String password;
     private String email;
-    private Boolean enabled;
+    private Boolean enabled ;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "middle_name")
@@ -36,10 +40,24 @@ public class User {
                     name = "product_id", referencedColumnName = "product_id"))
     private Set<Product> favorites;
 
+    @Column(name = "created_at",columnDefinition = "TIMESTAMP")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public User(){}
 
-
+    public User(String password, String email, String firstName, String middleName, String lastName) {
+        this.password = password;
+        this.email = email;
+        this.enabled = true;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+    }
 
     public Long getId() {
         return id;
@@ -107,6 +125,14 @@ public class User {
 
     public void setFavorites(Set<Product> favorites) {
         this.favorites = favorites;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }
 
