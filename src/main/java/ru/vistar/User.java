@@ -1,5 +1,6 @@
 package ru.vistar;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -36,10 +37,14 @@ public class User {
                     name = "product_id", referencedColumnName = "product_id"))
     private Set<Product> favorites;
 
+    @OneToMany(mappedBy = "user")
+    List<Purchase> purchases;
+
+    @OneToMany(mappedBy = "user")
+    List<Review> reviews;
+
 
     public User(){}
-
-
 
     public Long getId() {
         return id;
@@ -107,6 +112,22 @@ public class User {
 
     public void setFavorites(Set<Product> favorites) {
         this.favorites = favorites;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
 

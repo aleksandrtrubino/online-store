@@ -35,6 +35,7 @@ public class Review {
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at",columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     public Review(){}

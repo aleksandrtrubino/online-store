@@ -19,7 +19,7 @@ public class Purchase {
     @Column(name = "updated_at",columnDefinition = "TIMESTAMP")
     private LocalDateTime updatedAt;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
@@ -27,7 +27,7 @@ public class Purchase {
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 

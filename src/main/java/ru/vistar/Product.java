@@ -1,6 +1,7 @@
 package ru.vistar;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "products")
 public class Product {
@@ -28,6 +29,12 @@ public class Product {
 
     @Column(name = "prev_price")
     private Double prevPrice;
+
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
+
+    @OneToMany(mappedBy = "product")
+    private List<Purchase> purchases;
 
     public Product(){}
 
@@ -81,5 +88,21 @@ public class Product {
 
     public void setPrevPrice(Double prevPrice) {
         this.prevPrice = prevPrice;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
     }
 }
