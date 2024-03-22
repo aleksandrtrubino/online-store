@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202403212023001" author="aleksandrtrubino">
+        <createSequence sequenceName="subcategories_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="202403212023002" author="aleksandrtrubino">
+        <createTable tableName="subcategories">
+            <column name="subcategory_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="subcategory_name" type="varchar(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403212023003" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="subcategories"
+                baseColumnNames="category_id"
+                constraintName="fk_subcategories_category_id"
+                referencedTableName="categories"
+                referencedColumnNames="category_id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+</databaseChangeLog>

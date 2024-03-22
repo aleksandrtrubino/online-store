@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="202403212100001" author="Karavaev2024">
+        <createTable tableName="purchase_statuses">
+            <column name="purchase_status_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="purchase_status_name" type="varchar(128)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403212100002" author="Karavaev2024">
+        <createSequence sequenceName="purchase_statuses_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+
+</databaseChangeLog>

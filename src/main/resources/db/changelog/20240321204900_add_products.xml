@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202403212049001" author="aleksandrtrubino">
+        <createSequence sequenceName="products_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="202403212049002" author="aleksandrtrubino">
+        <createTable tableName="products">
+            <column name="product_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="product_name" type="varchar(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="subcategory_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="price" type="decimal(19,4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="prev_price" type="decimal(19,4)">
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403212049003" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="products"
+                baseColumnNames="subcategory_id"
+                constraintName="fk_products_subcategory_id"
+                referencedTableName="subcategories"
+                referencedColumnNames="subcategory_id"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+    <changeSet id="202403212049004" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="products"
+                baseColumnNames="shop_id"
+                constraintName="fk_products_shop_id"
+                referencedTableName="shops"
+                referencedColumnNames="shop_id"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+</databaseChangeLog>
