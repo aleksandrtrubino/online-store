@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id

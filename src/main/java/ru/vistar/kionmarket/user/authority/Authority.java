@@ -5,7 +5,8 @@ import ru.vistar.kionmarket.user.User;
 import jakarta.persistence.*;
 import java.util.Set;
 
-@Entity(name = "authorities")
+@Entity
+@Table(name = "authorities")
 public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authorities_seq")

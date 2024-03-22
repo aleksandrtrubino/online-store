@@ -5,7 +5,8 @@ import ru.vistar.kionmarket.user.User;
 
 import jakarta.persistence.*;
 
-@Entity(name = "buyers")
+@Entity
+@Table(name = "buyers")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Buyer extends User {
 

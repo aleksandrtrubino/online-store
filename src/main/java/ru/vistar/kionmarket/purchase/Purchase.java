@@ -9,7 +9,8 @@ import ru.vistar.kionmarket.user.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "purchases")
+@Entity
+@Table(name = "purchases")
 public class Purchase {
     @Id
     @Column(name = "purchase_id")

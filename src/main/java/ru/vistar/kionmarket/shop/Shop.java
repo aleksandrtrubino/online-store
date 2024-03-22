@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity(name = "shops")
+@Entity
+@Table(name = "shops")
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shops_seq")

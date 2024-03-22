@@ -4,7 +4,8 @@ import ru.vistar.kionmarket.product.category.Category;
 
 import jakarta.persistence.*;
 
-@Entity(name = "subcategories")
+@Entity
+@Table(name = "subcategories")
 public class Subcategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subcategories_seq")
