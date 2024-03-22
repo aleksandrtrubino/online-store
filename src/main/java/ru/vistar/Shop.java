@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "shops")
 public class Shop {
@@ -23,6 +24,9 @@ public class Shop {
     @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "shop")
+    private List<Product> products;
 
     public Shop(){}
 
@@ -48,5 +52,13 @@ public class Shop {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

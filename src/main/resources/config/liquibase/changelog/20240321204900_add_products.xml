@@ -27,10 +27,10 @@
             <column name="description" type="varchar(128)">
                 <constraints nullable="false" />
             </column>
-            <column name="price" type="float">
+            <column name="price" type="numeric(19,4)">
                 <constraints nullable="false" />
             </column>
-            <column name="prev_price" type="float">
+            <column name="prev_price" type="numeric(19,4)">
             </column>
             <column name="created_at" type="timestamp">
                 <constraints nullable="false" unique="false"/>

@@ -6,28 +6,34 @@ import javax.persistence.*;
 @Table(name = "addresses")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "addresses_seq")
     @Column(name = "address_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id", referencedColumnName = "city_id")
     private City city;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "house_id", referencedColumnName = "house_id")
     private House house;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "street_id", referencedColumnName = "street_id")
     private Street street;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "address_type_id",referencedColumnName = "address_type_id")
+    private AddressType addressType;
+
+
     public Address(){}
 
-    public Address(City city, Street street, House house) {
+    public Address(City city, Street street, House house, AddressType addressType) {
         this.city = city;
         this.street = street;
         this.house = house;
+        this.addressType = addressType;
     }
     public Long getId() {
         return id;
@@ -55,5 +61,13 @@ public class Address {
 
     public void setStreet(Street street) {
         this.street = street;
+    }
+
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
     }
 }

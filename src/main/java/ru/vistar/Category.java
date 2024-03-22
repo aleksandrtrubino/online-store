@@ -1,6 +1,7 @@
 package ru.vistar;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "categories")
 public class Category {
@@ -11,6 +12,9 @@ public class Category {
 
     @Column(name = "category_name")
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<Subcategory> subcategories;
 
     public Category(){}
 
@@ -28,5 +32,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Subcategory> getSubcategories() {
+        return subcategories;
+    }
+
+    public void setSubcategories(List<Subcategory> subategories) {
+        this.subcategories = subategories;
     }
 }

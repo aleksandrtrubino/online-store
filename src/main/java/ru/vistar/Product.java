@@ -18,7 +18,7 @@ public class Product {
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
     private Subcategory subcategory;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
     private Shop shop;
 
@@ -28,10 +28,10 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "price")
+    @Column(name = "price",columnDefinition = "NUMERIC(19,4)")
     private Double price;
 
-    @Column(name = "prev_price")
+    @Column(name = "prev_price",columnDefinition = "NUMERIC(19,4)")
     private Double prevPrice;
 
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
