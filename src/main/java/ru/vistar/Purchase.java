@@ -38,6 +38,13 @@ public class Purchase {
 
     public Purchase(){}
 
+    public Purchase(User user, Address address, Product product, PurchaseStatus purchaseStatus) {
+        this.user = user;
+        this.address = address;
+        this.product = product;
+        this.purchaseStatus = purchaseStatus;
+    }
+
     public Long getId() {
         return id;
     }

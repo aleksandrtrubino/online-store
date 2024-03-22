@@ -40,13 +40,11 @@ public class Review {
 
     public Review(){}
 
-    public Review(Integer rating, String content, User user, Product product, LocalDateTime createdAt) {
+    public Review(Integer rating, String content, User user, Product product) {
         this.rating = rating;
         this.content = content;
         this.user = user;
         this.product = product;
-        this.createdAt = createdAt;
-        //this.updatedAt = updatedAt;
     }
 
     public Long getId() {

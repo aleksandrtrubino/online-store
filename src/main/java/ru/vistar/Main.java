@@ -5,6 +5,7 @@ import org.hibernate.type.LocalDateType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.text.html.parser.Entity;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -17,77 +18,59 @@ public class Main {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ru.vistar.persistence-unit");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        User user = new User();
-        user.setEmail("string1234@mail.com");
-        user.setPassword("4321");
-        user.setEnabled(true);
-        user.setFirstName("Иван");
-        user.setMiddleName("Иванович");
-        user.setLastName("Иванов");
+//        Shop shop = new Shop();
+//        shop.setName("Спортdмастер");
+//
+//        Category category = new Category();
+//        category.setName("Спорттdовары");
+//
+//        Subcategory subcategory = new Subcategory();
+//        subcategory.setName("Товаdры для футбола");
+//        subcategory.setCategory(category);
+//
+//        Product product = new Product();
+//        product.setName("Футбольнdый мяч");
+//        product.setDescription("Футбdольный мяч прочный хороший");
+//        product.setPrice(100.0);
+//        product.setPrevPrice(null);
+//        product.setShop(shop);
+//        product.setSubcategory(subcategory);
+//
+//        User user = new User();
+//        user.setEmail("sdtring1234@mail.com");
+//        user.setPassword("43d21");
+//        user.setEnabled(true);
+//        user.setFirstName("Ивdан");
+//        user.setMiddleName("Иваdнович");
+//        user.setLastName("Иваноdв");
+//        user.setFavorites(new HashSet<>());
+//        user.getFavorites().add(product);
+//
+//        Review review = new Review(5,"good",user,product, LocalDateTime.now(),LocalDateTime.now());
+//
+//        PurchaseStatus purchaseStatus = new PurchaseStatus("is_done");
+//
+//        Purchase purchase = new Purchase();
+//        purchase.setUser(user);
+//        purchase.setAddress(address);
+//        purchase.setProduct(product);
+//        purchase.setPurchaseStatus(purchaseStatus);
+//        purchase.setCreatedAt(LocalDateTime.now());
+//        purchase.setUpdatedAt(LocalDateTime.now());
 
-        Authority authority = new Authority();
-        authority.setName("admin");
-
-        Set<Authority> authorities = new HashSet<>();
-        authorities.add(authority);
-
-        user.setAuthorities(authorities);
-
-
-        City city = new City("voronezh");
-        Street street = new Street("voroshilova");
-        House house = new House("49");
-
-        Address address = new Address(city, street, house);
-
-
-        Shop shop = new Shop();
-        shop.setName("Спортмастер");
-
-        Category category = new Category();
-        category.setName("Спорттовары");
-
-        Subcategory subcategory = new Subcategory();
-        subcategory.setName("Товары для футбола");
-        subcategory.setCategory(category);
-
-        Product product = new Product();
-        product.setName("Футбольный мяч");
-        product.setDescription("Футбольный мяч прочный хороший");
-        product.setPrice(100.0);
-        product.setPrevPrice(null);
-        product.setShop(shop);
-        product.setSubcategory(subcategory);
-
-        PurchaseStatus purchaseStatus = new PurchaseStatus("is_done");
-
-        Purchase purchase = new Purchase();
-        purchase.setUser(user);
-        purchase.setAddress(address);
-        purchase.setProduct(product);
-        purchase.setPurchaseStatus(purchaseStatus);
-        purchase.setCreatedAt(LocalDateTime.now());
-        purchase.setUpdatedAt(LocalDateTime.now());
-
-        entityManager.getTransaction().begin();
-
+ entityManager.getTransaction().begin();
+//        Review review = entityManager.getReference(Review.class, 1001L);
+//        review.setContent("bad");
+//        entityManager.persist(review);
+//        entityManager.persist(shop);
+//        entityManager.persist(category);
+//        entityManager.persist(subcategory);
+//        entityManager.persist(product);
+        User user = entityManager.getReference(User.class, 1001L);
+        user.setPassword("1234");
         entityManager.persist(user);
-        entityManager.persist(authority);
-
-        entityManager.persist(city);
-        entityManager.persist(street);
-        entityManager.persist(house);
-        entityManager.persist(address);
-
-        entityManager.persist(shop);
-        entityManager.persist(category);
-        entityManager.persist(subcategory);
-        entityManager.persist(product);
-
-        entityManager.persist(purchaseStatus);
-
-        entityManager.persist(purchase);
-
+//        entityManager.persist(review);
+// entityManager.persist(purchaseStatus);
         entityManager.getTransaction().commit();
     }
 }

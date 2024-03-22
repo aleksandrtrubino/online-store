@@ -43,6 +43,15 @@ public class Product {
 
     public Product(){}
 
+    public Product(Subcategory subcategory, Shop shop, String name, String description, Double price, Double prevPrice) {
+        this.subcategory = subcategory;
+        this.shop = shop;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.prevPrice = prevPrice;
+    }
+
     public Long getId() {
         return id;
     }

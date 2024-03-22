@@ -26,7 +26,9 @@ public class Shop {
 
     public Shop(){}
 
-
+    public Shop(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;
