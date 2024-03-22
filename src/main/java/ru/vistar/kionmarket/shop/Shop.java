@@ -27,7 +27,7 @@ public class Shop {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Product> products;
 
     public Shop(){}

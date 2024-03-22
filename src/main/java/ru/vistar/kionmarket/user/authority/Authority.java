@@ -14,7 +14,7 @@ public class Authority {
     private Long id;
     @Column(name = "authority_name")
     private String name;
-    @ManyToMany(mappedBy = "authorities")
+    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
     private Set<User> users;
 
     public Authority() {}

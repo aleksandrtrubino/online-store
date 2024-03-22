@@ -16,7 +16,7 @@ public class AddressType {
     @Column(name = "address_type_name")
     private String name;
 
-    @OneToMany(mappedBy = "addressType")
+    @OneToMany(mappedBy = "addressType", fetch = FetchType.LAZY)
     private List<Address> addresses;
 
     public AddressType(){}

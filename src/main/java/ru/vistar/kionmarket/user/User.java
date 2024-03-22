@@ -29,7 +29,7 @@ public class User {
     private String middleName;
     @Column(name = "last_name")
     private String lastName;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_authorities",
             joinColumns = @JoinColumn(
@@ -38,7 +38,7 @@ public class User {
                     name = "authority_id", referencedColumnName = "authority_id"))
     private Set<Authority> authorities;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(
@@ -55,10 +55,10 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     List<Purchase> purchases;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     List<Review> reviews;
 
 
