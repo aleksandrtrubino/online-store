@@ -10,6 +10,13 @@ public class Buyer extends User{
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     Address address;
 
+    public Buyer(){}
+
+    public Buyer(String password, String email, String firstName, String middleName, String lastName, Address address) {
+        super(password, email, firstName, middleName, lastName);
+        this.address = address;
+    }
+
     public Address getAddress() {
         return address;
     }

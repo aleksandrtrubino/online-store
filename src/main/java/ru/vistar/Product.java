@@ -18,7 +18,7 @@ public class Product {
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
     private Subcategory subcategory;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
     private Shop shop;
 

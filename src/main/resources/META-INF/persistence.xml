@@ -18,7 +18,7 @@
         <class>ru.vistar.Category</class>
         <class>ru.vistar.Subcategory</class>
         <class>ru.vistar.Product</class>
-        <class>ru.vistar.PickupPoint</class>
+        <class>ru.vistar.AddressType</class>
         <class>ru.vistar.Review</class>
         <class>ru.vistar.PurchaseStatus</class>
         <class>ru.vistar.Purchase</class>
