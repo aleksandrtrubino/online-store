@@ -21,6 +21,7 @@
         <class>ru.vistar.PickupPoint</class>
         <class>ru.vistar.Review</class>
         <class>ru.vistar.PurchaseStatus</class>
+        <class>ru.vistar.Purchase</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
