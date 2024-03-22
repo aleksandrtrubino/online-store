@@ -1,6 +1,10 @@
 package ru.vistar;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "shops")
 public class Shop {
@@ -12,7 +16,19 @@ public class Shop {
     @Column(name = "shop_name")
     private String name;
 
+    @Column(name = "created_at",columnDefinition = "TIMESTAMP")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
     public Shop(){}
+
+    public Shop(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;
@@ -24,5 +40,13 @@ public class Shop {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }

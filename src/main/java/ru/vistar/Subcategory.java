@@ -14,9 +14,14 @@ public class Subcategory {
 
     @OneToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    Category category;
+    private Category category;
 
     public Subcategory(){}
+
+    public Subcategory(String name, Category category) {
+        this.name = name;
+        this.category = category;
+    }
 
     public Long getId() {
         return id;

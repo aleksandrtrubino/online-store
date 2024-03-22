@@ -1,6 +1,7 @@
 package ru.vistar;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -36,6 +37,13 @@ public class Purchase {
     private PurchaseStatus purchaseStatus;
 
     public Purchase(){}
+
+    public Purchase(User user, Address address, Product product, PurchaseStatus purchaseStatus) {
+        this.user = user;
+        this.address = address;
+        this.product = product;
+        this.purchaseStatus = purchaseStatus;
+    }
 
     public Long getId() {
         return id;
@@ -88,4 +96,6 @@ public class Purchase {
     public void setPurchaseStatus(PurchaseStatus purchaseStatus) {
         this.purchaseStatus = purchaseStatus;
     }
+
+
 }

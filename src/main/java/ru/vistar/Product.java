@@ -1,7 +1,11 @@
 package ru.vistar;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity(name = "products")
 public class Product {
@@ -30,6 +34,14 @@ public class Product {
     @Column(name = "prev_price")
     private Double prevPrice;
 
+    @Column(name = "created_at",columnDefinition = "TIMESTAMP")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 
@@ -37,6 +49,15 @@ public class Product {
     private List<Purchase> purchases;
 
     public Product(){}
+
+    public Product(Subcategory subcategory, Shop shop, String name, String description, Double price, Double prevPrice) {
+        this.subcategory = subcategory;
+        this.shop = shop;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.prevPrice = prevPrice;
+    }
 
     public Long getId() {
         return id;
@@ -88,6 +109,14 @@ public class Product {
 
     public void setPrevPrice(Double prevPrice) {
         this.prevPrice = prevPrice;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public List<Review> getReviews() {
