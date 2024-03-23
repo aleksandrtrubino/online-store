@@ -1,6 +1,4 @@
-package ru.vistar.kionmarket.user.authority;
-
-import ru.vistar.kionmarket.user.User;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 import java.util.Set;

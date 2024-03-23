@@ -1,4 +1,4 @@
-package ru.vistar.kionmarket.purchase.status;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 

@@ -1,8 +1,8 @@
-package ru.vistar.kionmarket.shop;
+package ru.vistar.kionmarket.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import ru.vistar.kionmarket.product.Product;
+import ru.vistar.kionmarket.domain.Product;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

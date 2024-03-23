@@ -1,6 +1,4 @@
-package ru.vistar.kionmarket.product.category;
-
-import ru.vistar.kionmarket.product.subcategory.Subcategory;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 import java.util.List;

@@ -1,6 +1,6 @@
-package ru.vistar.kionmarket.address.type;
+package ru.vistar.kionmarket.domain;
 
-import ru.vistar.kionmarket.address.Address;
+import ru.vistar.kionmarket.domain.Address;
 
 import jakarta.persistence.*;
 import java.util.List;

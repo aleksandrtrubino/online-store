@@ -1,4 +1,4 @@
-package ru.vistar.kionmarket.address.house;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 

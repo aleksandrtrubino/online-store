@@ -1,10 +1,6 @@
-package ru.vistar.kionmarket.purchase;
+package ru.vistar.kionmarket.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
-import ru.vistar.kionmarket.purchase.status.PurchaseStatus;
-import ru.vistar.kionmarket.address.Address;
-import ru.vistar.kionmarket.product.Product;
-import ru.vistar.kionmarket.user.User;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

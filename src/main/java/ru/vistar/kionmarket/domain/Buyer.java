@@ -1,7 +1,4 @@
-package ru.vistar.kionmarket.user.buyer;
-
-import ru.vistar.kionmarket.address.Address;
-import ru.vistar.kionmarket.user.User;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 

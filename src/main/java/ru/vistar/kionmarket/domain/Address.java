@@ -1,9 +1,4 @@
-package ru.vistar.kionmarket.address;
-
-import ru.vistar.kionmarket.address.type.AddressType;
-import ru.vistar.kionmarket.address.city.City;
-import ru.vistar.kionmarket.address.house.House;
-import ru.vistar.kionmarket.address.street.Street;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 

@@ -1,20 +1,19 @@
-package ru.vistar.kionmarket.address.city;
+package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cities")
-public class City {
+@Table(name = "streets")
+public class Street {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cities_seq")
-    @Column(name = "city_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "streets_seq")
+    @Column(name = "street_id")
     private Long id;
 
-    @Column(name = "city_name")
+    @Column(name = "street_name")
     private String name;
-    public City(){}
-
-    public City(String name) {
+    public Street(){}
+    public Street(String name) {
         this.name = name;
     }
 

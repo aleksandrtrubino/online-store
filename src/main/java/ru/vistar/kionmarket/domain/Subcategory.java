@@ -1,6 +1,6 @@
-package ru.vistar.kionmarket.product.subcategory;
+package ru.vistar.kionmarket.domain;
 
-import ru.vistar.kionmarket.product.category.Category;
+import ru.vistar.kionmarket.domain.Category;
 
 import jakarta.persistence.*;
 
