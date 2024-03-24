@@ -5,15 +5,16 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "buyers")
 @PrimaryKeyJoinColumn(name = "user_id")
-public class Buyer extends User {
+public class UserBuyer extends User {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     Address address;
 
-    public Buyer(){}
+    public UserBuyer() {
+    }
 
-    public Buyer(String password, String email, String firstName, String middleName, String lastName, Address address) {
+    public UserBuyer(String password, String email, String firstName, String middleName, String lastName, Address address) {
         super(password, email, firstName, middleName, lastName);
         this.address = address;
     }
