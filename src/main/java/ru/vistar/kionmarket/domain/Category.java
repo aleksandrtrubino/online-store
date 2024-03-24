@@ -1,7 +1,7 @@
 package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -15,7 +15,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
-    private List<Subcategory> subcategories;
+    private Set<Subcategory> subcategories;
 
     public Category(){}
 
@@ -35,11 +35,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Subcategory> getSubcategories() {
+    public Set<Subcategory> getSubcategories() {
         return subcategories;
     }
 
-    public void setSubcategories(List<Subcategory> subategories) {
-        this.subcategories = subategories;
+    public void setSubcategories(Set<Subcategory> subсategories) {
+        this.subcategories = subсategories;
     }
 }

@@ -22,7 +22,7 @@ public class User {
     private Long id;
     private String password;
     private String email;
-    private Boolean enabled ;
+    private Boolean enabled = true;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "middle_name")
@@ -56,10 +56,10 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    List<Purchase> purchases;
+    Set<Purchase> purchases;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    List<Review> reviews;
+    Set<Review> reviews;
 
 
     public User(){}
@@ -141,19 +141,19 @@ public class User {
         this.favorites = favorites;
     }
 
-    public List<Purchase> getPurchases() {
+    public Set<Purchase> getPurchases() {
         return purchases;
     }
 
-    public void setPurchases(List<Purchase> purchases) {
+    public void setPurchases(Set<Purchase> purchases) {
         this.purchases = purchases;
     }
 
-    public List<Review> getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 

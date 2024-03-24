@@ -7,6 +7,7 @@ import ru.vistar.kionmarket.domain.Product;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "shops")
@@ -28,7 +29,7 @@ public class Shop {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
-    private List<Product> products;
+    private Set<Product> products;
 
     public Shop(){}
 
@@ -56,11 +57,11 @@ public class Shop {
         return updatedAt;
     }
 
-    public List<Product> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 }

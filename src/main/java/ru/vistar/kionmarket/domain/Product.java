@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -44,10 +45,10 @@ public class Product {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<Review> reviews;
+    private Set<Review> reviews;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<Purchase> purchases;
+    private Set<Purchase> purchases;
 
     public Product(){}
 
@@ -120,19 +121,19 @@ public class Product {
         return updatedAt;
     }
 
-    public List<Review> getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 
-    public List<Purchase> getPurchases() {
+    public Set<Purchase> getPurchases() {
         return purchases;
     }
 
-    public void setPurchases(List<Purchase> purchases) {
+    public void setPurchases(Set<Purchase> purchases) {
         this.purchases = purchases;
     }
 }

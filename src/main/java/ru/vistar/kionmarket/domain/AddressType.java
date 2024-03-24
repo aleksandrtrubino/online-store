@@ -3,7 +3,7 @@ package ru.vistar.kionmarket.domain;
 import ru.vistar.kionmarket.domain.Address;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "address_types")
@@ -17,7 +17,7 @@ public class AddressType {
     private String name;
 
     @OneToMany(mappedBy = "addressType", fetch = FetchType.LAZY)
-    private List<Address> addresses;
+    private Set<Address> addresses;
 
     public AddressType(){}
 
@@ -33,11 +33,11 @@ public class AddressType {
         this.name = name;
     }
 
-    public List<Address> getAddresses() {
+    public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
 }

@@ -46,6 +46,13 @@
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
 
+		<!--MapStruct-->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.0.Beta1</version>
+		</dependency>
+
 		<!--Web-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -138,10 +145,12 @@
 			</resource>
 		</resources>
 		<plugins>
+			<!--Maven-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!--Liquibase-->
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
@@ -154,7 +163,21 @@
 					<password>postgres</password>
 				</configuration>
 			</plugin>
-
+			<!--MapStruct-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.6.0.Beta1</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
