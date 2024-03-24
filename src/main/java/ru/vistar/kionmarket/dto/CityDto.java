@@ -1,20 +1,11 @@
-package ru.vistar.kionmarket.domain;
+package ru.vistar.kionmarket.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "cities")
-public class City {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cities_seq")
-    @Column(name = "city_id")
+public class CityDto {
     private Long id;
-
-    @Column(name = "city_name")
     private String name;
-    public City(){}
 
-    public City(String name) {
+    public CityDto(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
