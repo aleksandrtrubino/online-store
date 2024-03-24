@@ -3,28 +3,24 @@ package ru.vistar.kionmarket.mapper.impl;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import ru.vistar.kionmarket.domain.*;
+import ru.vistar.kionmarket.domain.Address;
 import ru.vistar.kionmarket.dto.AddressDto;
-import ru.vistar.kionmarket.exception.ResourceNotFoundException;
 import ru.vistar.kionmarket.mapper.*;
-import ru.vistar.kionmarket.repository.AddressTypeRepository;
-import ru.vistar.kionmarket.repository.CityRepository;
-import ru.vistar.kionmarket.repository.HouseRepository;
-import ru.vistar.kionmarket.repository.StreetRepository;
+
 
 @Component
 public class AddressMapperImpl implements AddressMapper {
 
-    final AddressTypeRepository addressTypeRepository;
-    final CityRepository cityRepository;
-    final StreetRepository streetRepository;
-    final HouseRepository houseRepository;
+    final AddressTypeMapper addressTypeMapper;
+    final CityMapper cityMapper;
+    final StreetMapper streetMapper;
+    final HouseMapper houseMapper;
 
-    public AddressMapperImpl(AddressTypeRepository addressTypeRepository, CityRepository cityRepository, StreetRepository streetRepository, HouseRepository houseRepository) {
-        this.addressTypeRepository = addressTypeRepository;
-        this.cityRepository = cityRepository;
-        this.streetRepository = streetRepository;
-        this.houseRepository = houseRepository;
+    public AddressMapperImpl(AddressTypeMapper addressTypeMapper, CityMapper cityMapper, StreetMapper streetMapper, HouseMapper houseMapper) {
+        this.addressTypeMapper = addressTypeMapper;
+        this.cityMapper = cityMapper;
+        this.streetMapper = streetMapper;
+        this.houseMapper = houseMapper;
     }
 
     @Override
@@ -35,17 +31,10 @@ public class AddressMapperImpl implements AddressMapper {
 
         Address address = new Address();
         address.setId(addressDto.getId());
-        AddressType addressType = addressTypeRepository.findById(addressDto.getAddressTypeId())
-                        .orElseThrow(()->new ResourceNotFoundException(""));
-        address.setAddressType(addressType);
-        City city = cityRepository.findById(addressDto.getCityId())
-                        .orElseThrow(()->new ResourceNotFoundException(""));
-        address.setCity(city);
-        Street street = streetRepository.findById(addressDto.getStreetId())
-                        .orElseThrow(()->new ResourceNotFoundException(""));
-        address.setStreet(street);
-        House house = houseRepository.findById(addressDto.getHouseId())
-                .orElseThrow(()->new ResourceNotFoundException(""));
+        address.setAddressType(addressTypeMapper.toEntity(addressDto.getAddressTypeDto()));
+        address.setCity(cityMapper.toEntity(addressDto.getCityDto()));
+        address.setStreet(streetMapper.toEntity(addressDto.getStreetDto()));
+        address.setHouse(houseMapper.toEntity(addressDto.getHouseDto()));
 
         return address;
     }
@@ -56,11 +45,12 @@ public class AddressMapperImpl implements AddressMapper {
             return null;
         }
 
-       AddressDto addressDto = new AddressDto();
-       addressDto.setAddressTypeId(address.getAddressType().getId());
-       addressDto.setCityId(address.getCity().getId());
-       addressDto.setStreetId(address.getStreet().getId());
-       addressDto.setHouseId(address.getHouse().getId());
+        AddressDto addressDto = new AddressDto();
+        addressDto.setId(addressDto.getId());
+        addressDto.setAddressTypeDto(addressTypeMapper.toDto(address.getAddressType()));
+        addressDto.setCityDto(cityMapper.toDto(address.getCity()));
+        addressDto.setStreetDto(streetMapper.toDto(address.getStreet()));
+        addressDto.setHouseDto(houseMapper.toDto(address.getHouse()));
 
         return addressDto;
     }

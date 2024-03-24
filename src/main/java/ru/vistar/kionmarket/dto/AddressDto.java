@@ -1,20 +1,21 @@
 package ru.vistar.kionmarket.dto;
 
+
 public class AddressDto {
     private Long id;
-    private Long addressTypeId;
-    private Long cityId;
-    private Long streetId;
-    private Long houseId;
+    private AddressTypeDto addressTypeDto;
+    private CityDto cityDto;
+    private StreetDto streetDto;
+    private HouseDto houseDto;
 
     public AddressDto(){}
 
-    public AddressDto(Long id, Long addressTypeId, Long cityId, Long streetId, Long houseId) {
+    public AddressDto(Long id, AddressTypeDto addressTypeDto, CityDto cityDto, StreetDto streetDto, HouseDto houseDto) {
         this.id = id;
-        this.addressTypeId = addressTypeId;
-        this.cityId = cityId;
-        this.streetId = streetId;
-        this.houseId = houseId;
+        this.addressTypeDto = addressTypeDto;
+        this.cityDto = cityDto;
+        this.streetDto = streetDto;
+        this.houseDto = houseDto;
     }
 
     public Long getId() {
@@ -25,35 +26,35 @@ public class AddressDto {
         this.id = id;
     }
 
-    public Long getAddressTypeId() {
-        return addressTypeId;
+    public AddressTypeDto getAddressTypeDto() {
+        return addressTypeDto;
     }
 
-    public void setAddressTypeId(Long addressTypeId) {
-        this.addressTypeId = addressTypeId;
+    public void setAddressTypeDto(AddressTypeDto addressTypeDto) {
+        this.addressTypeDto = addressTypeDto;
     }
 
-    public Long getCityId() {
-        return cityId;
+    public CityDto getCityDto() {
+        return cityDto;
     }
 
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
+    public void setCityDto(CityDto cityDto) {
+        this.cityDto = cityDto;
     }
 
-    public Long getStreetId() {
-        return streetId;
+    public StreetDto getStreetDto() {
+        return streetDto;
     }
 
-    public void setStreetId(Long streetId) {
-        this.streetId = streetId;
+    public void setStreetDto(StreetDto streetDto) {
+        this.streetDto = streetDto;
     }
 
-    public Long getHouseId() {
-        return houseId;
+    public HouseDto getHouseDto() {
+        return houseDto;
     }
 
-    public void setHouseId(Long houseId) {
-        this.houseId = houseId;
+    public void setHouseDto(HouseDto houseDto) {
+        this.houseDto = houseDto;
     }
 }
