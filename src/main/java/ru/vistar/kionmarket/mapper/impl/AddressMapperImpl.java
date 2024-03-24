@@ -46,7 +46,7 @@ public class AddressMapperImpl implements AddressMapper {
         }
 
         AddressDto addressDto = new AddressDto();
-        addressDto.setId(addressDto.getId());
+        addressDto.setId(address.getId());
         addressDto.setAddressTypeDto(addressTypeMapper.toDto(address.getAddressType()));
         addressDto.setCityDto(cityMapper.toDto(address.getCity()));
         addressDto.setStreetDto(streetMapper.toDto(address.getStreet()));
