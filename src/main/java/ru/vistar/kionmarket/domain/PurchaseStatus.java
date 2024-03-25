@@ -2,6 +2,8 @@ package ru.vistar.kionmarket.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "purchase_statuses")
 public class PurchaseStatus {
@@ -12,6 +14,9 @@ public class PurchaseStatus {
 
     @Column(name = "purchase_status_name")
     private String name;
+
+    @OneToMany(mappedBy = "purchaseStatus", fetch = FetchType.LAZY)
+    Set<Purchase> purchases;
 
     public PurchaseStatus(){}
 
@@ -29,6 +34,14 @@ public class PurchaseStatus {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
     }
 }
 

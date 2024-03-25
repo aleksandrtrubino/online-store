@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.vistar.kionmarket.domain.Product;
@@ -28,6 +29,7 @@ public class Shop {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private Set<Product> products;
 

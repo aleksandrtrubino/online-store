@@ -9,7 +9,7 @@ import ru.vistar.kionmarket.service.impl.CategoryServiceImpl;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/products/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     final CategoryService categoryService;
 

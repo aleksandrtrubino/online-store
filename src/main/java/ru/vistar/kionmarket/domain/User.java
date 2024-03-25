@@ -38,6 +38,14 @@ public class User {
                     name = "authority_id", referencedColumnName = "authority_id"))
     private Set<Authority> authorities;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    private Address address;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id",referencedColumnName = "shop_id")
+    private Shop shop;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "favorites",
@@ -56,10 +64,10 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    Set<Purchase> purchases;
+    private Set<Purchase> purchases;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-    Set<Review> reviews;
+    private Set<Review> reviews;
 
 
     public User(){}
@@ -107,6 +115,22 @@ public class User {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     public String getFirstName() {

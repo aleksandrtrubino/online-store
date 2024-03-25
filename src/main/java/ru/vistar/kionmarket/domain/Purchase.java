@@ -32,7 +32,7 @@ public class Purchase {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_status_id", referencedColumnName = "purchase_status_id")
     private PurchaseStatus purchaseStatus;
 

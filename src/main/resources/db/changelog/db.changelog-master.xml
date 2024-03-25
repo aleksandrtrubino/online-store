@@ -4,15 +4,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="20240317204700_add_users.xml" relativeToChangelogFile="true"/>
-    <include file="20240317210400_add_authorities.xml" relativeToChangelogFile="true"/>
-    <include file="20240317210700_add_users_authorities.xml" relativeToChangelogFile="true"/>
+
     <include file="20240320204400_add_address_types_table.xml" relativeToChangelogFile="true"/>
     <include file="20240320201100_add_tables_cities_streets_houses.xml" relativeToChangelogFile="true"/>
     <include file="20240320221400_add_tables_addresses.xml" relativeToChangelogFile="true"/>
     <include file="20240320205400_add_shops.xml" relativeToChangelogFile="true"/>
-    <include file="20240320205600_add_suppliers.xml" relativeToChangelogFile="true"/>
-    <include file="20240321201100_add_buyers.xml" relativeToChangelogFile="true"/>
+    <include file="20240317204700_add_users.xml" relativeToChangelogFile="true"/>
+    <include file="20240317210400_add_authorities.xml" relativeToChangelogFile="true"/>
+    <include file="20240317210700_add_users_authorities.xml" relativeToChangelogFile="true"/>
     <include file="20240321202300_add_categories.xml" relativeToChangelogFile="true"/>
     <include file="20240321202400_add_subcategories.xml" relativeToChangelogFile="true"/>
     <include file="20240321204900_add_products.xml" relativeToChangelogFile="true"/>

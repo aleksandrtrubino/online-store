@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.vistar.kionmarket.domain.Address;
 
 import jakarta.persistence.*;
@@ -16,6 +17,7 @@ public class AddressType {
     @Column(name = "address_type_name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "addressType", fetch = FetchType.LAZY)
     private Set<Address> addresses;
 

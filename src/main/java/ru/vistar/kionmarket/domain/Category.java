@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ public class Category {
     @Column(name = "category_name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private Set<Subcategory> subcategories;
 
