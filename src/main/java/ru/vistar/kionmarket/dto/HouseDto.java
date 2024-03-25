@@ -1,20 +1,11 @@
 package ru.vistar.kionmarket.dto;
 
 public class HouseDto {
-    private Long id;
     private String number;
 
-    public HouseDto(Long id, String number) {
-        this.id = id;
+    public HouseDto(){}
+    public HouseDto(String number) {
         this.number = number;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNumber() {

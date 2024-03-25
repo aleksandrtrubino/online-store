@@ -1,20 +1,11 @@
 package ru.vistar.kionmarket.dto;
 
 public class CityDto {
-    private Long id;
     private String name;
 
-    public CityDto(Long id, String name) {
-        this.id = id;
+    public CityDto(){}
+    public CityDto(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

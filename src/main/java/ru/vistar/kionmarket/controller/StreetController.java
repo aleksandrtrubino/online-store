@@ -2,7 +2,7 @@ package ru.vistar.kionmarket.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vistar.kionmarket.dto.CityDto;
+import ru.vistar.kionmarket.domain.Street;
 import ru.vistar.kionmarket.dto.StreetDto;
 import ru.vistar.kionmarket.service.StreetService;
 import ru.vistar.kionmarket.service.impl.StreetServiceImpl;
@@ -19,24 +19,24 @@ public class StreetController {
     }
 
     @PostMapping
-    public ResponseEntity<StreetDto> create(@RequestBody StreetDto streetDto){
+    public ResponseEntity<Street> create(@RequestBody StreetDto streetDto){
         return ResponseEntity.ok(streetService.create(streetDto));
     }
-    @PutMapping
-    public ResponseEntity<StreetDto> update(@RequestBody StreetDto streetDto){
-        return ResponseEntity.ok(streetService.update(streetDto));
+    @PutMapping("/{id}")
+    public ResponseEntity<Street> update(@PathVariable Long id, @RequestBody StreetDto streetDto){
+        return ResponseEntity.ok(streetService.update(id, streetDto));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<StreetDto> findById(@PathVariable Long id){
+    public ResponseEntity<Street> findById(@PathVariable Long id){
         return ResponseEntity.ok(streetService.findById(id));
     }
     @GetMapping
-    public ResponseEntity<List<StreetDto>> findAll(){
+    public ResponseEntity<List<Street>> findAll(){
         return ResponseEntity.ok(streetService.findAll());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
         streetService.deleteById(id);
         return ResponseEntity.ok().build();
     }

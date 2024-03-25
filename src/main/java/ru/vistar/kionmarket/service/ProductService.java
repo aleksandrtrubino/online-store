@@ -3,7 +3,6 @@ package ru.vistar.kionmarket.service;
 import ru.vistar.kionmarket.domain.Product;
 import ru.vistar.kionmarket.domain.Purchase;
 import ru.vistar.kionmarket.domain.Review;
-import ru.vistar.kionmarket.dto.CityDto;
 import ru.vistar.kionmarket.dto.ProductDto;
 
 import java.util.List;

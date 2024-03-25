@@ -12,5 +12,5 @@ public interface CategoryService {
     public List<CategoryDto> findAll();
     public void deleteById(Long id);
 
-    public List<Subcategory> getSubcategories(Long categoryId);//categories/{categoryId}/subcategories
+    //public List<Subcategory> getSubcategories(Long categoryId);//categories/{categoryId}/subcategories
 }

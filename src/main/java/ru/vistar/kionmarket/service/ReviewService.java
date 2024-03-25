@@ -1,8 +1,6 @@
 package ru.vistar.kionmarket.service;
 
-import ru.vistar.kionmarket.domain.Purchase;
 import ru.vistar.kionmarket.domain.Review;
-import ru.vistar.kionmarket.dto.PurchaseDto;
 import ru.vistar.kionmarket.dto.ReviewDto;
 
 import java.util.List;

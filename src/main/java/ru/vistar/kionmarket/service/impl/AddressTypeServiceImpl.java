@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import ru.vistar.kionmarket.domain.AddressType;
 import ru.vistar.kionmarket.dto.AddressTypeDto;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
-import ru.vistar.kionmarket.mapper.AddressTypeMapper;
 import ru.vistar.kionmarket.repository.AddressTypeRepository;
 import ru.vistar.kionmarket.service.AddressTypeService;
 
@@ -14,37 +13,36 @@ import java.util.List;
 public class AddressTypeServiceImpl implements AddressTypeService {
 
     final AddressTypeRepository addressTypeRepository;
-    final AddressTypeMapper addressTypeMapper;
 
-    public AddressTypeServiceImpl(AddressTypeRepository addressTypeRepository, AddressTypeMapper addressTypeMapper) {
+    public AddressTypeServiceImpl(AddressTypeRepository addressTypeRepository) {
         this.addressTypeRepository = addressTypeRepository;
-        this.addressTypeMapper = addressTypeMapper;
     }
 
     @Override
-    public AddressTypeDto create(AddressTypeDto addressTypeDto) {
-        AddressType addressType = addressTypeMapper.toEntity(addressTypeDto);
-        return addressTypeMapper.toDto(addressTypeRepository.save(addressType));
-    }
-
-    @Override
-    public AddressTypeDto update(AddressTypeDto addressTypeDto) {
-        AddressType addressType = addressTypeRepository.findById(addressTypeDto.getId())
-                .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found",addressTypeDto.getId())));
+    public AddressType create(AddressTypeDto addressTypeDto) {
+        AddressType addressType = new AddressType();
         addressType.setName(addressTypeDto.getName());
-        return addressTypeMapper.toDto(addressTypeRepository.save(addressType));
+        return addressType;
     }
 
     @Override
-    public AddressTypeDto findById(Long id) {
+    public AddressType update(Long id, AddressTypeDto addressTypeDto) {
+        AddressType addressType = addressTypeRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found", id)));
+        addressType.setName(addressTypeDto.getName());
+        return addressTypeRepository.save(addressType);
+    }
+
+    @Override
+    public AddressType findById(Long id) {
         AddressType addressType = addressTypeRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found",id)));
-        return addressTypeMapper.toDto(addressType);
+        return addressType;
     }
 
     @Override
-    public List<AddressTypeDto> findAll() {
-        return addressTypeMapper.toDto(addressTypeRepository.findAll());
+    public List<AddressType> findAll() {
+        return addressTypeRepository.findAll();
     }
 
     @Override

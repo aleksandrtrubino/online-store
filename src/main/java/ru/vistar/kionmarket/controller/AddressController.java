@@ -2,6 +2,7 @@ package ru.vistar.kionmarket.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.vistar.kionmarket.domain.Address;
 import ru.vistar.kionmarket.dto.AddressDto;
 import ru.vistar.kionmarket.service.AddressService;
 import ru.vistar.kionmarket.service.impl.AddressServiceImpl;
@@ -18,29 +19,29 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping("/types/{addressTypeId}/cities/{cityId}/streets/{streetId}/houses/{houseId}")
-    public ResponseEntity<AddressDto> create(@PathVariable Long addressTypeId, @PathVariable Long cityId, @PathVariable Long streetId, @PathVariable Long houseId){
-        return ResponseEntity.ok(addressService.create(addressTypeId,cityId,streetId,houseId));
+    @PostMapping
+    public ResponseEntity<Address> create(@RequestBody AddressDto addressDto){
+        return ResponseEntity.ok(addressService.create(addressDto));
     }
 
-    @PutMapping("/{addressId}/types/{addressTypeId}/cities/{cityId}/streets/{streetId}/houses/{houseId}")
-    public ResponseEntity<AddressDto> update(@PathVariable Long addressId, @PathVariable Long addressTypeId, @PathVariable Long cityId, @PathVariable Long streetId, @PathVariable Long houseId){
-        return ResponseEntity.ok(addressService.update(addressId,addressTypeId,cityId,streetId,houseId));
+    @PutMapping("/{id}")
+    public ResponseEntity<Address> update(@PathVariable Long id, @RequestBody AddressDto addressDto){
+        return ResponseEntity.ok(addressService.update(id, addressDto));
     }
 
-    @GetMapping("/{addressId}")
-    public ResponseEntity<AddressDto> findById(@PathVariable Long addressId){
-        return ResponseEntity.ok(addressService.findById(addressId));
+    @GetMapping("/{id}")
+    public ResponseEntity<Address> findById(@PathVariable Long id){
+        return ResponseEntity.ok(addressService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<AddressDto>> findAll(){
+    public ResponseEntity<List<Address>> findAll(){
         return ResponseEntity.ok(addressService.findAll());
     }
 
-    @DeleteMapping("/{addressId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long addressId){
-        addressService.deleteById(addressId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        addressService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
