@@ -19,11 +19,11 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
-    final UserRepository userRepository;
-    final ProductRepository productRepository;
-    final AddressRepository addressRepository;
-    final ShopRepository shopRepository;
-    final UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+    private final AddressRepository addressRepository;
+    private final ShopRepository shopRepository;
+    private final UserMapper userMapper;
 
     public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, ShopRepository shopRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
     public UserDto create(UserDto userDto) {
         User user = new User();
         user.setEmail(userDto.getEmail());
-        user.setPassword(user.getPassword());
-        user.setFirstName(user.getFirstName());
-        user.setMiddleName(user.getMiddleName());
-        user.setLastName(user.getLastName());
+        user.setPassword(userDto.getPassword());
+        user.setFirstName(userDto.getFirstName());
+        user.setMiddleName(userDto.getMiddleName());
+        user.setLastName(userDto.getLastName());
         return userMapper.toDto(userRepository.save(user));
     }
 

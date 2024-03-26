@@ -15,7 +15,7 @@ import java.util.Set;
 @RequestMapping("/api/v1/purchase-statuses")
 public class PurchaseStatusController {
 
-    final PurchaseStatusService purchaseStatusService;
+    private final PurchaseStatusService purchaseStatusService;
 
     public PurchaseStatusController(PurchaseStatusServiceImpl purchaseStatusService) {
         this.purchaseStatusService = purchaseStatusService;

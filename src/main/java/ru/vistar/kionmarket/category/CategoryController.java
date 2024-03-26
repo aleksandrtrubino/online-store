@@ -10,7 +10,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/categories")
 public class CategoryController {
-    final CategoryService categoryService;
+    private final CategoryService categoryService;
     public CategoryController(CategoryServiceImpl categoryService) {
         this.categoryService = categoryService;
     }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface ShopService {
     public Shop create(ShopDto shopDto);//shops
-    public Shop update(ShopDto shopDto);//shops
+    public Shop update(Long id, ShopDto shopDto);//shops
     public Shop findById(Long shopId);//shops/{shopId}
     public List<Shop> findAll();//shops
     public void deleteById(Long shopId);//shops/{shopId}

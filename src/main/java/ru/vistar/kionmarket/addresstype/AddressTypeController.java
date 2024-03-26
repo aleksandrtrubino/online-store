@@ -10,7 +10,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/addressTypes")
 public class AddressTypeController {
-    final AddressTypeService addressTypeService;
+    private final AddressTypeService addressTypeService;
     public AddressTypeController(AddressTypeServiceImpl addressTypeService) {
         this.addressTypeService = addressTypeService;
     }

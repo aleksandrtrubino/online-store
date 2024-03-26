@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/addresses/houses")
 public class HouseController {
-    final HouseService houseService;
+    private final HouseService houseService;
     public HouseController(HouseServiceImpl houseService) {
         this.houseService = houseService;
     }

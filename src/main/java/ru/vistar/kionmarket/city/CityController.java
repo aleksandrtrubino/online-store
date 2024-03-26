@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/addresses/cities")
 public class CityController {
-    final CityService cityService;
+    private final CityService cityService;
     public CityController(CityServiceImpl cityService) {
         this.cityService = cityService;
     }

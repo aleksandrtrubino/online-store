@@ -15,7 +15,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductController {
-    final ProductService productService;
+    private final ProductService productService;
     public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
     }

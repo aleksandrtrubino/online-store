@@ -6,7 +6,7 @@ import ru.vistar.kionmarket.exception.ResourceNotFoundException;
 import java.util.List;
 @Service
 public class CityServiceImpl implements CityService {
-    final CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
     public CityServiceImpl(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
@@ -20,10 +20,10 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City update(Long id, CityDto houseDto) {
+    public City update(Long id, CityDto cityDto) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", id)));
-        city.setName(city.getName());
+        city.setName(cityDto.getName());
         return cityRepository.save(city);
     }
 

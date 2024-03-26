@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/v1/purchases")
 public class PurchaseController {
 
-    final PurchaseService purchaseService;
+    private final PurchaseService purchaseService;
 
     public PurchaseController(PurchaseServiceImpl purchaseService) {
         this.purchaseService = purchaseService;

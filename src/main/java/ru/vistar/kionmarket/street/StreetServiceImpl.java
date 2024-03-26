@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class StreetServiceImpl implements StreetService {
 
-    final StreetRepository streetRepository;
+    private final StreetRepository streetRepository;
 
     public StreetServiceImpl(StreetRepository streetRepository) {
         this.streetRepository = streetRepository;

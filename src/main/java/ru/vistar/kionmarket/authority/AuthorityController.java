@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/api/v1/authorities")
 public class AuthorityController {
 
-    final AuthorityService authorityService;
+    private final AuthorityService authorityService;
 
     public AuthorityController(AuthorityServiceImpl authorityService){
         this.authorityService = authorityService;

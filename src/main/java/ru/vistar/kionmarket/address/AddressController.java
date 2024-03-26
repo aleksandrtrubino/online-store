@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/api/v1/addresses")
 public class AddressController {
 
-    final AddressService addressService;
+    private final AddressService addressService;
     public AddressController(AddressServiceImpl addressService) {
         this.addressService = addressService;
     }

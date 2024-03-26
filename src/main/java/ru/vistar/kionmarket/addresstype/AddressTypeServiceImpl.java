@@ -10,7 +10,7 @@ import java.util.Set;
 @Service
 public class AddressTypeServiceImpl implements AddressTypeService {
 
-    final AddressTypeRepository addressTypeRepository;
+    private final AddressTypeRepository addressTypeRepository;
     public AddressTypeServiceImpl(AddressTypeRepository addressTypeRepository) {
         this.addressTypeRepository = addressTypeRepository;
     }

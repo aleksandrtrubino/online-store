@@ -15,7 +15,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/subcategories")
 public class SubcategoryController {
-    final SubcategoryService subcategoryService;
+    private final SubcategoryService subcategoryService;
     public SubcategoryController(SubcategoryServiceImpl subcategoryService) {
         this.subcategoryService = subcategoryService;
     }

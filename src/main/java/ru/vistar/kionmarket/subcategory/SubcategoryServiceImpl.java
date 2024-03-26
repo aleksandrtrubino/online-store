@@ -12,8 +12,8 @@ import java.util.Set;
 @Service
 public class SubcategoryServiceImpl implements SubcategoryService {
 
-    final SubcategoryRepository subcategoryRepository;
-    final CategoryRepository categoryRepository;
+    private final SubcategoryRepository subcategoryRepository;
+    private final CategoryRepository categoryRepository;
     public SubcategoryServiceImpl(SubcategoryRepository subcategoryRepository, CategoryRepository categoryRepository) {
         this.subcategoryRepository = subcategoryRepository;
         this.categoryRepository = categoryRepository;

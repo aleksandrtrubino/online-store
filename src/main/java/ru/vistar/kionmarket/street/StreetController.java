@@ -8,7 +8,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/addresses/streets")
 public class StreetController {
-    final StreetService streetService;
+    private final StreetService streetService;
     public StreetController(StreetServiceImpl streetService) {
         this.streetService = streetService;
     }

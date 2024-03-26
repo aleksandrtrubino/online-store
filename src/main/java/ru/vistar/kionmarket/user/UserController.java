@@ -16,7 +16,7 @@ import java.util.Set;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    final UserService userService;
+    private final UserService userService;
 
     public UserController(UserServiceImpl userService) {
         this.userService = userService;

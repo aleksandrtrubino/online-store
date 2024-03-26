@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class HouseServiceImpl implements HouseService {
-    final HouseRepository houseRepository;
+    private final HouseRepository houseRepository;
 
     public HouseServiceImpl(HouseRepository houseRepository) {
         this.houseRepository = houseRepository;

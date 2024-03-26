@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
 
-    final PurchaseRepository purchaseRepository;
-    final UserRepository userRepository;
-    final AddressRepository addressRepository;
-    final ProductRepository productRepository;
-    final PurchaseStatusRepository purchaseStatusRepository;
+    private final PurchaseRepository purchaseRepository;
+    private final UserRepository userRepository;
+    private final AddressRepository addressRepository;
+    private final ProductRepository productRepository;
+    private final PurchaseStatusRepository purchaseStatusRepository;
 
     public PurchaseServiceImpl(PurchaseRepository purchaseRepository, UserRepository userRepository, AddressRepository addressRepository, ProductRepository productRepository, PurchaseStatusRepository purchaseStatusRepository) {
         this.purchaseRepository = purchaseRepository;

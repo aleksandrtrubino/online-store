@@ -11,8 +11,8 @@ import java.util.Set;
 @Service
 public class PurchaseStatusServiceImpl implements PurchaseStatusService {
 
-    final PurchaseStatusRepository purchaseStatusRepository;
-    final PurchaseRepository purchaseRepository;
+    private final PurchaseStatusRepository purchaseStatusRepository;
+    private final PurchaseRepository purchaseRepository;
 
     public PurchaseStatusServiceImpl(PurchaseStatusRepository purchaseStatusRepository, PurchaseRepository purchaseRepository) {
         this.purchaseStatusRepository = purchaseStatusRepository;

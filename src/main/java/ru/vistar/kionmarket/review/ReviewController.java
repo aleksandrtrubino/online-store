@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/reviews")
 public class ReviewController {
-    final ReviewService reviewService;
+    private final ReviewService reviewService;
     public ReviewController(ReviewServiceImpl reviewService) {
         this.reviewService = reviewService;
     }

@@ -14,11 +14,11 @@ import ru.vistar.kionmarket.street.StreetRepository;
 import java.util.List;
 @Service
 public class AddressServiceImpl implements AddressService {
-    final AddressRepository addressRepository;
-    final AddressTypeRepository addressTypeRepository;
-    final CityRepository cityRepository;
-    final StreetRepository streetRepository;
-    final HouseRepository houseRepository;
+    private final AddressRepository addressRepository;
+    private final AddressTypeRepository addressTypeRepository;
+    private final CityRepository cityRepository;
+    private final StreetRepository streetRepository;
+    private final HouseRepository houseRepository;
     public AddressServiceImpl(AddressRepository addressRepository, AddressTypeRepository addressTypeRepository, CityRepository cityRepository, StreetRepository streetRepository, HouseRepository houseRepository) {
         this.addressRepository = addressRepository;
         this.addressTypeRepository = addressTypeRepository;

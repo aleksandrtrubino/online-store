@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class AuthorityServiceImpl implements AuthorityService {
 
-    final UserRepository userRepository;
-    final AuthorityRepository authorityRepository;
+    private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
 
     public AuthorityServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;

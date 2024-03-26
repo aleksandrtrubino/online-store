@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Set;
 @Service
 public class ProductServiceImpl implements ProductService {
-    final ProductRepository productRepository;
-    final ShopRepository shopRepository;
-    final SubcategoryRepository subcategoryRepository;
+    private final ProductRepository productRepository;
+    private final ShopRepository shopRepository;
+    private final SubcategoryRepository subcategoryRepository;
 
     public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository) {
         this.productRepository = productRepository;
@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
-        product.setPrice(product.getPrice());
+        product.setPrice(productDto.getPrice());
         product.setPrevPrice(productDto.getPrevPrice());
         product.setSubcategory(subcategory);
         product.setShop(shop);
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productDto.getShopId())));
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
-        product.setPrice(product.getPrice());
+        product.setPrice(productDto.getPrice());
         product.setPrevPrice(productDto.getPrevPrice());
         product.setSubcategory(subcategory);
         product.setShop(shop);
