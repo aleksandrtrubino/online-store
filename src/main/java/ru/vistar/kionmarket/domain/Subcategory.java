@@ -1,8 +1,11 @@
 package ru.vistar.kionmarket.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.vistar.kionmarket.domain.Category;
 
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "subcategories")
@@ -15,10 +18,13 @@ public class Subcategory {
     @Column(name = "subcategory_name")
     private String name;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "subcategory", fetch = FetchType.LAZY)
+    private Set<Product> products;
     public Subcategory(){}
 
     public Subcategory(String name, Category category) {
@@ -48,5 +54,13 @@ public class Subcategory {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

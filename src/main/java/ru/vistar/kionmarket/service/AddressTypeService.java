@@ -5,6 +5,7 @@ import ru.vistar.kionmarket.domain.AddressType;
 import ru.vistar.kionmarket.dto.AddressTypeDto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AddressTypeService {
     public AddressType create(AddressTypeDto addressTypeDto);//address-types
@@ -13,5 +14,5 @@ public interface AddressTypeService {
     public List<AddressType> findAll();//address-types
     public void deleteById(Long id);//address-types/{id}
 
-    //public List<Address> getAddresses(Long addressTypeId, Long addressId);//address-types/{addressTypeId}/addresses/{addressId}
+    public Set<Address> getAddresses(Long id);//address-types/{addressTypeId}/addresses/{addressId}
 }

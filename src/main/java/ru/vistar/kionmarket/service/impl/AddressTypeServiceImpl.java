@@ -1,6 +1,7 @@
 package ru.vistar.kionmarket.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.vistar.kionmarket.domain.Address;
 import ru.vistar.kionmarket.domain.AddressType;
 import ru.vistar.kionmarket.dto.AddressTypeDto;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
@@ -8,12 +9,12 @@ import ru.vistar.kionmarket.repository.AddressTypeRepository;
 import ru.vistar.kionmarket.service.AddressTypeService;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AddressTypeServiceImpl implements AddressTypeService {
 
     final AddressTypeRepository addressTypeRepository;
-
     public AddressTypeServiceImpl(AddressTypeRepository addressTypeRepository) {
         this.addressTypeRepository = addressTypeRepository;
     }
@@ -48,5 +49,12 @@ public class AddressTypeServiceImpl implements AddressTypeService {
     @Override
     public void deleteById(Long id) {
         addressTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public Set<Address> getAddresses(Long id) {
+        AddressType addressType = addressTypeRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found", id)));
+        return addressType.getAddresses();
     }
 }

@@ -15,7 +15,7 @@ public class Category {
     @Column(name = "category_name")
     private String name;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private Set<Subcategory> subcategories;
 

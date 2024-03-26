@@ -14,7 +14,6 @@ import java.util.List;
 public class AddressController {
 
     final AddressService addressService;
-
     public AddressController(AddressServiceImpl addressService) {
         this.addressService = addressService;
     }

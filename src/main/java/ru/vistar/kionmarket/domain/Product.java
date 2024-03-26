@@ -1,11 +1,11 @@
 package ru.vistar.kionmarket.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,11 +15,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_seq")
     @Column(name = "product_id")
     private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
     private Subcategory subcategory;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
     private Shop shop;
@@ -35,11 +35,11 @@ public class Product {
 
     @Column(name = "prev_price",columnDefinition = "NUMERIC(19,4)")
     private Double prevPrice;
-
+    @JsonIgnore
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     @CreationTimestamp
     private LocalDateTime createdAt;
-
+    @JsonIgnore
     @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime updatedAt;

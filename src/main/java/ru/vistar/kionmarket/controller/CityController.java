@@ -13,22 +13,25 @@ import java.util.List;
 @RequestMapping("/api/v1/addresses/cities")
 public class CityController {
     final CityService cityService;
-
     public CityController(CityServiceImpl cityService) {
         this.cityService = cityService;
     }
+
     @PostMapping
     public ResponseEntity<City> create(@RequestBody CityDto cityDto){
         return ResponseEntity.ok(cityService.create(cityDto));
     }
+
     @PutMapping("{id}")
     public ResponseEntity<City> update(@PathVariable Long id, @RequestBody CityDto cityDto){
         return ResponseEntity.ok(cityService.update(id, cityDto));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<City> findById(@PathVariable Long id){
         return ResponseEntity.ok(cityService.findById(id));
     }
+
     @GetMapping
     public ResponseEntity<List<City>> findAll(){
         return ResponseEntity.ok(cityService.findAll());

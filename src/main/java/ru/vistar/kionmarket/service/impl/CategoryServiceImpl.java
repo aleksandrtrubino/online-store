@@ -6,7 +6,6 @@ import ru.vistar.kionmarket.domain.Subcategory;
 import ru.vistar.kionmarket.dto.CategoryDto;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
 import ru.vistar.kionmarket.repository.CategoryRepository;
-import ru.vistar.kionmarket.repository.SubcategoryRepository;
 import ru.vistar.kionmarket.service.CategoryService;
 
 import java.util.List;
@@ -15,10 +14,8 @@ import java.util.Set;
 @Service
 public class CategoryServiceImpl implements CategoryService {
     final CategoryRepository categoryRepository;
-    //final SubcategoryRepository subcategoryRepository;
-    public CategoryServiceImpl(CategoryRepository categoryRepository){//, SubcategoryRepository subcategoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository){
         this.categoryRepository = categoryRepository;
-        //this.subcategoryRepository = subcategoryRepository;
     }
 
     @Override

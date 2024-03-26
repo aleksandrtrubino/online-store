@@ -18,26 +18,32 @@ public class CategoryController {
     public CategoryController(CategoryServiceImpl categoryService) {
         this.categoryService = categoryService;
     }
+
     @PostMapping
     public ResponseEntity<Category> create(@RequestBody CategoryDto categoryDto){
         return ResponseEntity.ok(categoryService.create(categoryDto));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
         return ResponseEntity.ok(categoryService.update(id, categoryDto));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Category> findById(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.findById(id));
     }
+
     @GetMapping
     public ResponseEntity<List<Category>> findAll(){
         return ResponseEntity.ok(categoryService.findAll());
     }
+
     @GetMapping("/{id}/subcategories")
     public ResponseEntity<Set<Subcategory>> getSubcategories(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.getSubcategories(id));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
         categoryService.deleteById(id);
