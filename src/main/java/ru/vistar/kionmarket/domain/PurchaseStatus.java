@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -15,6 +16,7 @@ public class PurchaseStatus {
     @Column(name = "purchase_status_name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "purchaseStatus", fetch = FetchType.LAZY)
     Set<Purchase> purchases;
 

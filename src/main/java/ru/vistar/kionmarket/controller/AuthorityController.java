@@ -2,6 +2,7 @@ package ru.vistar.kionmarket.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.vistar.kionmarket.domain.Authority;
 import ru.vistar.kionmarket.dto.AuthorityDto;
 import ru.vistar.kionmarket.service.AuthorityService;
 import ru.vistar.kionmarket.service.impl.AuthorityServiceImpl;
@@ -9,7 +10,7 @@ import ru.vistar.kionmarket.service.impl.AuthorityServiceImpl;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/authorities")
 public class AuthorityController {
 
     final AuthorityService authorityService;
@@ -18,39 +19,39 @@ public class AuthorityController {
         this.authorityService = authorityService;
     }
 
-    @PostMapping("/authorities")
-    public ResponseEntity<AuthorityDto> create(@RequestBody AuthorityDto authorityDto){
+    @PostMapping
+    public ResponseEntity<Authority> create(@RequestBody AuthorityDto authorityDto){
         return ResponseEntity.ok(authorityService.create(authorityDto));
     }
 
-    @PutMapping("/authorities")
-    public ResponseEntity<AuthorityDto> update(@RequestBody AuthorityDto authorityDto){
-        return ResponseEntity.ok(authorityService.update(authorityDto));
+    @PutMapping("/{authorityId}")
+    public ResponseEntity<Authority> update(@PathVariable Long authorityId, @RequestBody AuthorityDto authorityDto){
+        return ResponseEntity.ok(authorityService.update(authorityId, authorityDto));
     }
 
-    @GetMapping("/authorities/{id}")
-    public ResponseEntity<AuthorityDto> findById(@PathVariable Long id){
-        return ResponseEntity.ok(authorityService.findById(id));
+    @GetMapping("/{authorityId}")
+    public ResponseEntity<Authority> findById(@PathVariable Long authorityId){
+        return ResponseEntity.ok(authorityService.findById(authorityId));
     }
 
-    @GetMapping("/authorities")
-    public ResponseEntity<List<AuthorityDto>> findAll(){
+    @GetMapping
+    public ResponseEntity<List<Authority>> findAll(){
         return ResponseEntity.ok(authorityService.findAll());
     }
 
-    @DeleteMapping("/authorities/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        authorityService.deleteById(id);
+    @DeleteMapping("/{authorityId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long authorityId){
+        authorityService.deleteById(authorityId);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{userId}/authorities/{authorityId}")
+    @PostMapping("/{authorityId}/users/{userId}")
     public ResponseEntity<Void>  grantAuthorityToUser(@PathVariable Long authorityId, @PathVariable Long userId){
         authorityService.grantAuthorityToUser(authorityId,userId);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{userId}/authorities/{authorityId}")
+    @DeleteMapping("/{authorityId}/users/{userId}")
     public ResponseEntity<Void>  revokeAuthorityFromUser(@PathVariable Long authorityId, @PathVariable Long userId){
         authorityService.revokeAuthorityFromUser(authorityId,userId);
         return ResponseEntity.ok().build();

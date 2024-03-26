@@ -1,28 +1,38 @@
 package ru.vistar.kionmarket.service;
 
-import ru.vistar.kionmarket.domain.Product;
-import ru.vistar.kionmarket.domain.Purchase;
-import ru.vistar.kionmarket.domain.Review;
+import ru.vistar.kionmarket.domain.*;
 import ru.vistar.kionmarket.dto.AuthorityDto;
 import ru.vistar.kionmarket.dto.UserDto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
-//USERS
     public UserDto create(UserDto userDto);//users
-    public UserDto update(UserDto userDto);//users
+    public UserDto update(Long userid, UserDto userDto);//users/{userId}
     public UserDto findById(Long id);//users/{id}
     public List<UserDto> findAll();//users
     public void deleteById(Long id);//users/{id}
 
-//    public List<Authority> getAuthorities(Long userId);//users/{userId}/authorities
-//    public List<Product> getFavoritesById(Long userId);//users/{userId}/favorites
-//    public void addFavorite(Long userId, Long productId);//users/{userId}/favorites/{productId}
-//    public void removeFavorite(Long userId, Long productId);//users/{userId}/favorites/{productId}
-//    public List<Purchase> getPurchases(Long userId);//users/{userId}/purchases
-//    public List<Review> getReviews(Long userId);//users/{userId}/reviews
+    public Set<Authority> getAuthorities(Long userId);//users/{userId}/authorities
+
+    public Set<Review> getReviews(Long userId);//users/{userId}/reviews
+    public Set<Purchase> getPurchases(Long userId);//users/{userId}/purchases
+
+    public Set<Product> getFavorites(Long userId);//users/{userId}/favorites
+    public void addFavorite(Long userId, Long productId);//users/{userId}/favorites/{productId}
+    public void removeFavorite(Long userId, Long productId);//users/{userId}/favorites/{productId}
+
+    public Address getAddress(Long userId);//users/{userId}/addresses
+    public void addAddress(Long userId, Long addressId);//users/{userId}/addresses/{addressId}
+    public void removeAddress(Long userId);//users/{userId}/addresses
+
+    public Shop getShop(Long userId);//users/{userId}/shops
+    public void addShop(Long userId, Long shopId);//users/{userId}/shops/{shopId}
+    public void removeShop(Long userId);//users/{userId}/shops
+
+
 
 
     //AUTHORITIES

@@ -17,39 +17,36 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     final UserRepository userRepository;
     final AuthorityRepository authorityRepository;
-    final AuthorityMapper authorityMapper;
 
-
-    public AuthorityServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository, AuthorityMapper authorityMapper) {
+    public AuthorityServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
-        this.authorityMapper = authorityMapper;
     }
 
     @Override
-    public AuthorityDto create(AuthorityDto authorityDto) {
-        Authority authority = authorityMapper.toEntity(authorityDto);
-        return authorityMapper.toDto(authorityRepository.save(authority));
-    }
-
-    @Override
-    public AuthorityDto update(AuthorityDto authorityDto) {
-        Authority authority = authorityRepository.findById(authorityDto.getId())
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityDto.getId())));
+    public Authority create(AuthorityDto authorityDto) {
+        Authority authority = new Authority();
         authority.setName(authorityDto.getName());
-        return authorityMapper.toDto(authorityRepository.save(authority));
+        return authorityRepository.save(authority);
     }
 
     @Override
-    public AuthorityDto findById(Long id) {
-        Authority authority = authorityRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found",id)));
-        return authorityMapper.toDto(authority);
+    public Authority update(Long authorityId, AuthorityDto authorityDto) {
+        Authority authority = authorityRepository.findById(authorityId)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityId)));
+        authority.setName(authorityDto.getName());
+        return authorityRepository.save(authority);
     }
 
     @Override
-    public List<AuthorityDto> findAll() {
-        return authorityMapper.toDto(authorityRepository.findAll());
+    public Authority findById(Long authorityId) {
+        return authorityRepository.findById(authorityId)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found", authorityId)));
+    }
+
+    @Override
+    public List<Authority> findAll() {
+        return authorityRepository.findAll();
     }
 
     @Override
@@ -69,11 +66,12 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public void revokeAuthorityFromUser(Long authorityId, Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
         Authority authority = authorityRepository.findById(authorityId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityId)));
-        user.getAuthorities().remove(authority);
-        userRepository.save(user);
+        userRepository.findById(userId)
+                .ifPresent(user -> {
+                    user.getAuthorities().remove(authority);
+                    userRepository.save(user);
+                });
     }
 }
