@@ -22,7 +22,7 @@ public class AddressTypeServiceImpl implements AddressTypeService {
     public AddressType create(AddressTypeDto addressTypeDto) {
         AddressType addressType = new AddressType();
         addressType.setName(addressTypeDto.getName());
-        return addressType;
+        return addressTypeRepository.save(addressType);
     }
 
     @Override

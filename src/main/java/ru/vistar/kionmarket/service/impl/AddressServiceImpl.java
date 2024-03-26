@@ -61,7 +61,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address findById(Long id) {
         Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("AddressType with id %1$s not found", id)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Address with id %1$s not found", id)));
         return address;
     }
 
