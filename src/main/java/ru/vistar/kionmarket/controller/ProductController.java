@@ -7,6 +7,7 @@ import ru.vistar.kionmarket.domain.Purchase;
 import ru.vistar.kionmarket.domain.Review;
 import ru.vistar.kionmarket.dto.ProductDto;
 import ru.vistar.kionmarket.service.ProductService;
+import ru.vistar.kionmarket.service.impl.ProductServiceImpl;
 
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.Set;
 @RequestMapping("/api/v1/product")
 public class ProductController {
     final ProductService productService;
-    public ProductController(ProductService productService) {
+    public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
     }
 

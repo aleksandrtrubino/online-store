@@ -15,12 +15,12 @@ public class Address {
     private City city;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "house_id", referencedColumnName = "house_id")
-    private House house;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "street_id", referencedColumnName = "street_id")
     private Street street;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "house_id", referencedColumnName = "house_id")
+    private House house;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "address_type_id",referencedColumnName = "address_type_id")

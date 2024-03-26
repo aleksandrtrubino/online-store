@@ -25,11 +25,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product create(ProductDto productDto) {
-        Product product = new Product();
+
         Subcategory subcategory = subcategoryRepository.findById(productDto.getSubcategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", productDto.getSubcategoryId())));
         Shop shop = shopRepository.findById(productDto.getShopId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productDto.getShopId())));
+        Product product = new Product();
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(product.getPrice());

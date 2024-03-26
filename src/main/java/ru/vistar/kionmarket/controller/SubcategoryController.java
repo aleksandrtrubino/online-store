@@ -6,6 +6,7 @@ import ru.vistar.kionmarket.domain.Product;
 import ru.vistar.kionmarket.domain.Subcategory;
 import ru.vistar.kionmarket.dto.SubcategoryDto;
 import ru.vistar.kionmarket.service.SubcategoryService;
+import ru.vistar.kionmarket.service.impl.SubcategoryServiceImpl;
 
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Set;
 @RequestMapping("/api/v1/subcategories")
 public class SubcategoryController {
     final SubcategoryService subcategoryService;
-    public SubcategoryController(SubcategoryService subcategoryService) {
+    public SubcategoryController(SubcategoryServiceImpl subcategoryService) {
         this.subcategoryService = subcategoryService;
     }
 
