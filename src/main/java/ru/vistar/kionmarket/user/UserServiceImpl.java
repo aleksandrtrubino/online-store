@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.user;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vistar.kionmarket.address.Address;
@@ -25,22 +26,24 @@ public class UserServiceImpl implements UserService {
     private final ProductRepository productRepository;
     private final AddressRepository addressRepository;
     private final ShopRepository shopRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, ShopRepository shopRepository) {
+    public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, ShopRepository shopRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.addressRepository = addressRepository;
         this.shopRepository = shopRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User create(UserDto userDto) {
-        User user = new User();
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setFirstName(userDto.getFirstName());
-        user.setMiddleName(userDto.getMiddleName());
-        user.setLastName(userDto.getLastName());
+        String email = userDto.getEmail();
+        String password = passwordEncoder.encode(userDto.getPassword());
+        String firstName = userDto.getFirstName();
+        String middleName = userDto.getMiddleName();
+        String lastName = userDto.getLastName();
+        User user = new User(email,password,firstName,middleName,lastName);
         return userRepository.save(user);
     }
 
