@@ -1,6 +1,7 @@
 package ru.vistar.kionmarket.authority;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vistar.kionmarket.user.User;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
 import ru.vistar.kionmarket.user.UserRepository;
@@ -8,6 +9,7 @@ import ru.vistar.kionmarket.user.UserRepository;
 import java.util.List;
 
 @Service
+@Transactional
 public class AuthorityServiceImpl implements AuthorityService {
 
     private final UserRepository userRepository;
@@ -20,8 +22,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public Authority create(AuthorityDto authorityDto) {
-        Authority authority = new Authority();
-        authority.setName(authorityDto.getName());
+        String name = authorityDto.getName();
+        Authority authority = new Authority(name);
         return authorityRepository.save(authority);
     }
 
@@ -51,10 +53,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public void grantAuthorityToUser(Long authorityId, Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
         Authority authority = authorityRepository.findById(authorityId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityId)));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityId)));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
         user.getAuthorities().add(authority);
         userRepository.save(user);
     }
@@ -62,11 +64,10 @@ public class AuthorityServiceImpl implements AuthorityService {
     @Override
     public void revokeAuthorityFromUser(Long authorityId, Long userId) {
         Authority authority = authorityRepository.findById(authorityId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityId)));
-        userRepository.findById(userId)
-                .ifPresent(user -> {
-                    user.getAuthorities().remove(authority);
-                    userRepository.save(user);
-                });
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Authority with id %1$s not found",authorityId)));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
+        user.getAuthorities().remove(authority);
+        userRepository.save(user);
     }
 }

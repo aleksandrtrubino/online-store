@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import ru.vistar.kionmarket.user.User;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,7 @@ public class Authority {
 
     public Authority(String name) {
         this.name = name;
+        this.users = new HashSet<>();
     }
 
     public Long getId() {
@@ -40,9 +42,5 @@ public class Authority {
 
     public Set<User> getUsers() {
         return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 }

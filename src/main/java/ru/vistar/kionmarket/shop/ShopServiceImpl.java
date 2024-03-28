@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 @Service
 public class ShopServiceImpl implements ShopService{
+
     private final ShopRepository shopRepository;
 
     public ShopServiceImpl(ShopRepository shopRepository) {
@@ -16,24 +17,23 @@ public class ShopServiceImpl implements ShopService{
 
     @Override
     public Shop create(ShopDto shopDto) {
-        Shop shop = new Shop();
-        shop.setName(shopDto.getName());
+        String name = shopDto.getName();
+        Shop shop = new Shop(name);
         return shopRepository.save(shop);
     }
 
     @Override
-    public Shop update(Long id, ShopDto shopDto) {
-        Shop shop = shopRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException(String.format("Category with id %1$s not found", id)));
+    public Shop update(Long shopId, ShopDto shopDto) {
+        Shop shop = shopRepository.findById(shopId)
+                .orElseThrow(()-> new ResourceNotFoundException(String.format("Shop with id %1$s not found", shopId)));
         shop.setName(shopDto.getName());
         return shopRepository.save(shop);
     }
 
     @Override
     public Shop findById(Long shopId) {
-        Shop shop = shopRepository.findById(shopId)
-                .orElseThrow(()-> new ResourceNotFoundException(String.format("Category with id %1$s not found", shopId)));
-        return shop;
+        return shopRepository.findById(shopId)
+                .orElseThrow(()-> new ResourceNotFoundException(String.format("Shop with id %1$s not found", shopId)));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ShopServiceImpl implements ShopService{
     @Override
     public Set<Product> getProducts(Long shopId) {
         Shop shop = shopRepository.findById(shopId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Category with id %1$s not found", shopId)));
+                .orElseThrow(()->new ResourceNotFoundException(String.format("Shop with id %1$s not found", shopId)));
         return shop.getProducts();
     }
 }

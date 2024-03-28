@@ -12,6 +12,7 @@ public class City {
 
     @Column(name = "city_name")
     private String name;
+
     public City(){}
 
     public City(String name) {
@@ -20,10 +21,6 @@ public class City {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

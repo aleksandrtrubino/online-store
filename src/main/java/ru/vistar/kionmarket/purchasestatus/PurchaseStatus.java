@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import ru.vistar.kionmarket.purchase.Purchase;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,7 @@ public class PurchaseStatus {
 
     public PurchaseStatus(String name) {
         this.name = name;
+        this.purchases = new HashSet<>();
     }
 
     public Long getId() {

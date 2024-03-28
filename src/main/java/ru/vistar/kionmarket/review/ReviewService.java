@@ -1,14 +1,12 @@
 package ru.vistar.kionmarket.review;
 
-import ru.vistar.kionmarket.review.Review;
-import ru.vistar.kionmarket.review.ReviewDto;
-
 import java.util.List;
 
+//reviews
 public interface ReviewService {
-    public Review create(ReviewDto reviewDto);//reviews
-    public Review update(Long reviewId, ReviewDto reviewDto);//reviews/{reviewId}
-    public Review findById(Long reviewId);//reviews/{reviewId}
-    public List<Review> findAll();//reviews
-    public void deleteById(Long reviewId);//reviews/{reviewId}
+    public Review create(ReviewDto reviewDto);// POST
+    public Review update(Long reviewId, ReviewDto reviewDto);//{reviewId} PUT
+    public Review findById(Long reviewId);//{reviewId} GET
+    public List<Review> findAll();// GET
+    public void deleteById(Long reviewId);//{reviewId} DELETE
 }

@@ -11,6 +11,7 @@ import ru.vistar.kionmarket.shop.Shop;
 import ru.vistar.kionmarket.subcategory.Subcategory;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,14 +21,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_seq")
     @Column(name = "product_id")
     private Long id;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
-    private Subcategory subcategory;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
-    private Shop shop;
 
     @Column(name = "product_name")
     private String name;
@@ -40,30 +33,42 @@ public class Product {
 
     @Column(name = "prev_price",columnDefinition = "NUMERIC(19,4)")
     private Double prevPrice;
-    @JsonIgnore
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
+    private Subcategory subcategory;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
+    private Shop shop;
+
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     @CreationTimestamp
     private LocalDateTime createdAt;
-    @JsonIgnore
+
     @Column(name = "updated_at" ,columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<Review> reviews;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<Purchase> purchases;
 
     public Product(){}
 
-    public Product(Subcategory subcategory, Shop shop, String name, String description, Double price, Double prevPrice) {
-        this.subcategory = subcategory;
-        this.shop = shop;
+    public Product(String name, String description, Double price, Double prevPrice, Subcategory subcategory, Shop shop) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.prevPrice = prevPrice;
+        this.subcategory = subcategory;
+        this.shop = shop;
+        this.reviews = new HashSet<>();
+        this.purchases = new HashSet<>();
     }
 
     public Long getId() {

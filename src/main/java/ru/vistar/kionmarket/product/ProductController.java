@@ -2,18 +2,14 @@ package ru.vistar.kionmarket.product;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vistar.kionmarket.product.Product;
 import ru.vistar.kionmarket.purchase.Purchase;
 import ru.vistar.kionmarket.review.Review;
-import ru.vistar.kionmarket.product.ProductDto;
-import ru.vistar.kionmarket.product.ProductService;
-import ru.vistar.kionmarket.product.ProductServiceImpl;
 
 import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/v1/product")
+@RequestMapping("/api/v1/products")
 public class ProductController {
     private final ProductService productService;
     public ProductController(ProductServiceImpl productService) {
@@ -25,14 +21,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.create(productDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody ProductDto productDto){
-        return ResponseEntity.ok(productService.update(id, productDto));
+    @PutMapping("/{productId}")
+    public ResponseEntity<Product> update(@PathVariable Long productId, @RequestBody ProductDto productDto){
+        return ResponseEntity.ok(productService.update(productId, productDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id){
-        return ResponseEntity.ok(productService.findById(id));
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> findById(@PathVariable Long productId){
+        return ResponseEntity.ok(productService.findById(productId));
     }
 
     @GetMapping
@@ -40,14 +36,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    @GetMapping("/{id}/reviews")
-    public ResponseEntity<Set<Review>> getReviews(@PathVariable Long id){
-        return ResponseEntity.ok(productService.getReviews(id));
+    @GetMapping("/{productId}/reviews")
+    public ResponseEntity<Set<Review>> getReviews(@PathVariable Long productId){
+        return ResponseEntity.ok(productService.getReviews(productId));
     }
 
-    @GetMapping("/{id}/purchases")
-    public ResponseEntity<Set<Purchase>> getPurchases(@PathVariable Long id){
-        return ResponseEntity.ok(productService.getPurchases(id));
+    @GetMapping("/{productId}/purchases")
+    public ResponseEntity<Set<Purchase>> getPurchases(@PathVariable Long productId){
+        return ResponseEntity.ok(productService.getPurchases(productId));
     }
 
     @DeleteMapping("/{id}")

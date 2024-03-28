@@ -12,17 +12,15 @@ import java.util.Set;
 public class PurchaseStatusServiceImpl implements PurchaseStatusService {
 
     private final PurchaseStatusRepository purchaseStatusRepository;
-    private final PurchaseRepository purchaseRepository;
 
-    public PurchaseStatusServiceImpl(PurchaseStatusRepository purchaseStatusRepository, PurchaseRepository purchaseRepository) {
+    public PurchaseStatusServiceImpl(PurchaseStatusRepository purchaseStatusRepository) {
         this.purchaseStatusRepository = purchaseStatusRepository;
-        this.purchaseRepository = purchaseRepository;
     }
 
     @Override
     public PurchaseStatus create(PurchaseStatusDto purchaseStatusDto) {
-        PurchaseStatus purchaseStatus = new PurchaseStatus();
-        purchaseStatus.setName(purchaseStatusDto.getName());
+        String name = purchaseStatusDto.getName();
+        PurchaseStatus purchaseStatus = new PurchaseStatus(name);
         return purchaseStatusRepository.save(purchaseStatus);
     }
 

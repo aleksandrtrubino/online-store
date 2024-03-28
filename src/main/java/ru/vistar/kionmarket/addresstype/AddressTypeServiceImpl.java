@@ -17,24 +17,23 @@ public class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public AddressType create(AddressTypeDto addressTypeDto) {
-        AddressType addressType = new AddressType();
+        String name = addressTypeDto.getName();
+        AddressType addressType = new AddressType(name);
+        return addressTypeRepository.save(addressType);
+    }
+
+    @Override
+    public AddressType update(Long addressTypeId, AddressTypeDto addressTypeDto) {
+        AddressType addressType = addressTypeRepository.findById(addressTypeId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("AddressType with id %1$s not found", addressTypeId)));
         addressType.setName(addressTypeDto.getName());
         return addressTypeRepository.save(addressType);
     }
 
     @Override
-    public AddressType update(Long id, AddressTypeDto addressTypeDto) {
-        AddressType addressType = addressTypeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found", id)));
-        addressType.setName(addressTypeDto.getName());
-        return addressTypeRepository.save(addressType);
-    }
-
-    @Override
-    public AddressType findById(Long id) {
-        AddressType addressType = addressTypeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found",id)));
-        return addressType;
+    public AddressType findById(Long addressTypeId) {
+        return addressTypeRepository.findById(addressTypeId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("AddressType with id %1$s not found", addressTypeId)));
     }
 
     @Override
@@ -43,14 +42,14 @@ public class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        addressTypeRepository.deleteById(id);
+    public void deleteById(Long addressTypeId) {
+        addressTypeRepository.deleteById(addressTypeId);
     }
 
     @Override
-    public Set<Address> getAddresses(Long id) {
-        AddressType addressType = addressTypeRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("AddressType with id %1$s not found", id)));
+    public Set<Address> getAddresses(Long addressTypeId) {
+        AddressType addressType = addressTypeRepository.findById(addressTypeId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("AddressType with id %1$s not found", addressTypeId)));
         return addressType.getAddresses();
     }
 }

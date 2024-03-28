@@ -12,10 +12,10 @@ import java.util.Set;
 
 public interface UserService {
 
-    public UserDto create(UserDto userDto);//users
-    public UserDto update(Long userid, UserDto userDto);//users/{userId}
-    public UserDto findById(Long id);//users/{id}
-    public List<UserDto> findAll();//users
+    public User create(UserDto userDto);//users
+    public User update(Long userid, UserDto userDto);//users/{userId}
+    public User findById(Long id);//users/{id}
+    public List<User> findAll();//users
     public void deleteById(Long id);//users/{id}
 
     public Set<Authority> getAuthorities(Long userId);//users/{userId}/authorities

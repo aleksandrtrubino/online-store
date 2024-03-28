@@ -1,11 +1,14 @@
 package ru.vistar.kionmarket.review;
 
 public class ReviewDto {
+
     private Integer rating;
     private String content;
     private Long userId;
     private Long productId;
+
     public ReviewDto(){}
+
     public ReviewDto(Integer rating, String content, Long userId, Long productId) {
         this.rating = rating;
         this.content = content;

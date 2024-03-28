@@ -1,13 +1,13 @@
 package ru.vistar.kionmarket.city;
 
-import ru.vistar.kionmarket.city.City;
-import ru.vistar.kionmarket.city.CityDto;
 import java.util.List;
 
+
+//cities
 public interface CityService {
-    public City create(CityDto cityDto);//addresses/cities
-    public City update(Long id, CityDto cityDto);//addresses/cities/{id}
-    public City findById(Long id);//addresses/cities/{id}
-    public List<City> findAll();//addresses/cities
-    public void deleteById(Long id);//addresses/cities/{id}
+    public City create(CityDto cityDto);// POST
+    public City update(Long cityId, CityDto cityDto);//{cityId} PUT
+    public City findById(Long cityId);//{cityId} GET
+    public List<City> findAll();// GET
+    public void deleteById(Long cityId);//{cityId} DELETE
 }

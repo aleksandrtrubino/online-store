@@ -10,6 +10,7 @@ import java.util.List;
 public class AddressController {
 
     private final AddressService addressService;
+
     public AddressController(AddressServiceImpl addressService) {
         this.addressService = addressService;
     }
@@ -19,14 +20,14 @@ public class AddressController {
         return ResponseEntity.ok(addressService.create(addressDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Address> update(@PathVariable Long id, @RequestBody AddressDto addressDto){
-        return ResponseEntity.ok(addressService.update(id, addressDto));
+    @PutMapping("/{addressId}")
+    public ResponseEntity<Address> update(@PathVariable Long addressId, @RequestBody AddressDto addressDto){
+        return ResponseEntity.ok(addressService.update(addressId, addressDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Address> findById(@PathVariable Long id){
-        return ResponseEntity.ok(addressService.findById(id));
+    @GetMapping("/{addressId}")
+    public ResponseEntity<Address> findById(@PathVariable Long addressId){
+        return ResponseEntity.ok(addressService.findById(addressId));
     }
 
     @GetMapping
@@ -34,9 +35,9 @@ public class AddressController {
         return ResponseEntity.ok(addressService.findAll());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        addressService.deleteById(id);
+    @DeleteMapping("/{addressId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long addressId){
+        addressService.deleteById(addressId);
         return ResponseEntity.ok().build();
     }
 }

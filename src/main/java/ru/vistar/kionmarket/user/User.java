@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,6 +13,7 @@ import ru.vistar.kionmarket.review.Review;
 import ru.vistar.kionmarket.shop.Shop;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,8 +25,10 @@ public class User {
     @Column(name = "user_id")
     private Long id;
     private String email;
+    @JsonIgnore
     private String password;
-    private Boolean enabled;
+    @JsonIgnore
+    private Boolean enabled = true;
 
     @Column(name = "first_name")
     private String firstName;
@@ -44,28 +48,34 @@ public class User {
     private LocalDateTime updatedAt;
 
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_authorities",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "authority_id"))
     private Set<Authority> authorities;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "product_id"))
     private Set<Product> favorites;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<Purchase> purchases;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<Review> reviews;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id",referencedColumnName = "shop_id")
     private Shop shop;
@@ -80,6 +90,12 @@ public class User {
         this.middleName = middleName;
         this.lastName = lastName;
         this.enabled = true;
+        this.address = null;
+        this.shop = null;
+        this.authorities = new HashSet<>();
+        this.favorites = new HashSet<>();
+        this.purchases = new HashSet<>();
+        this.reviews = new HashSet<>();
     }
 
     public Long getId() {
@@ -131,9 +147,6 @@ public class User {
     public Set<Authority> getAuthorities() {
         return authorities;
     }
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
 
     public Address getAddress() {
         return address;
@@ -159,15 +172,9 @@ public class User {
     public Set<Purchase> getPurchases() {
         return purchases;
     }
-    public void setPurchases(Set<Purchase> purchases) {
-        this.purchases = purchases;
-    }
 
     public Set<Review> getReviews() {
         return reviews;
-    }
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
     }
 
     public LocalDateTime getCreatedAt() {

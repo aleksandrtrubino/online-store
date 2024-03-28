@@ -1,8 +1,10 @@
 package ru.vistar.kionmarket.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import ru.vistar.kionmarket.subcategory.Subcategory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +18,7 @@ public class Category {
     @Column(name = "category_name")
     private String name;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private Set<Subcategory> subcategories;
 
@@ -24,6 +26,7 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
+        this.subcategories = new HashSet<>();
     }
 
     public Long getId() {
@@ -40,9 +43,5 @@ public class Category {
 
     public Set<Subcategory> getSubcategories() {
         return subcategories;
-    }
-
-    public void setSubcategories(Set<Subcategory> subсategories) {
-        this.subcategories = subсategories;
     }
 }

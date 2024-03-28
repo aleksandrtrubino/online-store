@@ -14,24 +14,23 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City create(CityDto cityDto) {
-        City city = new City();
+        String name = cityDto.getName();
+        City city = new City(name);
+        return cityRepository.save(city);
+    }
+
+    @Override
+    public City update(Long cityId, CityDto cityDto) {
+        City city = cityRepository.findById(cityId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", cityId)));
         city.setName(cityDto.getName());
         return cityRepository.save(city);
     }
 
     @Override
-    public City update(Long id, CityDto cityDto) {
-        City city = cityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", id)));
-        city.setName(cityDto.getName());
-        return cityRepository.save(city);
-    }
-
-    @Override
-    public City findById(Long id) {
-        City city = cityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", id)));
-        return city;
+    public City findById(Long cityId) {
+        return cityRepository.findById(cityId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", cityId)));
     }
 
     @Override
@@ -40,7 +39,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        cityRepository.deleteById(id);
+    public void deleteById(Long cityId) {
+        cityRepository.deleteById(cityId);
     }
 }

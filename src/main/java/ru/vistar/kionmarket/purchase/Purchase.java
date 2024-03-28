@@ -3,6 +3,7 @@ package ru.vistar.kionmarket.purchase;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.UpdateTimestamp;
 import ru.vistar.kionmarket.address.Address;
 import ru.vistar.kionmarket.purchasestatus.PurchaseStatus;
 import ru.vistar.kionmarket.user.User;
@@ -18,28 +19,29 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchases_seq")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    private Address address;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "purchase_status_id", referencedColumnName = "purchase_status_id")
+    private PurchaseStatus purchaseStatus;
+
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at",columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address address;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    private Product product;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_status_id", referencedColumnName = "purchase_status_id")
-    private PurchaseStatus purchaseStatus;
 
     public Purchase(){}
 

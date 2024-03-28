@@ -23,15 +23,13 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review create(ReviewDto reviewDto) {
+        Integer rating = reviewDto.getRating();
+        String content = reviewDto.getContent();
         User user = userRepository.findById(reviewDto.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %1$s not found", reviewDto.getUserId())));
         Product product = productRepository.findById(reviewDto.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %1$s not found", reviewDto.getProductId())));
-        Review review = new Review();
-        review.setRating(reviewDto.getRating());
-        review.setContent(reviewDto.getContent());
-        review.setUser(user);
-        review.setProduct(product);
+        Review review = new Review(rating, content, user, product);
         return reviewRepository.save(review);
     }
 
@@ -52,9 +50,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review findById(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
+        return reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Review with id %1$s not found", reviewId)));
-        return review;
     }
 
     @Override

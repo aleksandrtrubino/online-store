@@ -1,6 +1,7 @@
 package ru.vistar.kionmarket.shop;
 
 public class ShopDto {
+
     private String name;
 
     ShopDto(){}

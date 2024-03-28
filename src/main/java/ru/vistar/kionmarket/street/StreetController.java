@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/addresses/streets")
+@RequestMapping("/api/v1/streets")
 public class StreetController {
+
     private final StreetService streetService;
+
     public StreetController(StreetServiceImpl streetService) {
         this.streetService = streetService;
     }
@@ -18,14 +20,14 @@ public class StreetController {
         return ResponseEntity.ok(streetService.create(streetDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Street> update(@PathVariable Long id, @RequestBody StreetDto streetDto){
-        return ResponseEntity.ok(streetService.update(id, streetDto));
+    @PutMapping("/{streetId}")
+    public ResponseEntity<Street> update(@PathVariable Long streetId, @RequestBody StreetDto streetDto){
+        return ResponseEntity.ok(streetService.update(streetId, streetDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Street> findById(@PathVariable Long id){
-        return ResponseEntity.ok(streetService.findById(id));
+    @GetMapping("/{streetId}")
+    public ResponseEntity<Street> findById(@PathVariable Long streetId){
+        return ResponseEntity.ok(streetService.findById(streetId));
     }
 
     @GetMapping
@@ -33,9 +35,9 @@ public class StreetController {
         return ResponseEntity.ok(streetService.findAll());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        streetService.deleteById(id);
+    @DeleteMapping("/{streetId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long streetId){
+        streetService.deleteById(streetId);
         return ResponseEntity.ok().build();
     }
 }

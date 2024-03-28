@@ -1,6 +1,7 @@
 package ru.vistar.kionmarket.purchasestatus;
 
 public class PurchaseStatusDto {
+
     String name;
 
     public PurchaseStatusDto(){}

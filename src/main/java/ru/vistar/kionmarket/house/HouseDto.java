@@ -1,9 +1,11 @@
 package ru.vistar.kionmarket.house;
 
 public class HouseDto {
+
     private String number;
 
     public HouseDto(){}
+
     public HouseDto(String number) {
         this.number = number;
     }

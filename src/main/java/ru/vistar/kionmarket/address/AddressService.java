@@ -1,14 +1,12 @@
 package ru.vistar.kionmarket.address;
 
-import ru.vistar.kionmarket.address.Address;
-import ru.vistar.kionmarket.address.AddressDto;
-
 import java.util.List;
 
+//addresses
 public interface AddressService {
-    public Address create(AddressDto addressDto);//addresses
-    public Address update(Long id, AddressDto addressDto);//addresses/{addressesId}
-    public Address findById(Long addressId);//addresses/{addressId}
-    public List<Address> findAll();//addresses
-    public void deleteById(Long addressId);//addresses/{addressId}
+    public Address create(AddressDto addressDto);// POST
+    public Address update(Long addressId, AddressDto addressDto);//{addressesId} PUT
+    public Address findById(Long addressId);//{addressId} GET
+    public List<Address> findAll();// GET
+    public void deleteById(Long addressId);//{addressId} DELETE
 }

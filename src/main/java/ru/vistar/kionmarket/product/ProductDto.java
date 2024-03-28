@@ -1,28 +1,23 @@
 package ru.vistar.kionmarket.product;
 
 public class ProductDto {
-    private Long subcategoryId;
-    private Long shopId;
+
     private String name;
     private String description;
     private Double price;
     private Double prevPrice;
+    private Long subcategoryId;
+    private Long shopId;
+
     public ProductDto(){}
 
-    public Long getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
-    }
-
-    public Long getSubcategoryId() {
-        return subcategoryId;
-    }
-
-    public void setSubcategoryId(Long subcategoryId) {
+    public ProductDto(String name, String description, Double price, Double prevPrice, Long subcategoryId, Long shopId) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.prevPrice = prevPrice;
         this.subcategoryId = subcategoryId;
+        this.shopId = shopId;
     }
 
     public String getName() {
@@ -55,5 +50,21 @@ public class ProductDto {
 
     public void setPrevPrice(Double prevPrice) {
         this.prevPrice = prevPrice;
+    }
+
+    public Long getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(Long subcategoryId) {
+        this.subcategoryId = subcategoryId;
+    }
+
+    public Long getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
     }
 }

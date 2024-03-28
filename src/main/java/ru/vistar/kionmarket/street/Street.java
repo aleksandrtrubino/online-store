@@ -12,17 +12,15 @@ public class Street {
 
     @Column(name = "street_name")
     private String name;
+
     public Street(){}
+
     public Street(String name) {
         this.name = name;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

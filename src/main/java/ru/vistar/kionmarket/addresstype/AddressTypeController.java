@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/v1/addressTypes")
+@RequestMapping("/api/v1/address-types")
 public class AddressTypeController {
+
     private final AddressTypeService addressTypeService;
+    
     public AddressTypeController(AddressTypeServiceImpl addressTypeService) {
         this.addressTypeService = addressTypeService;
     }
@@ -20,14 +22,14 @@ public class AddressTypeController {
         return ResponseEntity.ok(addressTypeService.create(addressTypeDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AddressType> update(@PathVariable Long id, @RequestBody AddressTypeDto addressTypeDto){
-        return ResponseEntity.ok(addressTypeService.update(id, addressTypeDto));
+    @PutMapping("/{addressTypeId}")
+    public ResponseEntity<AddressType> update(@PathVariable Long addressTypeId, @RequestBody AddressTypeDto addressTypeDto){
+        return ResponseEntity.ok(addressTypeService.update(addressTypeId, addressTypeDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AddressType> findById(@PathVariable Long id){
-        return ResponseEntity.ok(addressTypeService.findById(id));
+    @GetMapping("/{addressTypeId}")
+    public ResponseEntity<AddressType> findById(@PathVariable Long addressTypeId){
+        return ResponseEntity.ok(addressTypeService.findById(addressTypeId));
     }
 
     @GetMapping
@@ -35,14 +37,14 @@ public class AddressTypeController {
         return ResponseEntity.ok(addressTypeService.findAll());
     }
 
-    @GetMapping("/{id}/addresses")
-    public ResponseEntity<Set<Address>> getAddresses(@PathVariable Long id){
-        return ResponseEntity.ok(addressTypeService.getAddresses(id));
+    @GetMapping("/{addressTypeId}/addresses")
+    public ResponseEntity<Set<Address>> getAddresses(@PathVariable Long addressTypeId){
+        return ResponseEntity.ok(addressTypeService.getAddresses(addressTypeId));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        addressTypeService.deleteById(id);
+    @DeleteMapping("/{addressTypeId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long addressTypeId){
+        addressTypeService.deleteById(addressTypeId);
         return ResponseEntity.ok().build();
     }
 }

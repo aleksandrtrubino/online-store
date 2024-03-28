@@ -1,14 +1,12 @@
 package ru.vistar.kionmarket.purchase;
 
-import ru.vistar.kionmarket.purchase.Purchase;
-import ru.vistar.kionmarket.purchase.PurchaseDto;
-
 import java.util.List;
 
+//purchases
 public interface PurchaseService {
-    public Purchase create(PurchaseDto purchaseDto);//purchases
-    public Purchase update(Long purchaseId, PurchaseDto purchaseDto);//purchases/{purchaseId}
-    public Purchase findById(Long purchaseId);//purchases/{purchaseId}
-    public List<Purchase> findAll();//purchases
-    public void deleteById(Long purchaseId);//purchases/{purchaseId}
+    public Purchase create(PurchaseDto purchaseDto);// POST
+    public Purchase update(Long purchaseId, PurchaseDto purchaseDto);//{purchaseId} PUT
+    public Purchase findById(Long purchaseId);//{purchaseId} GET
+    public List<Purchase> findAll();// GET
+    public void deleteById(Long purchaseId);//{purchaseId} DELETE
 }

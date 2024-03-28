@@ -7,6 +7,7 @@ import java.util.List;
 
 @Service
 public class HouseServiceImpl implements HouseService {
+
     private final HouseRepository houseRepository;
 
     public HouseServiceImpl(HouseRepository houseRepository) {
@@ -21,18 +22,17 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public House update(Long id, HouseDto houseDto) {
-        House house = houseRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("House with id %1$s not found", id)));
+    public House update(Long houseId, HouseDto houseDto) {
+        House house = houseRepository.findById(houseId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("House with id %1$s not found", houseId)));
         house.setNumber(houseDto.getNumber());
         return houseRepository.save(house);
     }
 
     @Override
-    public House findById(Long id) {
-        House house = houseRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("House with id %1$s not found", id)));
-        return house;
+    public House findById(Long houseId) {
+        return houseRepository.findById(houseId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("House with id %1$s not found", houseId)));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        houseRepository.deleteById(id);
+    public void deleteById(Long houseId) {
+        houseRepository.deleteById(houseId);
     }
 }

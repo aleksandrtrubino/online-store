@@ -19,11 +19,11 @@ public class Subcategory {
     @Column(name = "subcategory_name")
     private String name;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "subcategory", fetch = FetchType.LAZY)
     private Set<Product> products;
     public Subcategory(){}

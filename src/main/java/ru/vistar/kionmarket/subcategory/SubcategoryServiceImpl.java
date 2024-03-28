@@ -13,6 +13,7 @@ import java.util.Set;
 public class SubcategoryServiceImpl implements SubcategoryService {
 
     private final SubcategoryRepository subcategoryRepository;
+
     private final CategoryRepository categoryRepository;
     public SubcategoryServiceImpl(SubcategoryRepository subcategoryRepository, CategoryRepository categoryRepository) {
         this.subcategoryRepository = subcategoryRepository;
@@ -21,44 +22,45 @@ public class SubcategoryServiceImpl implements SubcategoryService {
 
     @Override
     public Subcategory create(SubcategoryDto subcategoryDto) {
+        String name = subcategoryDto.getName();
         Category category = categoryRepository.findById(subcategoryDto.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %1$s not found",subcategoryDto.getCategoryId())));
-        Subcategory subcategory = new Subcategory();
+
+        Subcategory subcategory = new Subcategory(name, category);
+        return subcategoryRepository.save(subcategory);
+    }
+
+    @Override
+    public Subcategory update(Long subcategoryId, SubcategoryDto subcategoryDto) {
+        Subcategory subcategory = subcategoryRepository.findById(subcategoryId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", subcategoryId)));
+        Category category = categoryRepository.findById(subcategoryDto.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %1$s not found",subcategoryDto.getCategoryId())));
         subcategory.setName(subcategoryDto.getName());
         subcategory.setCategory(category);
         return subcategoryRepository.save(subcategory);
     }
 
     @Override
-    public Subcategory update(Long id, SubcategoryDto subcategoryDto) {
-        Subcategory subcategory = subcategoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", id)));
-        Category category = categoryRepository.findById(subcategoryDto.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %1$s not found",subcategoryDto.getCategoryId())));
-        subcategory.setName(subcategoryDto.getName());
-        subcategory.setCategory(category);
-        return subcategoryRepository.save(subcategory);
-    }
-
-    @Override
-    public Subcategory findById(Long id) {
-        Subcategory subcategory = subcategoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", id)));
-        return subcategory;
+    public Subcategory findById(Long subcategoryId) {
+        return subcategoryRepository.findById(subcategoryId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", subcategoryId)));
     }
 
     @Override
     public List<Subcategory> findAll() {
         return subcategoryRepository.findAll();
     }
+
     @Override
-    public void deleteById(Long id) {
-        subcategoryRepository.deleteById(id);
+    public void deleteById(Long subcategoryId) {
+        subcategoryRepository.deleteById(subcategoryId);
     }
+
     @Override
-    public Set<Product> getProducts(Long id) {
-        Subcategory subcategory = subcategoryRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", id)));
+    public Set<Product> getProducts(Long subcategoryId) {
+        Subcategory subcategory = subcategoryRepository.findById(subcategoryId)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", subcategoryId)));
         return subcategory.getProducts();
     }
 }

@@ -7,11 +7,13 @@ import ru.vistar.kionmarket.subcategory.SubcategoryDto;
 import java.util.List;
 import java.util.Set;
 
+//subcategories
 public interface SubcategoryService {
-    public Subcategory create(SubcategoryDto subcategoryDto);
-    public Subcategory update(Long id, SubcategoryDto subcategoryDto);
-    public Subcategory findById(Long id);
-    public List<Subcategory> findAll();
-    public void deleteById (Long id);
-    public Set<Product> getProducts(Long id);
+    public Subcategory create(SubcategoryDto subcategoryDto);// POST
+    public Subcategory update(Long subcategoryId, SubcategoryDto subcategoryDto);//{subcategoryId} PUT
+    public Subcategory findById(Long subcategoryId);//{subcategoryId} GET
+    public List<Subcategory> findAll();// GET
+    public void deleteById (Long subcategoryId);//{subcategoryId} DELETE
+
+    public Set<Product> getProducts(Long subcategoryId);//{subcategoryId}/products
 }

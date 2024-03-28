@@ -2,15 +2,11 @@ package ru.vistar.kionmarket.city;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vistar.kionmarket.city.City;
-import ru.vistar.kionmarket.city.CityDto;
-import ru.vistar.kionmarket.city.CityService;
-import ru.vistar.kionmarket.city.CityServiceImpl;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/addresses/cities")
+@RequestMapping("/api/v1/cities")
 public class CityController {
     private final CityService cityService;
     public CityController(CityServiceImpl cityService) {
@@ -22,14 +18,14 @@ public class CityController {
         return ResponseEntity.ok(cityService.create(cityDto));
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<City> update(@PathVariable Long id, @RequestBody CityDto cityDto){
-        return ResponseEntity.ok(cityService.update(id, cityDto));
+    @PutMapping("{cityId}")
+    public ResponseEntity<City> update(@PathVariable Long cityId, @RequestBody CityDto cityDto){
+        return ResponseEntity.ok(cityService.update(cityId, cityDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<City> findById(@PathVariable Long id){
-        return ResponseEntity.ok(cityService.findById(id));
+    @GetMapping("/{cityId}")
+    public ResponseEntity<City> findById(@PathVariable Long cityId){
+        return ResponseEntity.ok(cityService.findById(cityId));
     }
 
     @GetMapping
@@ -37,9 +33,9 @@ public class CityController {
         return ResponseEntity.ok(cityService.findAll());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        cityService.deleteById(id);
+    @DeleteMapping("/{cityId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long cityId){
+        cityService.deleteById(cityId);
         return ResponseEntity.ok().build();
     }
 }

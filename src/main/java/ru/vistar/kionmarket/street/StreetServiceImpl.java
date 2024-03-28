@@ -20,24 +20,23 @@ public class StreetServiceImpl implements StreetService {
 
     @Override
     public Street create(StreetDto streetDto) {
-        Street street = new Street();
+        String name = streetDto.getName();
+        Street street = new Street(name);
+        return streetRepository.save(street);
+    }
+
+    @Override
+    public Street update(Long streetId, StreetDto streetDto) {
+        Street street = streetRepository.findById(streetId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", streetId)));
         street.setName(streetDto.getName());
         return streetRepository.save(street);
     }
 
     @Override
-    public Street update(Long id, StreetDto streetDto) {
-        Street street = streetRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", id)));
-        street.setName(streetDto.getName());
-        return streetRepository.save(street);
-    }
-
-    @Override
-    public Street findById(Long id) {
-        Street street = streetRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", id)));
-        return street;
+    public Street findById(Long streetId) {
+        return streetRepository.findById(streetId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", streetId)));
     }
 
     @Override
@@ -46,7 +45,7 @@ public class StreetServiceImpl implements StreetService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        streetRepository.deleteById(id);
+    public void deleteById(Long streetId) {
+        streetRepository.deleteById(streetId);
     }
 }

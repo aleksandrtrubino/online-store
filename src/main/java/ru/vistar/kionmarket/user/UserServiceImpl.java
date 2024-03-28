@@ -1,6 +1,7 @@
 package ru.vistar.kionmarket.user;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vistar.kionmarket.address.Address;
 import ru.vistar.kionmarket.authority.Authority;
 import ru.vistar.kionmarket.user.*;
@@ -17,35 +18,34 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final AddressRepository addressRepository;
     private final ShopRepository shopRepository;
-    private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, ShopRepository shopRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, ShopRepository shopRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.addressRepository = addressRepository;
         this.shopRepository = shopRepository;
-        this.userMapper = userMapper;
     }
 
     @Override
-    public UserDto create(UserDto userDto) {
+    public User create(UserDto userDto) {
         User user = new User();
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setFirstName(userDto.getFirstName());
         user.setMiddleName(userDto.getMiddleName());
         user.setLastName(userDto.getLastName());
-        return userMapper.toDto(userRepository.save(user));
+        return userRepository.save(user);
     }
 
     @Override
-    public UserDto update(Long userId, UserDto userDto) {
+    public User update(Long userId, UserDto userDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
         user.setEmail(userDto.getEmail());
@@ -53,19 +53,19 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setMiddleName(user.getMiddleName());
         user.setLastName(userDto.getLastName());
-        return userMapper.toDto(userRepository.save(user));
+        return userRepository.save(user);
     }
 
     @Override
-    public UserDto findById(Long userId) {
-        User user = userRepository.findById(userId)
+    public User findById(Long userId) {
+        return userRepository.findById(userId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        return userMapper.toDto(user);
+
     }
 
     @Override
-    public List<UserDto> findAll() {
-        return userMapper.toDto(userRepository.findAll());
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Override

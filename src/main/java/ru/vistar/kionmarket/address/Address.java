@@ -43,10 +43,6 @@ public class Address {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public City getCity() {
         return city;
     }

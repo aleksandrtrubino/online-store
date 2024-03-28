@@ -5,11 +5,13 @@ import ru.vistar.kionmarket.subcategory.Subcategory;
 import java.util.List;
 import java.util.Set;
 
+//categories
 public interface CategoryService {
-    public Category create(CategoryDto categoryDto);
-    public Category update(Long id, CategoryDto categoryDto);
-    public Category findById(Long id);
-    public List<Category> findAll();
-    public void deleteById(Long id);
-    public Set<Subcategory> getSubcategories(Long categoryId);//categories/{categoryId}/subcategories
+    public Category create(CategoryDto categoryDto);// POST
+    public Category update(Long categoryId, CategoryDto categoryDto);//{categoryId}  PUT
+    public Category findById(Long categoryId);//{categoryId} GET
+    public List<Category> findAll();// GET
+    public void deleteById(Long categoryId);//{categoryId} DELETE
+
+    public Set<Subcategory> getSubcategories(Long categoryId);//{categoryId}/subcategories GET
 }

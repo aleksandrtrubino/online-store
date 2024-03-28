@@ -20,14 +20,14 @@ public class ShopController {
         return ResponseEntity.ok(shopService.create(categoryDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Shop> update(@PathVariable Long id, @RequestBody ShopDto categoryDto){
-        return ResponseEntity.ok(shopService.update(id, categoryDto));
+    @PutMapping("/{shopId}")
+    public ResponseEntity<Shop> update(@PathVariable Long shopId, @RequestBody ShopDto categoryDto){
+        return ResponseEntity.ok(shopService.update(shopId, categoryDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Shop> findById(@PathVariable Long id){
-        return ResponseEntity.ok(shopService.findById(id));
+    @GetMapping("/{shopId}")
+    public ResponseEntity<Shop> findById(@PathVariable Long shopId){
+        return ResponseEntity.ok(shopService.findById(shopId));
     }
 
     @GetMapping
@@ -35,14 +35,16 @@ public class ShopController {
         return ResponseEntity.ok(shopService.findAll());
     }
 
-    @GetMapping("/{id}/products")
-    public ResponseEntity<Set<Product>> getSubcategories(@PathVariable Long id){
-        return ResponseEntity.ok(shopService.getProducts(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        shopService.deleteById(id);
+    @DeleteMapping("/{shopId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long shopId){
+        shopService.deleteById(shopId);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{shopId}/products")
+    public ResponseEntity<Set<Product>> getSubcategories(@PathVariable Long shopId){
+        return ResponseEntity.ok(shopService.getProducts(shopId));
+    }
+
+
 }

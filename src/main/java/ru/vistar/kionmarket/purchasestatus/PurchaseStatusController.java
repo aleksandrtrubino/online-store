@@ -3,10 +3,6 @@ package ru.vistar.kionmarket.purchasestatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vistar.kionmarket.purchase.Purchase;
-import ru.vistar.kionmarket.purchasestatus.PurchaseStatus;
-import ru.vistar.kionmarket.purchasestatus.PurchaseStatusDto;
-import ru.vistar.kionmarket.purchasestatus.PurchaseStatusService;
-import ru.vistar.kionmarket.purchasestatus.PurchaseStatusServiceImpl;
 
 import java.util.List;
 import java.util.Set;

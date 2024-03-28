@@ -23,12 +23,12 @@ public class AddressType {
 
     public AddressType(){}
 
-    public Long getId() {
-        return id;
+    public AddressType(String name) {
+        this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -43,7 +43,4 @@ public class AddressType {
         return addresses;
     }
 
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
 }

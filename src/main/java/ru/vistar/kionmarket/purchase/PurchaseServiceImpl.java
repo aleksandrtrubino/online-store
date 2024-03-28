@@ -32,7 +32,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public Purchase create(PurchaseDto purchaseDto) {
-        Purchase purchase = new Purchase();
         Long userId = purchaseDto.getUserId();
         Long addressId = purchaseDto.getAddressId();
         Long productId = purchaseDto.getProductId();
@@ -45,10 +44,7 @@ public class PurchaseServiceImpl implements PurchaseService {
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Product with id %1$s not found",productId)));
         PurchaseStatus purchaseStatus = purchaseStatusRepository.findById(purchaseStatusId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase status with id %1$s not found",purchaseStatusId)));
-        purchase.setUser(user);
-        purchase.setAddress(address);
-        purchase.setProduct(product);
-        purchase.setPurchaseStatus(purchaseStatus);
+        Purchase purchase = new Purchase(user, address, product, purchaseStatus);
         return purchaseRepository.save(purchase);
 
     }

@@ -10,7 +10,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/categories")
 public class CategoryController {
+
     private final CategoryService categoryService;
+
     public CategoryController(CategoryServiceImpl categoryService) {
         this.categoryService = categoryService;
     }
@@ -20,14 +22,14 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.create(categoryDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
-        return ResponseEntity.ok(categoryService.update(id, categoryDto));
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<Category> update(@PathVariable Long categoryId, @RequestBody CategoryDto categoryDto){
+        return ResponseEntity.ok(categoryService.update(categoryId, categoryDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id){
-        return ResponseEntity.ok(categoryService.findById(id));
+    @GetMapping("/{categoryId}")
+    public ResponseEntity<Category> findById(@PathVariable Long categoryId){
+        return ResponseEntity.ok(categoryService.findById(categoryId));
     }
 
     @GetMapping
@@ -35,15 +37,14 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findAll());
     }
 
-    @GetMapping("/{id}/subcategories")
-    public ResponseEntity<Set<Subcategory>> getSubcategories(@PathVariable Long id){
-        return ResponseEntity.ok(categoryService.getSubcategories(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        categoryService.deleteById(id);
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long categoryId){
+        categoryService.deleteById(categoryId);
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{categoryId}/subcategories")
+    public ResponseEntity<Set<Subcategory>> getSubcategories(@PathVariable Long categoryId){
+        return ResponseEntity.ok(categoryService.getSubcategories(categoryId));
+    }
 }
