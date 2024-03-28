@@ -17,7 +17,7 @@
                 <constraints nullable="false" />
             </column>
             <column name="email" type="varchar(128)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="enabled" type="boolean">
                 <constraints nullable="false" />
@@ -53,6 +53,7 @@
                 constraintName="fk_users_address_id"
                 referencedTableName="addresses"
                 referencedColumnNames="address_id"
+                onDelete="SET NULL"
                 onUpdate="RESTRICT"/>
     </changeSet>
 
@@ -63,6 +64,7 @@
                 constraintName="fk_users_shop_id"
                 referencedTableName="shops"
                 referencedColumnNames="shop_id"
+                onDelete="SET NULL"
                 onUpdate="RESTRICT"/>
     </changeSet>
 

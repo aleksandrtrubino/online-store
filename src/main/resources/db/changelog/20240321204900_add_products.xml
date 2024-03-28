@@ -31,10 +31,10 @@
             <column name="prev_price" type="decimal(19,4)">
             </column>
             <column name="created_at" type="timestamp">
-                <constraints nullable="false" unique="false"/>
+                <constraints nullable="false"/>
             </column>
             <column name="updated_at" type="timestamp">
-                <constraints nullable="true" unique="false"/>
+                <constraints nullable="true"/>
             </column>
         </createTable>
     </changeSet>

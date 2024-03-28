@@ -4,7 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="202403202214001" author="Karavaev2024">
+
+    <changeSet id="202403162011001" author="Karavaev2024">
+        <createSequence sequenceName="addresses_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="202403162011002" author="Karavaev2024">
         <createTable tableName="addresses">
             <column name="address_id" type="bigint">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -24,7 +29,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="202403202214002" author="Karavaev2024">
+    <changeSet id="202403162011003" author="Karavaev2024">
         <addForeignKeyConstraint
                 baseTableName="addresses"
                 baseColumnNames="city_id"
@@ -35,7 +40,7 @@
                 onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="202403202214003" author="Karavaev2024">
+    <changeSet id="202403162011004" author="Karavaev2024">
         <addForeignKeyConstraint
                 baseTableName="addresses"
                 baseColumnNames="street_id"
@@ -46,7 +51,7 @@
                 onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="202403202214004" author="Karavaev2024">
+    <changeSet id="202403162011005" author="Karavaev2024">
         <addForeignKeyConstraint
                 baseTableName="addresses"
                 baseColumnNames="house_id"
@@ -57,19 +62,15 @@
                 onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="202403202214005" author="Karavaev2024">
+    <changeSet id="202403162011006" author="Karavaev2024">
         <addForeignKeyConstraint
                 baseTableName="addresses"
                 baseColumnNames="address_type_id"
                 constraintName="fk_addresses_address_type_id"
                 referencedTableName="address_types"
                 referencedColumnNames="address_type_id"
-                onDelete="NO ACTION"
+                onDelete="SET NULL"
                 onUpdate="RESTRICT"/>
-    </changeSet>
-
-    <changeSet id="202403202214006" author="Karavaev2024">
-        <createSequence sequenceName="addresses_seq" startValue="1050" incrementBy="50"/>
     </changeSet>
 
 </databaseChangeLog>

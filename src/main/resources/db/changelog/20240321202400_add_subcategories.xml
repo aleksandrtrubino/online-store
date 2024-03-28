@@ -14,7 +14,7 @@
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="subcategory_name" type="varchar(128)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="category_id" type="bigint">
                 <constraints nullable="false"/>

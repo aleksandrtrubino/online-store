@@ -4,17 +4,17 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="202403202054001" author="aleksandrtrubino">
+    <changeSet id="202403172000001" author="aleksandrtrubino">
         <createSequence sequenceName="shops_seq" startValue="1050" incrementBy="50"/>
     </changeSet>
 
-    <changeSet id="202403202054002" author="aleksandrtrubino">
+    <changeSet id="202403172000002" author="aleksandrtrubino">
         <createTable tableName="shops">
             <column name="shop_id" type="bigint">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="shop_name" type="varchar(128)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="created_at" type="timestamp">
                 <constraints nullable="false" unique="false"/>

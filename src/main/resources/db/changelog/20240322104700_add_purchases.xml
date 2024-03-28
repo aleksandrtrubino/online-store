@@ -52,7 +52,7 @@
                 constraintName="fk_purchases_product_id"
                 referencedTableName="products"
                 referencedColumnNames="product_id"
-                onDelete="NO ACTION"
+                onDelete="CASCADE"
                 onUpdate="RESTRICT"/>
     </changeSet>
 
@@ -63,7 +63,7 @@
                 constraintName="fk_purchases_address_id"
                 referencedTableName="addresses"
                 referencedColumnNames="address_id"
-                onDelete="NO ACTION"
+                onDelete="CASCADE"
                 onUpdate="RESTRICT"/>
     </changeSet>
 
@@ -74,7 +74,7 @@
                 constraintName="fk_purchases_purchase_status_id"
                 referencedTableName="purchase_statuses"
                 referencedColumnNames="purchase_status_id"
-                onDelete="NO ACTION"
+                onDelete="CASCADE"
                 onUpdate="RESTRICT"/>
     </changeSet>
 
