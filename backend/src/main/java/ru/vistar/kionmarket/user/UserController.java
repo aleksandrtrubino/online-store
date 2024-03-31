@@ -2,12 +2,10 @@ package ru.vistar.kionmarket.user;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vistar.kionmarket.address.Address;
 import ru.vistar.kionmarket.authority.Authority;
 import ru.vistar.kionmarket.product.Product;
 import ru.vistar.kionmarket.purchase.Purchase;
 import ru.vistar.kionmarket.review.Review;
-import ru.vistar.kionmarket.shop.Shop;
 
 import java.util.List;
 import java.util.Set;
@@ -76,40 +74,6 @@ public class UserController {
     @DeleteMapping("/{userId}/favorites/{productId}")
     public ResponseEntity<Void> removeFavorite(@PathVariable Long userId, @PathVariable Long productId){
         userService.removeFavorite(userId,productId);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/{userId}/addresses")
-    public ResponseEntity<Address> getAddress(@PathVariable Long userId){
-        return ResponseEntity.ok(userService.getAddress(userId));
-    }
-
-    @PostMapping("/{userId}/addresses/{addressId}")
-    public ResponseEntity<Void> addAddress(@PathVariable Long userId, @PathVariable Long addressId){
-        userService.addAddress(userId,addressId);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/{userId}/addresses")
-    public ResponseEntity<Void> removeAddress(@PathVariable Long userId){
-        userService.removeAddress(userId);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/{userId}/shops")
-    public ResponseEntity<Shop> getShop(@PathVariable Long userId){
-        return ResponseEntity.ok(userService.getShop(userId));
-    }
-
-    @PostMapping("/{userId}/shops/{shopId}")
-    public ResponseEntity<Void> addShop(@PathVariable Long userId, @PathVariable Long shopId){
-        userService.addShop(userId,shopId);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/{userId}/shops")
-    public ResponseEntity<Void> removeShop(@PathVariable Long userId){
-        userService.removeShop(userId);
         return ResponseEntity.ok().build();
     }
 }

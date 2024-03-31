@@ -27,15 +27,6 @@ public interface UserService {
     public void addFavorite(Long userId, Long productId);//users/{userId}/favorites/{productId}
     public void removeFavorite(Long userId, Long productId);//users/{userId}/favorites/{productId}
 
-    public Address getAddress(Long userId);//users/{userId}/addresses
-    public void addAddress(Long userId, Long addressId);//users/{userId}/addresses/{addressId}
-    public void removeAddress(Long userId);//users/{userId}/addresses
-
-    public Shop getShop(Long userId);//users/{userId}/shops
-    public void addShop(Long userId, Long shopId);//users/{userId}/shops/{shopId}
-    public void removeShop(Long userId);//users/{userId}/shops
-
-
 
 
     //AUTHORITIES

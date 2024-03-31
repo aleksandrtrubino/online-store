@@ -31,12 +31,6 @@
             <column name="last_name" type="varchar(128)">
                 <constraints nullable="false" />
             </column>
-            <column name="address_id" type="bigint">
-                <constraints nullable="true" unique="true"/>
-            </column>
-            <column name="shop_id" type="bigint">
-                <constraints nullable="true" unique="true"/>
-            </column>
             <column name="created_at" type="timestamp">
                 <constraints nullable="false" unique="false"/>
             </column>
@@ -44,28 +38,6 @@
                 <constraints nullable="true" unique="false"/>
             </column>
         </createTable>
-    </changeSet>
-
-    <changeSet id="202403172047003" author="aleksandrtrubino">
-        <addForeignKeyConstraint
-                baseTableName="users"
-                baseColumnNames="address_id"
-                constraintName="fk_users_address_id"
-                referencedTableName="addresses"
-                referencedColumnNames="address_id"
-                onDelete="SET NULL"
-                onUpdate="RESTRICT"/>
-    </changeSet>
-
-    <changeSet id="202403172047004" author="aleksandrtrubino">
-        <addForeignKeyConstraint
-                baseTableName="users"
-                baseColumnNames="shop_id"
-                constraintName="fk_users_shop_id"
-                referencedTableName="shops"
-                referencedColumnNames="shop_id"
-                onDelete="SET NULL"
-                onUpdate="RESTRICT"/>
     </changeSet>
 
 </databaseChangeLog>

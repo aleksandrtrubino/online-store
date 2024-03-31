@@ -56,11 +56,6 @@ public class User {
     private Set<Authority> authorities;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address address;
-
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "favorites",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
@@ -75,12 +70,6 @@ public class User {
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<Review> reviews;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id",referencedColumnName = "shop_id")
-    private Shop shop;
-
-
     public User(){}
 
     public User( String email, String password, String firstName, String middleName, String lastName) {
@@ -90,8 +79,6 @@ public class User {
         this.middleName = middleName;
         this.lastName = lastName;
         this.enabled = true;
-        this.address = null;
-        this.shop = null;
         this.authorities = new HashSet<>();
         this.favorites = new HashSet<>();
         this.purchases = new HashSet<>();
@@ -146,20 +133,6 @@ public class User {
 
     public Set<Authority> getAuthorities() {
         return authorities;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-    public void setShop(Shop shop) {
-        this.shop = shop;
     }
 
     public Set<Product> getFavorites() {

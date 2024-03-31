@@ -24,15 +24,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final AddressRepository addressRepository;
-    private final ShopRepository shopRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, AddressRepository addressRepository, ShopRepository shopRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, ProductRepository productRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
-        this.addressRepository = addressRepository;
-        this.shopRepository = shopRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -124,56 +120,5 @@ public class UserServiceImpl implements UserService {
                     userRepository.save(user);
                 });
     }
-
-    @Override
-    public Address getAddress(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        return user.getAddress();
-    }
-
-    @Override
-    public void addAddress(Long userId, Long addressId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        Address address = addressRepository.findById(addressId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Address with id %1$s not found",userId)));
-        user.setAddress(address);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void removeAddress(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        user.setAddress(null);
-        userRepository.save(user);
-    }
-
-    @Override
-    public Shop getShop(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        return user.getShop();
-    }
-
-    @Override
-    public void addShop(Long userId, Long shopId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        Shop shop = shopRepository.findById(shopId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Shop with id %1$s not found",userId)));
-        user.setShop(shop);
-        userRepository.save(user);
-    }
-
-    @Override
-    public void removeShop(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
-        user.setShop(null);
-        userRepository.save(user);
-    }
-
 
 }
