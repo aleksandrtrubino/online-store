@@ -14,8 +14,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City create(CityDto cityDto) {
-        String name = cityDto.getName();
-        City city = new City(name);
+        City city = new City();
+        city.setName(cityDto.getName());
         return cityRepository.save(city);
     }
 

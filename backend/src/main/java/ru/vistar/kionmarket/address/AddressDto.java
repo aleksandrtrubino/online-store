@@ -2,34 +2,14 @@ package ru.vistar.kionmarket.address;
 
 public class AddressDto {
 
-    private Long cityId;
-    private Long streetId;
     private Long houseId;
     private Long addressTypeId;
 
     public AddressDto(){}
 
-    public AddressDto(Long cityId, Long streetId, Long houseId, Long addressTypeId) {
-        this.cityId = cityId;
-        this.streetId = streetId;
+    public AddressDto(Long houseId, Long addressTypeId) {
         this.houseId = houseId;
         this.addressTypeId = addressTypeId;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
-
-    public Long getStreetId() {
-        return streetId;
-    }
-
-    public void setStreetId(Long streetId) {
-        this.streetId = streetId;
     }
 
     public Long getHouseId() {

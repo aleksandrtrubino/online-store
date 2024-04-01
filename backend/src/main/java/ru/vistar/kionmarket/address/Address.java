@@ -14,41 +14,31 @@ public class Address {
     @Column(name = "address_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "city_id", referencedColumnName = "city_id")
-    private City city;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "city_id", referencedColumnName = "city_id")
+//    private City city;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "street_id", referencedColumnName = "street_id")
+//    private Street street;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "street_id", referencedColumnName = "street_id")
-    private Street street;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "house_id", referencedColumnName = "house_id")
     private House house;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "address_type_id",referencedColumnName = "address_type_id")
     private AddressType addressType;
 
 
     public Address(){}
 
-    public Address(City city, Street street, House house, AddressType addressType) {
-        this.city = city;
-        this.street = street;
+    public Address(House house, AddressType addressType) {
         this.house = house;
         this.addressType = addressType;
     }
     public Long getId() {
         return id;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
     }
 
     public House getHouse() {
@@ -57,14 +47,6 @@ public class Address {
 
     public void setHouse(House house) {
         this.house = house;
-    }
-
-    public Street getStreet() {
-        return street;
-    }
-
-    public void setStreet(Street street) {
-        this.street = street;
     }
 
     public AddressType getAddressType() {

@@ -49,7 +49,7 @@ public class WebSecurityConfig {
         return authProvider;
     }
 
-    private final String[] PUBLIC = {"/swagger-ui/**","/v3/api-docs/**","/api/v1/auth","/api/v1/users"};
+    private final String[] PUBLIC = {"/swagger-ui/**","/v3/api-docs/**","/api/v1/auth","/api/v1/users","api/v1/**"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

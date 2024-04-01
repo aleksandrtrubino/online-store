@@ -1,6 +1,8 @@
 package ru.vistar.kionmarket.street;
 
 import org.springframework.stereotype.Service;
+import ru.vistar.kionmarket.city.City;
+import ru.vistar.kionmarket.city.CityRepository;
 import ru.vistar.kionmarket.street.Street;
 import ru.vistar.kionmarket.street.StreetDto;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
@@ -13,15 +15,19 @@ import java.util.List;
 public class StreetServiceImpl implements StreetService {
 
     private final StreetRepository streetRepository;
-
-    public StreetServiceImpl(StreetRepository streetRepository) {
+    private final CityRepository cityRepository;
+    public StreetServiceImpl(StreetRepository streetRepository, CityRepository cityRepository) {
         this.streetRepository = streetRepository;
+        this.cityRepository = cityRepository;
     }
 
     @Override
     public Street create(StreetDto streetDto) {
-        String name = streetDto.getName();
-        Street street = new Street(name);
+        City city = cityRepository.findById(streetDto.getCity_id())
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", streetDto.getCity_id())));
+        Street street = new Street();
+        street.setName(streetDto.getName());
+        street.setCity(city);
         return streetRepository.save(street);
     }
 
@@ -29,7 +35,10 @@ public class StreetServiceImpl implements StreetService {
     public Street update(Long streetId, StreetDto streetDto) {
         Street street = streetRepository.findById(streetId)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", streetId)));
+        City city = cityRepository.findById(streetDto.getCity_id())
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", streetDto.getCity_id())));
         street.setName(streetDto.getName());
+        street.setCity(city);
         return streetRepository.save(street);
     }
 

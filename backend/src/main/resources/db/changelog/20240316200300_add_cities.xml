@@ -19,7 +19,15 @@
         </createTable>
     </changeSet>
 
-
-
+    <changeSet id="202403162003003" author="Karavaev2024">
+        <addForeignKeyConstraint
+                baseTableName="streets"
+                baseColumnNames="city_id"
+                constraintName="fk_street_city_id"
+                referencedTableName="cities"
+                referencedColumnNames="city_id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
 
 </databaseChangeLog>

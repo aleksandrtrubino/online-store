@@ -17,9 +17,21 @@
             <column name="street_name" type="varchar(128)">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="city_id" type="bigint">
+                <constraints nullable="false" unique="false"/>
+            </column>
         </createTable>
     </changeSet>
 
-
+    <changeSet id="202403162002003" author="Karavaev2024">
+        <addForeignKeyConstraint
+                baseTableName="houses"
+                baseColumnNames="street_id"
+                constraintName="fk_house_street_id"
+                referencedTableName="streets"
+                referencedColumnNames="street_id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
 
 </databaseChangeLog>

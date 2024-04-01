@@ -2,7 +2,6 @@ package ru.vistar.kionmarket.address;
 
 import java.util.List;
 
-//addresses
 public interface AddressService {
     public Address create(AddressDto addressDto);// POST
     public Address update(Long addressId, AddressDto addressDto);//{addressesId} PUT

@@ -16,14 +16,10 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
     private final AddressTypeRepository addressTypeRepository;
-    private final CityRepository cityRepository;
-    private final StreetRepository streetRepository;
     private final HouseRepository houseRepository;
-    public AddressServiceImpl(AddressRepository addressRepository, AddressTypeRepository addressTypeRepository, CityRepository cityRepository, StreetRepository streetRepository, HouseRepository houseRepository) {
+    public AddressServiceImpl(AddressRepository addressRepository, AddressTypeRepository addressTypeRepository, HouseRepository houseRepository) {
         this.addressRepository = addressRepository;
         this.addressTypeRepository = addressTypeRepository;
-        this.cityRepository = cityRepository;
-        this.streetRepository = streetRepository;
         this.houseRepository = houseRepository;
     }
 
@@ -31,13 +27,9 @@ public class AddressServiceImpl implements AddressService {
     public Address create(AddressDto addressDto) {
         AddressType addressType = addressTypeRepository.findById(addressDto.getAddressTypeId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("AddressType with id %1$s not found", addressDto.getAddressTypeId())));
-        City city = cityRepository.findById(addressDto.getCityId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", addressDto.getCityId())));
-        Street street = streetRepository.findById(addressDto.getStreetId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", addressDto.getStreetId())));
         House house = houseRepository.findById(addressDto.getHouseId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("House with id %1$s not found", addressDto.getHouseId())));
-        Address address = new Address(city,street,house,addressType);
+        Address address = new Address(house,addressType);
         return addressRepository.save(address);
     }
 
@@ -47,15 +39,9 @@ public class AddressServiceImpl implements AddressService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Address with id %1$s not found", addressId)));
         AddressType addressType = addressTypeRepository.findById(addressDto.getAddressTypeId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("AddressType with id %1$s not found", addressDto.getAddressTypeId())));
-        City city = cityRepository.findById(addressDto.getCityId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("City with id %1$s not found", addressDto.getCityId())));
-        Street street = streetRepository.findById(addressDto.getStreetId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Street with id %1$s not found", addressDto.getStreetId())));
         House house = houseRepository.findById(addressDto.getHouseId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("House with id %1$s not found", addressDto.getHouseId())));
         address.setAddressType(addressType);
-        address.setCity(city);
-        address.setStreet(street);
         address.setHouse(house);
         return addressRepository.save(address);
     }

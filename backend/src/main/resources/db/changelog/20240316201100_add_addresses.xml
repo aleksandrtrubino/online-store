@@ -14,12 +14,6 @@
             <column name="address_id" type="bigint">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="city_id" type="bigint">
-                <constraints nullable="false" unique="false"/>
-            </column>
-            <column name="street_id" type="bigint">
-                <constraints nullable="false" unique="false"/>
-            </column>
             <column name="house_id" type="bigint">
                 <constraints nullable="false" unique="false"/>
             </column>
@@ -32,37 +26,15 @@
     <changeSet id="202403162011003" author="Karavaev2024">
         <addForeignKeyConstraint
                 baseTableName="addresses"
-                baseColumnNames="city_id"
-                constraintName="fk_addresses_city_id"
-                referencedTableName="cities"
-                referencedColumnNames="city_id"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"/>
-    </changeSet>
-
-    <changeSet id="202403162011004" author="Karavaev2024">
-        <addForeignKeyConstraint
-                baseTableName="addresses"
-                baseColumnNames="street_id"
-                constraintName="fk_addresses_street_id"
-                referencedTableName="streets"
-                referencedColumnNames="street_id"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"/>
-    </changeSet>
-
-    <changeSet id="202403162011005" author="Karavaev2024">
-        <addForeignKeyConstraint
-                baseTableName="addresses"
                 baseColumnNames="house_id"
-                constraintName="fk_addresses_house_id"
+                constraintName="fk_address_house_id"
                 referencedTableName="houses"
                 referencedColumnNames="house_id"
                 onDelete="CASCADE"
                 onUpdate="RESTRICT"/>
     </changeSet>
 
-    <changeSet id="202403162011006" author="Karavaev2024">
+    <changeSet id="202403162011004" author="Karavaev2024">
         <addForeignKeyConstraint
                 baseTableName="addresses"
                 baseColumnNames="address_type_id"
@@ -72,5 +44,4 @@
                 onDelete="SET NULL"
                 onUpdate="RESTRICT"/>
     </changeSet>
-
 </databaseChangeLog>
