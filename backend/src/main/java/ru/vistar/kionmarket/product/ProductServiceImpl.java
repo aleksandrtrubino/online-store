@@ -29,13 +29,11 @@ public class ProductServiceImpl implements ProductService {
 
         String name = productDto.getName();
         String description = productDto.getDescription();
-        Double price = productDto.getPrice();
-        Double prevPrice = productDto.getPrevPrice();
         Subcategory subcategory = subcategoryRepository.findById(productDto.getSubcategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Subcategory with id %1$s not found", productDto.getSubcategoryId())));
         Shop shop = shopRepository.findById(productDto.getShopId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productDto.getShopId())));
-        Product product = new Product(name,description,price,prevPrice,subcategory,shop);
+        Product product = new Product(name,description,subcategory,shop);
         return productRepository.save(product);
     }
 
@@ -49,8 +47,6 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productDto.getShopId())));
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
-        product.setPrice(productDto.getPrice());
-        product.setPrevPrice(productDto.getPrevPrice());
         product.setSubcategory(subcategory);
         product.setShop(shop);
         return productRepository.save(product);

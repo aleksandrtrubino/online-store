@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
+import ru.vistar.kionmarket.productprice.ProductPrice;
 import ru.vistar.kionmarket.purchase.Purchase;
 import ru.vistar.kionmarket.review.Review;
 import ru.vistar.kionmarket.shop.Shop;
@@ -28,11 +29,8 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "price",columnDefinition = "NUMERIC(19,4)")
-    private Double price;
-
-    @Column(name = "prev_price",columnDefinition = "NUMERIC(19,4)")
-    private Double prevPrice;
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    Set<ProductPrice> prices;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
@@ -60,11 +58,9 @@ public class Product {
 
     public Product(){}
 
-    public Product(String name, String description, Double price, Double prevPrice, Subcategory subcategory, Shop shop) {
+    public Product(String name, String description, Subcategory subcategory, Shop shop) {
         this.name = name;
         this.description = description;
-        this.price = price;
-        this.prevPrice = prevPrice;
         this.subcategory = subcategory;
         this.shop = shop;
         this.reviews = new HashSet<>();
@@ -105,22 +101,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Double getPrevPrice() {
-        return prevPrice;
-    }
-
-    public void setPrevPrice(Double prevPrice) {
-        this.prevPrice = prevPrice;
     }
 
     public LocalDateTime getCreatedAt() {

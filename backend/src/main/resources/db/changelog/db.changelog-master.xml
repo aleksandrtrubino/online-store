@@ -4,9 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="20240316200100_add_houses.xml" relativeToChangelogFile="true"/>
+
+
+    <include file="20240316200100_add_cities.xml" relativeToChangelogFile="true"/>
     <include file="20240316200200_add_streets.xml" relativeToChangelogFile="true"/>
-    <include file="20240316200300_add_cities.xml" relativeToChangelogFile="true"/>
+    <include file="20240316200300_add_houses.xml" relativeToChangelogFile="true"/>
+
     <include file="20240316200400_add_address_types.xml" relativeToChangelogFile="true"/>
     <include file="20240316201100_add_addresses.xml" relativeToChangelogFile="true"/>
 
@@ -19,6 +22,7 @@
     <include file="20240321202300_add_categories.xml" relativeToChangelogFile="true"/>
     <include file="20240321202400_add_subcategories.xml" relativeToChangelogFile="true"/>
     <include file="20240321204900_add_products.xml" relativeToChangelogFile="true"/>
+    <include file="20240321205000_add_product_prices.xml" relativeToChangelogFile="true"/>
     <include file="20240321205700_add_favorites.xml" relativeToChangelogFile="true"/>
 
     <include file="20240321205800_add_reviews.xml" relativeToChangelogFile="true"/>

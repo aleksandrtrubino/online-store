@@ -4,28 +4,32 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="202403162003001" author="Karavaev2024">
-        <createSequence sequenceName="cities_seq" startValue="1050" incrementBy="50"/>
+
+    <changeSet id="202403162001001" author="Karavaev2024">
+        <createSequence sequenceName="houses_seq" startValue="1050" incrementBy="50"/>
     </changeSet>
 
     <changeSet id="202403162003002" author="Karavaev2024">
-        <createTable tableName="cities">
-            <column name="city_id" type="bigint">
+        <createTable tableName="houses">
+            <column name="house_id" type="bigint">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="city_name" type="varchar(128)">
+            <column name="house_number" type="varchar(128)">
                 <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="street_id" type="bigint">
+                <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
     </changeSet>
 
     <changeSet id="202403162003003" author="Karavaev2024">
         <addForeignKeyConstraint
-                baseTableName="streets"
-                baseColumnNames="city_id"
-                constraintName="fk_street_city_id"
-                referencedTableName="cities"
-                referencedColumnNames="city_id"
+                baseTableName="houses"
+                baseColumnNames="street_id"
+                constraintName="fk_house_street_id"
+                referencedTableName="streets"
+                referencedColumnNames="street_id"
                 onDelete="CASCADE"
                 onUpdate="RESTRICT"/>
     </changeSet>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202403212050001" author="aleksandrtrubino">
+        <createSequence sequenceName="product_prices_seq" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="202403212050002" author="aleksandrtrubino">
+        <createTable tableName="product_prices">
+            <column name="product_price_id" type="bigint">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="change_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_price" type="numeric(19,4)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="202403212050003" author="aleksandrtrubino">
+        <addForeignKeyConstraint
+                baseTableName="product_prices"
+                baseColumnNames="product_id"
+                constraintName="fk_product_prices_product_id"
+                referencedTableName="products"
+                referencedColumnNames="product_id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
+    </changeSet>
+
+
+</databaseChangeLog>

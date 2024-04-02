@@ -27,7 +27,7 @@
         <addForeignKeyConstraint
                 baseTableName="addresses"
                 baseColumnNames="house_id"
-                constraintName="fk_address_house_id"
+                constraintName="fk_addresses_house_id"
                 referencedTableName="houses"
                 referencedColumnNames="house_id"
                 onDelete="CASCADE"

@@ -25,11 +25,11 @@
 
     <changeSet id="202403162002003" author="Karavaev2024">
         <addForeignKeyConstraint
-                baseTableName="houses"
-                baseColumnNames="street_id"
-                constraintName="fk_house_street_id"
-                referencedTableName="streets"
-                referencedColumnNames="street_id"
+                baseTableName="streets"
+                baseColumnNames="city_id"
+                constraintName="fk_streets_city_id"
+                referencedTableName="cities"
+                referencedColumnNames="city_id"
                 onDelete="CASCADE"
                 onUpdate="RESTRICT"/>
     </changeSet>
