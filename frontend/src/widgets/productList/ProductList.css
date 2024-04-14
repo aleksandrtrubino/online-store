@@ -1,0 +1,11 @@
+
+.product-list{
+
+    flex-grow: 1;
+    margin: 1rem;
+    align-self: flex-end;
+    display: grid;
+    grid-template-columns: min-content min-content min-content min-content;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+}
