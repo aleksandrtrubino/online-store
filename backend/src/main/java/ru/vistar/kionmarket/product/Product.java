@@ -40,7 +40,7 @@ public class Product {
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
     private Shop shop;
 
-    @Column(name = "image_path")
+    @Column(name = "image_name")
     private String imageName;
 
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")

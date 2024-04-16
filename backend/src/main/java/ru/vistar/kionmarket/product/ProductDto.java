@@ -8,7 +8,6 @@ public class ProductDto {
     private String description;
     private Long subcategoryId;
     private Long shopId;
-    private MultipartFile image;
 
     public ProductDto(){}
 
@@ -17,7 +16,6 @@ public class ProductDto {
         this.description = description;
         this.subcategoryId = subcategoryId;
         this.shopId = shopId;
-        this.image = image;
     }
 
     public String getName() {
@@ -50,13 +48,5 @@ public class ProductDto {
 
     public void setShopId(Long shopId) {
         this.shopId = shopId;
-    }
-
-    public MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
     }
 }

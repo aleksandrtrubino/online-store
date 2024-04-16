@@ -2,6 +2,7 @@ package ru.vistar.kionmarket.product;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.vistar.kionmarket.purchase.Purchase;
 import ru.vistar.kionmarket.review.Review;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
     public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
     }
@@ -19,6 +20,11 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> create(@RequestBody ProductDto productDto){
         return ResponseEntity.ok(productService.create(productDto));
+    }
+
+    @PostMapping("/images/{productId}")
+    public ResponseEntity<Product> uploadImage(@PathVariable Long productId, @RequestParam("file") MultipartFile image){
+        return ResponseEntity.ok(productService.uploadImage(productId,image));
     }
 
     @PutMapping("/{productId}")

@@ -41,18 +41,22 @@ public class ProductServiceImpl implements ProductService {
         Shop shop = shopRepository.findById(productDto.getShopId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productDto.getShopId())));
         Product product = new Product(name,description,subcategory,shop);
+        product.setImageName("");
+        return productRepository.save(product);
+    }
 
-        String imageName = "product_" + product.getId();
+    public Product uploadImage(Long productId, MultipartFile image){
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %1$s not found", productId)));
+        String imageName = "product_" + product.getId() + ".jpeg";
         Path directoryPath = Path.of(IMAGE_PATH);
         Path imagePath = directoryPath.resolve(imageName);
-        MultipartFile image = productDto.getImage();
         try {
             Files.copy(image.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         product.setImageName(imageName);
-
         return productRepository.save(product);
     }
 
