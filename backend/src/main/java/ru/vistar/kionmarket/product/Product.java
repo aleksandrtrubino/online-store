@@ -40,6 +40,9 @@ public class Product {
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
     private Shop shop;
 
+    @Column(name = "image_path")
+    private String imageName;
+
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -125,5 +128,17 @@ public class Product {
 
     public void setPurchases(Set<Purchase> purchases) {
         this.purchases = purchases;
+    }
+
+    public Set<ProductPrice> getPrices() {
+        return prices;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }
