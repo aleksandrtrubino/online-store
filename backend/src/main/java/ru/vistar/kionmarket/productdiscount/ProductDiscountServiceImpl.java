@@ -23,21 +23,21 @@ public class ProductDiscountServiceImpl implements ProductDiscountService{
         ProductDiscount productDiscount = new ProductDiscount();
         productDiscount.setProduct(product);
         productDiscount.setValue(productDiscountDto.getValue());
-        productDiscount.setStart(productDiscountDto.getStart());
-        productDiscount.setEnd(productDiscountDto.getEnd());
+        productDiscount.setStartDate(productDiscountDto.getStartDate());
+        productDiscount.setEndDate(productDiscountDto.getEndDate());
         return productDiscountRepository.save(productDiscount);
     }
 
     @Override
-    public ProductDiscount update(Long id, ProductDiscountDto productDiscountDto) {
-        ProductDiscount productDiscount = productDiscountRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("ProductDiscount with id %1$s not found", id)));
+    public ProductDiscount update(Long productDiscountId, ProductDiscountDto productDiscountDto) {
+        ProductDiscount productDiscount = productDiscountRepository.findById(productDiscountId)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("ProductDiscount with id %1$s not found", productDiscountId)));
         Product product = productRepository.findById(productDiscountDto.getProductId())
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Product with id %1$s not found", productDiscountDto.getProductId())));
         productDiscount.setProduct(product);
         productDiscount.setValue(productDiscountDto.getValue());
-        productDiscount.setStart(productDiscountDto.getStart());
-        productDiscount.setEnd(productDiscountDto.getEnd());
+        productDiscount.setStartDate(productDiscountDto.getStartDate());
+        productDiscount.setEndDate(productDiscountDto.getEndDate());
         return productDiscountRepository.save(productDiscount);
     }
 

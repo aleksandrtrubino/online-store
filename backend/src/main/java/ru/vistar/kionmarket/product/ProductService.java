@@ -9,12 +9,12 @@ import java.util.Set;
 
 //products
 public interface ProductService {
-    public Product create(ProductRequestDto productRequestDto);// POST
+    public ProductResponseDto create(ProductRequestDto productRequestDto);// POST
+    public ProductResponseDto update(Long productId, ProductRequestDto productRequestDto);//{productId} PUT
     public void uploadProductImages(Long productId, MultipartFile[] images);//products/{productId}/images POST
     public List<byte[]> getProductImages(Long productId);//products/{productId}/images
-    public Product update(Long productId, ProductRequestDto productRequestDto);//{productId} PUT
-    public Product findById(Long productId);//{productId} GET
-    public List<Product> findAll();// GET
+    public ProductResponseDto findById(Long productId);//{productId} GET
+    public List<ProductResponseDto> findAll();// GET
     public void deleteById(Long productId);//{productId} DELETE
 
     public Set<Review> getReviews(Long productId);//{productId}/reviews GET

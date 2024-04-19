@@ -21,6 +21,7 @@ public class ProductPriceController {
         return ResponseEntity.ok(productPriceService.create(productPriceDto));
     }
 
+
     @PutMapping("/{productPriceId}")
     public ResponseEntity<ProductPrice> update(@PathVariable Long productPriceId, @RequestBody ProductPriceDto productPriceDto){
         return ResponseEntity.ok(productPriceService.update(productPriceId,productPriceDto));

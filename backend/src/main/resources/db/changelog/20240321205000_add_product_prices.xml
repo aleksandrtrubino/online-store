@@ -34,7 +34,7 @@
                 referencedTableName="products"
                 referencedColumnNames="product_id"
                 onDelete="CASCADE"
-                onUpdate="RESTRICT"/>
+                onUpdate="CASCADE"/>
     </changeSet>
 
 

@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
+import ru.vistar.kionmarket.productdiscount.ProductDiscount;
 import ru.vistar.kionmarket.productprice.ProductPrice;
 import ru.vistar.kionmarket.purchase.Purchase;
 import ru.vistar.kionmarket.review.Review;
@@ -29,9 +30,13 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "product_price_id", referencedColumnName = "product_price_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_price_id",referencedColumnName = "product_price_id")
     private ProductPrice price;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_discount_id",referencedColumnName = "product_discount_id")
+    private ProductDiscount discount;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
@@ -104,6 +109,22 @@ public class Product {
         this.description = description;
     }
 
+    public ProductPrice getPrice() {
+        return price;
+    }
+
+    public void setPrice(ProductPrice price) {
+        this.price = price;
+    }
+
+    public ProductDiscount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(ProductDiscount discount) {
+        this.discount = discount;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -127,13 +148,4 @@ public class Product {
     public void setPurchases(Set<Purchase> purchases) {
         this.purchases = purchases;
     }
-
-    public ProductPrice getPrice() {
-        return price;
-    }
-
-    public void setPrice(ProductPrice price) {
-        this.price = price;
-    }
-
 }

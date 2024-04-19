@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.productdiscount;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import ru.vistar.kionmarket.product.Product;
 
@@ -12,23 +13,25 @@ public class ProductDiscount {
     @Column(name = "product_discount_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_discount_seq")
     private Long id;
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
     @Column(name = "discount_value")
-    private int value;
+    private Integer value;
     @Column(name = "start_date")
-    private LocalDateTime start;
+    private LocalDateTime startDate;
     @Column(name = "end_date")
-    private LocalDateTime end;
+    private LocalDateTime endDate;
 
     public ProductDiscount(){}
 
-    public ProductDiscount(Product product, int value, LocalDateTime start, LocalDateTime end) {
+    public ProductDiscount(Product product, Integer value, LocalDateTime startDate, LocalDateTime endDate) {
         this.product = product;
         this.value = value;
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Long getId() {
@@ -47,7 +50,7 @@ public class ProductDiscount {
         this.product = product;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
@@ -55,19 +58,19 @@ public class ProductDiscount {
         this.value = value;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
+    public void setStartDate(LocalDateTime start) {
+        this.startDate = start;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public void setEndDate(LocalDateTime end) {
+        this.endDate = end;
     }
 }

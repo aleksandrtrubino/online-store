@@ -35,6 +35,6 @@
                 constraintName="fk_discounts_products_id"
                 referencedTableName="products"
                 referencedColumnNames="product_id"
-                onUpdate="RESTRICT"/>
+                onDelete="CASCADE"/>
     </changeSet>
 </databaseChangeLog>

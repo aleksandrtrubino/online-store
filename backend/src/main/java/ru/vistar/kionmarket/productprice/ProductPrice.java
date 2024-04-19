@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.productprice;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import ru.vistar.kionmarket.product.Product;
 
@@ -13,19 +14,20 @@ public class ProductPrice {
     @Column(name = "product_price_id")
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
     @Column(name = "product_price", columnDefinition = "NUMERIC(19,4)")
-    private Long price;
+    private Double price;
 
     @Column(name = "change_date",columnDefinition = "TIMESTAMP")
     private LocalDateTime changeDate;
 
     public ProductPrice() {}
 
-    public ProductPrice(Product product, Long price, LocalDateTime changeDate) {
+    public ProductPrice(Product product, Double price, LocalDateTime changeDate) {
         this.product = product;
         this.price = price;
         this.changeDate = changeDate;
@@ -43,11 +45,11 @@ public class ProductPrice {
         this.product = product;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

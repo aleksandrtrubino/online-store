@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/product_discounts")
+@RequestMapping("/api/v1/product-discounts")
 public class ProductDiscountController {
     private final ProductDiscountService productDiscountService;
 
@@ -18,22 +18,22 @@ public class ProductDiscountController {
     public ResponseEntity<ProductDiscount> create(@RequestBody ProductDiscountDto productDiscountDto){
         return ResponseEntity.ok(productDiscountService.create(productDiscountDto));
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<ProductDiscount> update(@PathVariable Long id, @RequestBody ProductDiscountDto productDiscountDto){
-        return ResponseEntity.ok(productDiscountService.update(id, productDiscountDto));
+    @PutMapping("/{productDiscountId}")
+    public ResponseEntity<ProductDiscount> update(@PathVariable Long productDiscountId, @RequestBody ProductDiscountDto productDiscountDto){
+        return ResponseEntity.ok(productDiscountService.update(productDiscountId, productDiscountDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductDiscount> findById(@PathVariable Long id){
-        return ResponseEntity.ok(productDiscountService.findById(id));
+    @GetMapping("/{productDiscountId}")
+    public ResponseEntity<ProductDiscount> findById(@PathVariable Long productDiscountId){
+        return ResponseEntity.ok(productDiscountService.findById(productDiscountId));
     }
     @GetMapping
     public ResponseEntity<List<ProductDiscount>> findAll(){
         return ResponseEntity.ok(productDiscountService.findAll());
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        productDiscountService.deleteById(id);
+    @DeleteMapping("/{productDiscountId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long productDiscountId){
+        productDiscountService.deleteById(productDiscountId);
         return ResponseEntity.ok().build();
     }
 }

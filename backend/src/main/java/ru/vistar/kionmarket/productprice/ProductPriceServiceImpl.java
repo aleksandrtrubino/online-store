@@ -23,7 +23,7 @@ public class ProductPriceServiceImpl implements ProductPriceService{
     public ProductPrice create(ProductPriceDto productPriceDto) {
         Product product = productRepository.findById(productPriceDto.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %1$s not found", productPriceDto.getProductId())));
-        Long price = productPriceDto.getPrice();
+        Double price = productPriceDto.getPrice();
         LocalDateTime changeDate = productPriceDto.getChangeDate();
         ProductPrice productPrice = new ProductPrice(product, price, changeDate);
         return productPriceRepository.save(productPrice);

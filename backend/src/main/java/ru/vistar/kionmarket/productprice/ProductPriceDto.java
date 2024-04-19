@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 public class ProductPriceDto {
 
     private Long productId;
-    private Long price;
+    private Double price;
     private LocalDateTime changeDate;
 
-    public ProductPriceDto(Long productId, Long price, LocalDateTime changeDate) {
+    public ProductPriceDto(Long productId, Double price, LocalDateTime changeDate) {
         this.productId = productId;
         this.price = price;
         this.changeDate = changeDate;
@@ -22,11 +22,11 @@ public class ProductPriceDto {
         this.productId = productId;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

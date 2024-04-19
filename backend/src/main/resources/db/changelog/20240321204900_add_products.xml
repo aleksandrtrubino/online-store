@@ -26,7 +26,10 @@
                 <constraints nullable="false" />
             </column>
             <column name="product_price_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
+            </column>
+            <column name="product_discount_id" type="bigint">
+                <constraints nullable="true" />
             </column>
             <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>

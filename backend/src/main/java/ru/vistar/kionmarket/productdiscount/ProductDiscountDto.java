@@ -3,41 +3,41 @@ package ru.vistar.kionmarket.productdiscount;
 import java.time.LocalDateTime;
 
 public class ProductDiscountDto {
-    private int value;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private Integer value;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private Long productId;
     public ProductDiscountDto(){}
 
-    public ProductDiscountDto(int value, LocalDateTime start, LocalDateTime end, Long productId) {
+    public ProductDiscountDto(Integer value, LocalDateTime startDate, LocalDateTime endDate, Long productId) {
         this.value = value;
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.productId = productId;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public Long getProductId() {

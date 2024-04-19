@@ -24,7 +24,6 @@
     <include file="20240321204900_add_products.xml" relativeToChangelogFile="true"/>
     <include file="20240321205000_add_product_prices.xml" relativeToChangelogFile="true"/>
     <include file="20240402180200_add_product_discounts.xml" relativeToChangelogFile="true"/>
-    <include file="20240402181000_add_user_discounts.xml" relativeToChangelogFile="true"/>
     <include file="20240321205700_add_favorites.xml" relativeToChangelogFile="true"/>
 
     <include file="20240321205800_add_reviews.xml" relativeToChangelogFile="true"/>

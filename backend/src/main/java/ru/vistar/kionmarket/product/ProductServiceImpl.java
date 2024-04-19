@@ -20,21 +20,24 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ShopRepository shopRepository;
     private final SubcategoryRepository subcategoryRepository;
+    private final ProductMapper productMapper;
     private final FileStorageService fileStorageService;
+
 
     private final String IMAGE_DIRECTORY = "src/main/resources/images/";
     private final String IMAGE_NAME_PREFIX = "product_";
     private final int MAX_IMAGES = 10;
 
-    public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository, FileStorageService fileStorageService) {
+    public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository, FileStorageService fileStorageService, ProductMapperImpl productMapper) {
         this.productRepository = productRepository;
         this.shopRepository = shopRepository;
         this.subcategoryRepository = subcategoryRepository;
         this.fileStorageService = fileStorageService;
+        this.productMapper = productMapper;
     }
 
     @Override
-    public Product create(ProductRequestDto productRequestDto) {
+    public ProductResponseDto create(ProductRequestDto productRequestDto) {
 
         String name = productRequestDto.getName();
         String description = productRequestDto.getDescription();
@@ -43,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
         Shop shop = shopRepository.findById(productRequestDto.getShopId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productRequestDto.getShopId())));
         Product product = new Product(name,description,subcategory,shop);
-        return productRepository.save(product);
+        return productMapper.toDto(productRepository.save(product));
     }
 
     @Override
@@ -82,7 +85,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product update(Long productId, ProductRequestDto productRequestDto) {
+    public ProductResponseDto update(Long productId, ProductRequestDto productRequestDto) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %1$s not found", productId)));
         Subcategory subcategory = subcategoryRepository.findById(productRequestDto.getSubcategoryId())
@@ -93,18 +96,18 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productRequestDto.getDescription());
         product.setSubcategory(subcategory);
         product.setShop(shop);
-        return productRepository.save(product);
+        return productMapper.toDto(productRepository.save(product));
     }
 
     @Override
-    public Product findById(Long productId) {
-        return productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %1$s not found", productId)));
+    public ProductResponseDto findById(Long productId) {
+        return productMapper.toDto(productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %1$s not found", productId))));
     }
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductResponseDto> findAll() {
+        return productMapper.toDto(productRepository.findAll());
     }
 
     @Override

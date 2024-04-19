@@ -12,19 +12,19 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
     public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody ProductRequestDto productRequestDto){
+    public ResponseEntity<ProductResponseDto> create(@RequestBody ProductRequestDto productRequestDto){
         return ResponseEntity.ok(productService.create(productRequestDto));
     }
 
     @PostMapping("/images/{productId}")
     public ResponseEntity<String> uploadImage(@PathVariable Long productId, @RequestParam("file") MultipartFile[] images){
-        productService.uploadProductImages(productId,images);
+        productService.uploadProductImages(productId, images);
         return ResponseEntity.ok("OK");
     }
 
@@ -34,17 +34,17 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<Product> update(@PathVariable Long productId, @RequestBody ProductRequestDto productRequestDto){
+    public ResponseEntity<ProductResponseDto> update(@PathVariable Long productId, @RequestBody ProductRequestDto productRequestDto){
         return ResponseEntity.ok(productService.update(productId, productRequestDto));
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> findById(@PathVariable Long productId){
+    public ResponseEntity<ProductResponseDto> findById(@PathVariable Long productId){
         return ResponseEntity.ok(productService.findById(productId));
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll(){
+    public ResponseEntity<List<ProductResponseDto>> findAll(){
         return ResponseEntity.ok(productService.findAll());
     }
 

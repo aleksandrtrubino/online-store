@@ -1,7 +1,5 @@
 package ru.vistar.kionmarket.product;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class ProductRequestDto {
 
     private String name;
@@ -11,7 +9,7 @@ public class ProductRequestDto {
 
     public ProductRequestDto(){}
 
-    public ProductRequestDto(String name, String description, Long subcategoryId, Long shopId, MultipartFile image) {
+    public ProductRequestDto(String name, String description, Long subcategoryId, Long shopId) {
         this.name = name;
         this.description = description;
         this.subcategoryId = subcategoryId;
@@ -49,4 +47,5 @@ public class ProductRequestDto {
     public void setShopId(Long shopId) {
         this.shopId = shopId;
     }
+
 }
