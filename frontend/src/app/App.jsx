@@ -10,6 +10,8 @@ import React from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import { CreateProductImage } from "../entities/product/CreateProductImage";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,6 +26,7 @@ const App = () => {
           <Route element={<RequireAuth />} />
             <Route element={<MainLayout />}>
               <Route path="/catalog" element={<Catalog />} />
+              <Route path="product-image" element={<CreateProductImage/>}/>
             </Route>
           <Route />
 
