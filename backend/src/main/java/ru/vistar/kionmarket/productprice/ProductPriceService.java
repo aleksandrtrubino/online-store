@@ -1,7 +1,5 @@
 package ru.vistar.kionmarket.productprice;
 
-import ru.vistar.kionmarket.product.ProductDto;
-
 import java.util.List;
 
 //product-prices

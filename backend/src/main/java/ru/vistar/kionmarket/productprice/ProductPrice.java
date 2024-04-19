@@ -13,7 +13,7 @@ public class ProductPrice {
     @Column(name = "product_price_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 

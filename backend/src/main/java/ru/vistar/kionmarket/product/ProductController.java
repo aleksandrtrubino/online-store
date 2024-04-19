@@ -18,18 +18,24 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody ProductDto productDto){
-        return ResponseEntity.ok(productService.create(productDto));
+    public ResponseEntity<Product> create(@RequestBody ProductRequestDto productRequestDto){
+        return ResponseEntity.ok(productService.create(productRequestDto));
     }
 
     @PostMapping("/images/{productId}")
-    public ResponseEntity<Product> uploadImage(@PathVariable Long productId, @RequestParam("file") MultipartFile image){
-        return ResponseEntity.ok(productService.uploadImage(productId,image));
+    public ResponseEntity<String> uploadImage(@PathVariable Long productId, @RequestParam("file") MultipartFile[] images){
+        productService.uploadProductImages(productId,images);
+        return ResponseEntity.ok("OK");
+    }
+
+    @GetMapping("/images/{productId}")
+    public ResponseEntity<List<byte[]>> getImage(@PathVariable Long productId){
+        return ResponseEntity.ok(productService.getProductImages(productId));
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<Product> update(@PathVariable Long productId, @RequestBody ProductDto productDto){
-        return ResponseEntity.ok(productService.update(productId, productDto));
+    public ResponseEntity<Product> update(@PathVariable Long productId, @RequestBody ProductRequestDto productRequestDto){
+        return ResponseEntity.ok(productService.update(productId, productRequestDto));
     }
 
     @GetMapping("/{productId}")

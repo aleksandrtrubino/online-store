@@ -2,16 +2,16 @@ package ru.vistar.kionmarket.product;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class ProductDto {
+public class ProductRequestDto {
 
     private String name;
     private String description;
     private Long subcategoryId;
     private Long shopId;
 
-    public ProductDto(){}
+    public ProductRequestDto(){}
 
-    public ProductDto(String name, String description, Long subcategoryId, Long shopId, MultipartFile image) {
+    public ProductRequestDto(String name, String description, Long subcategoryId, Long shopId, MultipartFile image) {
         this.name = name;
         this.description = description;
         this.subcategoryId = subcategoryId;

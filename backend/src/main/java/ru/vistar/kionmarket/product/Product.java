@@ -29,8 +29,9 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
-    Set<ProductPrice> prices;
+    @OneToOne
+    @JoinColumn(name = "product_price_id", referencedColumnName = "product_price_id")
+    private ProductPrice price;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subcategory_id", referencedColumnName = "subcategory_id")
@@ -39,9 +40,6 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")
     private Shop shop;
-
-    @Column(name = "image_name")
-    private String imageName;
 
     @Column(name = "created_at",columnDefinition = "TIMESTAMP")
     @CreationTimestamp
@@ -130,15 +128,12 @@ public class Product {
         this.purchases = purchases;
     }
 
-    public Set<ProductPrice> getPrices() {
-        return prices;
+    public ProductPrice getPrice() {
+        return price;
     }
 
-    public String getImageName() {
-        return imageName;
+    public void setPrice(ProductPrice price) {
+        this.price = price;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
 }
