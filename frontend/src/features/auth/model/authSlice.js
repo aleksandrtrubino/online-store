@@ -9,11 +9,11 @@ const authSlice = createSlice({
     token: null,
   },
   reducers: {
-    setToken(state, action){
+    setToken: (state, action) => {
       state.token = action.payload;
       state.id = decodeToken(state.token).sub;
     },
-    logout(state, action){
+    logout: (state, action) => {
       state.token = null;
       state.id = null;
     }

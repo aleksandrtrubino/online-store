@@ -6,7 +6,10 @@ import { ProductList } from '../../widgets/productList/ProductList';
 
 const Catalog = () => {
 return (
-  <ProductList />
+  <div className='catalog'>
+    <ProductList />
+  </div>
+  
 )  
 }
 

@@ -52,7 +52,7 @@ export const CreateProductImage = () => {
         //const response = await createProduct(formData).unwrap();
 
         try{
-          const result = await fetch("http://localhost:8080/api/v1/products/images/1051", {
+          const result = await fetch("http://localhost:8080/api/v1/products/images/1151", {
             method: "POST",
             body: formData,
               // headers: {
@@ -67,7 +67,7 @@ export const CreateProductImage = () => {
         }
        
 
-        const res = await fetch("http://localhost:8080/api/v1/products/images/1051", {
+        const res = await fetch("http://localhost:8080/api/v1/products/images/1151", {
             method: "GET",
           })
           const d = await res.json();

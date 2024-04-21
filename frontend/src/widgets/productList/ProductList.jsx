@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetProductListQuery } from "../../entities/product/api/ProductApi";
-import ProductGridItem from "../../entities/product/ui/productCard/ProductGridItem";
+import ProductCard from "../../entities/product/ui/productCard/ProductCard";
 import "./ProductList.css"
 
 export const ProductList = () => {
@@ -17,7 +17,7 @@ export const ProductList = () => {
   if (isLoading) {
     content = <p>loading...</p>;
   } else if (isSuccess) {
-    content = products.map((product) => <ProductGridItem key = {product.id} product={product} />);
+    content = products.map((product) => <ProductCard key = {product.id} product={product} />);
   } else if (isError) {
     content = <div>{error.toString()}</div>;
   }
