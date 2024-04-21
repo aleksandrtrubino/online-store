@@ -15,20 +15,23 @@ public class ProductResponseDto {
     private Double price;
     private Integer discount;
     private Boolean isDiscount;
+    private Boolean isFavorite;
     private Subcategory subcategory;
     private Shop shop;
     private List<byte[]> images;
 
     public ProductResponseDto(){}
 
-    public ProductResponseDto(Long id, String name, String description, Double price, Subcategory subcategory, Shop shop, List<byte[]> images) {
+    public ProductResponseDto(Long id, String name, String description, Double price, Integer discount, Boolean isDiscount, Boolean isFavorite, Subcategory subcategory, Shop shop, List<byte[]> images) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.discount = discount;
+        this.isDiscount = isDiscount;
+        this.isFavorite = isFavorite;
         this.subcategory = subcategory;
         this.shop = shop;
-        this.isDiscount = false;
         this.images = images;
     }
 
@@ -90,6 +93,18 @@ public class ProductResponseDto {
 
     public void setIsDiscount(Boolean discount) {
         isDiscount = discount;
+    }
+
+    public void setDiscount(Boolean discount) {
+        isDiscount = discount;
+    }
+
+    public Boolean getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(Boolean favorite) {
+        isFavorite = favorite;
     }
 
     public Boolean getIsDiscount(){

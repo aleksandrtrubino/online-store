@@ -1,13 +1,20 @@
 package ru.vistar.kionmarket.product;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import ru.vistar.kionmarket.exception.ResourceNotFoundException;
 import ru.vistar.kionmarket.productdiscount.ProductDiscount;
 import ru.vistar.kionmarket.productprice.ProductPrice;
 import ru.vistar.kionmarket.shop.Shop;
 import ru.vistar.kionmarket.subcategory.Subcategory;
+import ru.vistar.kionmarket.user.User;
+import ru.vistar.kionmarket.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -17,9 +24,12 @@ public class ProductMapperImpl implements ProductMapper {
     private final int MAX_IMAGES = 10;
 
     private final FileStorageService fileStorageService;
+    private final UserRepository userRepository;
 
-    public ProductMapperImpl(FileStorageService fileStorageService) {
+
+    public ProductMapperImpl(FileStorageService fileStorageService, UserRepository userRepository) {
         this.fileStorageService = fileStorageService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -41,11 +51,25 @@ public class ProductMapperImpl implements ProductMapper {
             discountValue = discount.getValue();
             isDiscount = true;
         }
-        else{
+        else if (price != null){
             priceWithDiscount = price.getPrice();
             discountValue = 0;
             isDiscount = false;
         }
+        else {
+            priceWithDiscount = null;
+            discountValue = 0;
+            isDiscount = false;
+        }
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Long userId = Long.parseLong(userDetails.getUsername());
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %1$s not found", userId)));
+        Set<Product> favorites = user.getFavorites();
+
+        Boolean isFavorite = favorites.contains(product);
 
         List<byte[]> images = new ArrayList<>();
 
@@ -66,6 +90,7 @@ public class ProductMapperImpl implements ProductMapper {
         responseDto.setPrice(priceWithDiscount);
         responseDto.setDiscount(discountValue);
         responseDto.setIsDiscount(isDiscount);
+        responseDto.setIsFavorite(isFavorite);
         responseDto.setSubcategory(subcategory);
         responseDto.setShop(shop);
         responseDto.setImages(images);

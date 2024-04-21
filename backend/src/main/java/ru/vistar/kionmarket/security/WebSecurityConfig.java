@@ -78,6 +78,7 @@ public class WebSecurityConfig {
                         auth
                                 .requestMatchers(PUBLIC).permitAll()
                                 .anyRequest().authenticated()
+                                //.anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(filterChainExceptionHandler, UsernamePasswordAuthenticationFilter.class)

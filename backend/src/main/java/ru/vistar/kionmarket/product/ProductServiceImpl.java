@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
         Shop shop = shopRepository.findById(productRequestDto.getShopId())
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Shop with id %1$s not found", productRequestDto.getShopId())));
         Product product = new Product(name,description,subcategory,shop);
+
         return productMapper.toDto(productRepository.save(product));
     }
 
