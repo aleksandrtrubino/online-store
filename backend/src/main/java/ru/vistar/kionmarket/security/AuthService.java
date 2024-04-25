@@ -52,8 +52,6 @@ public class AuthService {
         Cookie cookie = new Cookie("refreshToken", refreshToken);
         cookie.setMaxAge(jwtUtil.refreshTokenExpiration/1000);
         cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
         response.addCookie(cookie);
 
         String accessToken = jwtUtil.generateAccessToken(userDetails);
@@ -85,8 +83,6 @@ public class AuthService {
         Cookie refreshTokenCookie = new Cookie("refreshToken", null);
         refreshTokenCookie.setMaxAge(0);
         refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setSecure(true);
         response.addCookie(refreshTokenCookie);
     }
 }

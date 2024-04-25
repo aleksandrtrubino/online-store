@@ -1,12 +1,11 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom"
-import { useSelector } from "react-redux"
-import { selectCurrentToken } from "./authSlice"
 import React from "react"
 import { useJwt } from "react-jwt"
+import Cookies from 'js-cookie';
 
 const RequireAuth = () => {
-    const token = useSelector(selectCurrentToken)
-    const [isExpired] = useJwt(token);
+    const token = Cookies.get("refreshToken")
+    const {isExpired} = useJwt(token);
     const location = useLocation()
 
     return (

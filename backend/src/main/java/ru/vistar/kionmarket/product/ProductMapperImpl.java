@@ -19,16 +19,16 @@ import java.util.Set;
 @Component
 public class ProductMapperImpl implements ProductMapper {
 
-    private final String IMAGE_DIRECTORY = "src/main/resources/images/";
+    private final String IMAGE_DIRECTORY = "backend/src/main/resources/images/";
     private final String IMAGE_NAME_PREFIX = "product_";
     private final int MAX_IMAGES = 10;
 
-    private final FileStorageService fileStorageService;
+    private final FileStorageUtil fileStorageUtil;
     private final UserRepository userRepository;
 
 
-    public ProductMapperImpl(FileStorageService fileStorageService, UserRepository userRepository) {
-        this.fileStorageService = fileStorageService;
+    public ProductMapperImpl(FileStorageUtil fileStorageUtil, UserRepository userRepository) {
+        this.fileStorageUtil = fileStorageUtil;
         this.userRepository = userRepository;
     }
 
@@ -74,9 +74,9 @@ public class ProductMapperImpl implements ProductMapper {
         List<byte[]> images = new ArrayList<>();
 
         for(int i = 0; i < MAX_IMAGES; ++i){
-            String fileName = IMAGE_NAME_PREFIX + id + "_" + i;
-            if(fileStorageService.isFileExist(IMAGE_DIRECTORY,fileName)){
-                byte[] image = fileStorageService.findFile(IMAGE_DIRECTORY, fileName);
+            String fileName = IMAGE_NAME_PREFIX + id + "_" + i +".webp";
+            if(fileStorageUtil.isFileExist(IMAGE_DIRECTORY,fileName)){
+                byte[] image = fileStorageUtil.findFile(IMAGE_DIRECTORY, fileName);
                 images.add(image);
             }
             else

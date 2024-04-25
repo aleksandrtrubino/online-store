@@ -1,26 +1,12 @@
 import React from "react";
-import { useGetProductListQuery } from "../../entities/product/api/ProductApi";
+import { useGetProductsQuery } from "../../entities/product/api/ProductApi";
 import ProductCard from "../../entities/product/ui/productCard/ProductCard";
 import "./ProductList.css"
+import { useDispatch } from "react-redux";
 
-export const ProductList = () => {
-  const {
-    data: products,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetProductListQuery();
+export const ProductList = ({products}) => {
 
-  let content;
-
-  if (isLoading) {
-    content = <p>loading...</p>;
-  } else if (isSuccess) {
-    content = products.map((product) => <ProductCard key = {product.id} product={product} />);
-  } else if (isError) {
-    content = <div>{error.toString()}</div>;
-  }
+  const content = products.map((product) => <ProductCard key = {product.id} product={product} />);
 
   return (
     <div className="product-list">

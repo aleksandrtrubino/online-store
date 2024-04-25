@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
 .header{
     min-height: fit-content;
@@ -42,9 +43,12 @@
 .header__logo-wrapper{
     position: absolute;
     left: 2rem;
+
+    display: flex;
+    flex-direction: row;
 }
 
-.header__logo{
+.header__logo-image{
     box-sizing: border-box;
     min-width: 0;
     
@@ -52,4 +56,17 @@
     height: 3rem;
 
     background-color: #020319;
+}
+
+.header__logo-text{
+    position: absolute;
+    left: 11.6rem;
+    bottom: -0.7rem;
+
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight: 400;
+
+    color: white;
+    font-size: 3.5rem;
+    text-decoration: none;
 }

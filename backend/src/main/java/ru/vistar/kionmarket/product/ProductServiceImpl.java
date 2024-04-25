@@ -1,5 +1,10 @@
 package ru.vistar.kionmarket.product;
 
+import jakarta.annotation.Nullable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.vistar.kionmarket.exception.ResourceAlreadyExistsException;
@@ -14,6 +19,8 @@ import ru.vistar.kionmarket.subcategory.Subcategory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -21,18 +28,18 @@ public class ProductServiceImpl implements ProductService {
     private final ShopRepository shopRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final ProductMapper productMapper;
-    private final FileStorageService fileStorageService;
+    private final FileStorageUtil fileStorageUtil;
 
 
     private final String IMAGE_DIRECTORY = "src/main/resources/images/";
     private final String IMAGE_NAME_PREFIX = "product_";
     private final int MAX_IMAGES = 10;
 
-    public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository, FileStorageService fileStorageService, ProductMapperImpl productMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository, FileStorageUtil fileStorageUtil, ProductMapperImpl productMapper) {
         this.productRepository = productRepository;
         this.shopRepository = shopRepository;
         this.subcategoryRepository = subcategoryRepository;
-        this.fileStorageService = fileStorageService;
+        this.fileStorageUtil = fileStorageUtil;
         this.productMapper = productMapper;
     }
 
@@ -58,8 +65,8 @@ public class ProductServiceImpl implements ProductService {
         int imageIndex = 0;
         for(int i = 0; i < MAX_IMAGES; ++i){
             String fileName = IMAGE_NAME_PREFIX + productId + "_" + i;
-            if(!fileStorageService.isFileExist(IMAGE_DIRECTORY, fileName)){
-                fileStorageService.saveFile(images[imageIndex], IMAGE_DIRECTORY, fileName);
+            if(!fileStorageUtil.isFileExist(IMAGE_DIRECTORY, fileName)){
+                fileStorageUtil.saveFile(images[imageIndex], IMAGE_DIRECTORY, fileName);
                 ++imageIndex;
             }
             if(i == MAX_IMAGES - 1)
@@ -74,8 +81,8 @@ public class ProductServiceImpl implements ProductService {
 
         for(int i = 0; i < MAX_IMAGES; ++i){
             String fileName = IMAGE_NAME_PREFIX + productId + "_" + i;
-            if(fileStorageService.isFileExist(IMAGE_DIRECTORY,fileName)){
-                byte[] image = fileStorageService.findFile(IMAGE_DIRECTORY, fileName);
+            if(fileStorageUtil.isFileExist(IMAGE_DIRECTORY,fileName)){
+                byte[] image = fileStorageUtil.findFile(IMAGE_DIRECTORY, fileName);
                 images.add(image);
             }
             else
@@ -107,8 +114,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponseDto> findAll() {
-        return productMapper.toDto(productRepository.findAll());
+    public Page<ProductResponseDto> findAll(
+            Integer page,
+            Integer limit,
+            String sort,
+            String order,
+            @Nullable String categoryFilter,
+            @Nullable String priceRangeFilter,
+            @Nullable Long shopFilter) {
+
+        Sort.Direction direction = order.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageRequest = PageRequest.of(page, limit, direction, sort);
+
+        return productRepository.findAll(pageRequest).map(new Function<Product,ProductResponseDto>(){
+            @Override
+            public ProductResponseDto apply(Product product){
+                return productMapper.toDto(product);
+            }
+        });
     }
 
     @Override

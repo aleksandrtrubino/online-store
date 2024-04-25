@@ -1,14 +1,14 @@
 
 .product-card{
-    width: 13rem;
-    height: 17rem;
-    background-color: white;
+    width: 16rem;
+    height: 22rem;
+    background-color: #f5f7fa;
 
-    border: solid 1px;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    border-radius: 1.5rem;
 
     padding: 0.5rem;
 
@@ -23,7 +23,8 @@
 }
 
 .product-card:hover{
-    box-shadow: 0.1rem 0.1rem 0.2rem #020319;
+    box-shadow: 0.1rem 0.1rem 0.2rem slategray;
+
 
     transition: All 0.3s ease-in;
     -webkit-transition: All 0.3s ease-in;
@@ -31,27 +32,62 @@
     -o-transition: All 0.3s ease-in;
 }
 
+.product-card__image-wrapper{
+    width: 16rem;
+    height: 17rem;
+    background-color: #f5f7fa;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
 
 .product-card__image{
- width: 13rem;
- height: 13rem;
- border: solid 1px;
+    object-fit: cover;
+    overflow: hidden;
+    /*width: 13rem;*/
+    height: 17rem;
+    border-radius: 1rem;
 
- align-self: center;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .product-card__price{
     font-weight: bolder;
     color: black;
+
+    position: absolute;
+    bottom: 3rem;
+
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .product-card__name{
-  color: black;
+    bottom: 2rem;
+    position: absolute;
+    color: black;
+    font-size: 1rem;
+
+    -webkit-line-clamp: 1; /* Число отображаемых строк */
+    display: -webkit-box; /* Включаем флексбоксы */
+    -webkit-box-orient: vertical; /* Вертикальная ориентация */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+
 }
 
 .product-card__is-favorite-icon{
     position: absolute;
-    right: 1rem;
+    right: 1.5rem;
     top: 1rem;
 
     font-size: 1.5rem;
@@ -63,18 +99,32 @@
 
 .product-card__is-favorite-icon_true{
     color: #c8014e;
-}
+    stroke: #c8014e;
+    stroke-width: 2.5rem;
 
-.product-card__is-favorite-icon_false{
-    color: black;
-}
-
-.product-card__is-favorite-icon:hover{
-
-    color: #c8014e;
     transition: All 0.3s ease-in;
     -webkit-transition: All 0.3s ease-in;
     -moz-transition: All 0.3s ease-in;
     -o-transition: All 0.3s ease-in;
-
 }
+
+.product-card__is-favorite-icon_false{
+    color: white;
+    stroke: black;
+    stroke-width: 2.5rem;
+
+    transition: All 0.3s ease-in;
+    -webkit-transition: All 0.3s ease-in;
+    -moz-transition: All 0.3s ease-in;
+    -o-transition: All 0.3s ease-in;
+}
+
+/*.product-card__is-favorite-icon:hover{*/
+
+/*    color: #c8014e;*/
+/*    transition: All 0.3s ease-in;*/
+/*    -webkit-transition: All 0.3s ease-in;*/
+/*    -moz-transition: All 0.3s ease-in;*/
+/*    -o-transition: All 0.3s ease-in;*/
+
+/*}*/

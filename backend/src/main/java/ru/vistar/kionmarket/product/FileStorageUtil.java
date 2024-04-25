@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class FileStorageService {
+public class FileStorageUtil {
 
     public void saveFile(MultipartFile file, String directory, String fileName){
         Path path = Path.of(directory);

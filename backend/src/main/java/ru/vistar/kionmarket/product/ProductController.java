@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.product;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,8 +45,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> findAll(){
-        return ResponseEntity.ok(productService.findAll());
+    public ResponseEntity<Page<ProductResponseDto>> findAll(@RequestParam Integer page, @RequestParam Integer limit, @RequestParam String sort, @RequestParam String order){
+        return ResponseEntity.ok(productService.findAll(page, limit,sort, order, null, null, null));
     }
 
     @GetMapping("/{productId}/reviews")

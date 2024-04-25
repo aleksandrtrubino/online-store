@@ -10,7 +10,14 @@ export const loginApi = baseApi.injectEndpoints({
         withCredentials: true,
       }),
     }),
+    authenticate: builder.query({
+      query: () =>({
+        url: "/auth",
+        method: "GET",
+        withCredentials: true
+      })
+    })
   }),
 });
 
-export const { useLoginMutation } = loginApi;
+export const { useLoginMutation, useAuthenticateQuery } = loginApi;
