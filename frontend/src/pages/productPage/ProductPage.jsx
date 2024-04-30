@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import React from "react";
 import ProductCard from "../../entities/product/ui/productCard/ProductCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faChevronLeft} from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faChevronLeft, faShop} from '@fortawesome/free-solid-svg-icons'
 import './ProductPage.css'
 
 const ImageSlider = ({images}) => {
@@ -75,8 +75,53 @@ const ProductPage = () =>{
                 <ImageSlider images={data.images}/>
                 </div>
             </div>
-            <div className='product-page__name-area'>{data.name}</div>
-            <div className='product-page__price-area'>{data.price}₽</div>
+            <div className='product-page__name-area'>
+                <div className='product-page__name-wrapper'>
+                    <div className='product-page__name'>
+                        {data.name}
+                    </div>
+                    <div className='product-page__rating-reviews'>
+
+                    </div>
+
+                    <div className='product-page__details'>
+                        <div className='product-page__details-list'>
+                            <div className='product-page__details-item'>
+                                <span className='product-page__details-item-header'>
+                                    Категория:
+                                </span>
+                                <span className='product-page__details-item-content'>
+                                {data.subcategory.category.name}
+                                </span>
+                            </div>
+                            <div className='product-page__details-item'>
+                                <span className='product-page__details-item-header'>
+                                    Подкатегория:
+                                </span>
+                                <span className='product-page__details-item-content'>
+                                {data.subcategory.name}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='product-page__shop-wrapper'>
+                        <FontAwesomeIcon className='product-page__shop-logo ' icon={faShop}/>
+                        <div className='product-page__shop-name'>
+                            {data.shop.name}
+                        </div>
+                        <div className='product-page__shop'>
+                            Магазин
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='product-page__price-area'>
+                <div className='product-page__price-wrapper'>
+                    <div className='product-page__price'>{data.price}₽</div>
+                    <button className='product-page__button-to-cart'>Добавить в корзину</button>
+                </div>
+            </div>
             <div className='product-page__description-area'>{data.description}</div>
             </div>
         </div>

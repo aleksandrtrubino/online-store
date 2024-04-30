@@ -52,21 +52,21 @@
     box-sizing: border-box;
     min-width: 0;
     
-    width: 11rem;
-    height: 3rem;
+    width: 9rem;
+    height: 2.5rem;
 
     background-color: #020319;
 }
 
 .header__logo-text{
     position: absolute;
-    left: 11.6rem;
+    left: 9.7rem;
     bottom: -0.7rem;
 
     font-family: "PT Sans Narrow", sans-serif;
     font-weight: 400;
 
     color: white;
-    font-size: 3.5rem;
+    font-size: 3rem;
     text-decoration: none;
 }

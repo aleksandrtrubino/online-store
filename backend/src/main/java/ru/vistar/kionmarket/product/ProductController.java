@@ -45,8 +45,18 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductResponseDto>> findAll(@RequestParam Integer page, @RequestParam Integer limit, @RequestParam String sort, @RequestParam String order){
-        return ResponseEntity.ok(productService.findAll(page, limit,sort, order, null, null, null));
+    public ResponseEntity<Page<ProductResponseDto>> findAll(
+            @RequestParam Integer page,
+            @RequestParam Integer limit,
+            @RequestParam String sort,
+            @RequestParam String order,
+            @RequestParam(required = false) Long category,
+            @RequestParam(required = false) Long subcategory,
+            @RequestParam(required = false) Integer priceFrom,
+            @RequestParam(required = false) Integer priceTo,
+            @RequestParam(required = false) Long shop,
+            @RequestParam(required = false) String search){
+        return ResponseEntity.ok(productService.findAll(page, limit,sort, order, category, subcategory,priceFrom,priceTo, shop, search));
     }
 
     @GetMapping("/{productId}/reviews")

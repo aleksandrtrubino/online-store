@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.vistar.kionmarket.exception.ResourceAlreadyExistsException;
@@ -16,6 +17,9 @@ import ru.vistar.kionmarket.review.Review;
 import ru.vistar.kionmarket.shop.Shop;
 import ru.vistar.kionmarket.subcategory.Subcategory;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -119,14 +123,51 @@ public class ProductServiceImpl implements ProductService {
             Integer limit,
             String sort,
             String order,
-            @Nullable String categoryFilter,
-            @Nullable String priceRangeFilter,
-            @Nullable Long shopFilter) {
+            @Nullable Long categoryFilter,
+            @Nullable Long subcategoryFilter,
+            @Nullable Integer priceFrom,
+            @Nullable Integer priceTo,
+            @Nullable Long shopFilter,
+            @Nullable String search) {
 
         Sort.Direction direction = order.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageRequest = PageRequest.of(page, limit, direction, sort);
+        Pageable pageable = PageRequest.of(page, limit, direction, sort);
 
-        return productRepository.findAll(pageRequest).map(new Function<Product,ProductResponseDto>(){
+
+//        try {
+//            search = search != null ? URLDecoder.decode(search, StandardCharsets.UTF_8.toString()) : null;
+//        } catch (UnsupportedEncodingException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        Specification<Product> spec = Specification.where(null);
+        if (categoryFilter != null)
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("subcategory").get("category").get("id"), categoryFilter));
+        if (subcategoryFilter != null)
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("subcategory").get("id"), subcategoryFilter));
+        if (priceFrom != null)
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.greaterThanOrEqualTo(root.get("price").get("price"), priceFrom));
+        if (priceTo != null)
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.lessThanOrEqualTo(root.get("price").get("price"), priceTo));
+        if (shopFilter != null)
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("shop").get("id"), shopFilter));
+        if (search != null && !search.isEmpty()) {
+            String searchLowerCase = search.toLowerCase();
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.or(
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + searchLowerCase + "%"),
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLowerCase + "%"),
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("subcategory").get("name")), "%" + searchLowerCase + "%"),
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("subcategory").get("category").get("name")), "%" + searchLowerCase + "%")
+                    ));
+        }
+
+        return productRepository.findAll(spec, pageable).map(new Function<Product,ProductResponseDto>(){
             @Override
             public ProductResponseDto apply(Product product){
                 return productMapper.toDto(product);

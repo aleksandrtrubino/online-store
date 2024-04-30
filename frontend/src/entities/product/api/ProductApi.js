@@ -6,8 +6,8 @@ import { baseApi } from "../../../shared/api/baseApi";
 const ProductApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.query({
-      query: ({page, limit, sort, order}) => ({
-        url: `/products?page=${page - 1}&limit=${limit}&sort=${sort}&order=${order}`,
+      query: ({page, limit, sort, order, category, subcategory, priceFrom, priceTo, shop, search}) => ({
+        url: `/products?page=${page - 1}&limit=${limit}&sort=${sort}&order=${order}&category=${category}&subcategory=${subcategory}&priceFrom=${priceFrom}&priceTo=${priceTo}&shop=${shop}&search=${search}`,
         method: "GET",
       })
     }),

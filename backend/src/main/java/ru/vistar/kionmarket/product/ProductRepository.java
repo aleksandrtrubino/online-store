@@ -1,14 +1,14 @@
 package ru.vistar.kionmarket.product;
 
-import org.hibernate.query.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.vistar.kionmarket.product.Product;
-import ru.vistar.kionmarket.subcategory.Subcategory;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
+//    @Query(value = "SELECT * FROM USERS WHERE LASTNAME = ?1",
+//            countQuery = "SELECT count(*) FROM USERS WHERE LASTNAME = ?1",
+//            nativeQuery = true)
+//    Page<User> findByLastname(String lastname, Pageable pageable);
 }

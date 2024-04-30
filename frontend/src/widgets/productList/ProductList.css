@@ -2,9 +2,12 @@
 .product-list{
 
     flex-grow: 0;
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: min-content min-content min-content min-content min-content;
     column-gap: 1.5rem;
     row-gap: 1rem;
+    justify-content: center;
+    width: 100%;
 }

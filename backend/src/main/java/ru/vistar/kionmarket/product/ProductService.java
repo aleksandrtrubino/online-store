@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.product;
 
+import jakarta.annotation.Nullable;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 import ru.vistar.kionmarket.purchase.Purchase;
@@ -15,7 +16,17 @@ public interface ProductService {
     public void uploadProductImages(Long productId, MultipartFile[] images);//products/{productId}/images POST
     public List<byte[]> getProductImages(Long productId);//products/{productId}/images
     public ProductResponseDto findById(Long productId);//{productId} GET
-    public Page<ProductResponseDto> findAll(Integer page, Integer limit, String sort, String order, String categoryFilter, String priceRangeFilter, Long shopFilter);// GET
+    public Page<ProductResponseDto> findAll(
+            Integer page,
+            Integer limit,
+            String sort,
+            String order,
+            @Nullable Long categoryFilter,
+            @Nullable Long subcategoryFilter,
+            @Nullable Integer priceFrom,
+            @Nullable Integer priceTo,
+            @Nullable Long shopFilter,
+            @Nullable String search);// GET
     public void deleteById(Long productId);//{productId} DELETE
 
     public Set<Review> getReviews(Long productId);//{productId}/reviews GET
