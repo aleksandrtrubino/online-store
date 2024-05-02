@@ -134,12 +134,6 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(page, limit, direction, sort);
 
 
-//        try {
-//            search = search != null ? URLDecoder.decode(search, StandardCharsets.UTF_8.toString()) : null;
-//        } catch (UnsupportedEncodingException e) {
-//            throw new RuntimeException(e);
-//        }
-
         Specification<Product> spec = Specification.where(null);
         if (categoryFilter != null)
             spec = spec.and((root, query, criteriaBuilder) ->

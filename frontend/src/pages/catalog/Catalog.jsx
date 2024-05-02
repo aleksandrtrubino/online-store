@@ -11,15 +11,17 @@ import './Catalog.css'
 
 
 const PageSlider = ({page, maxPage}) =>{
-    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const toPrevPage = () =>{
-        navigate(`/catalog?page=${page-1}`)
+        searchParams.set('page',`${page - 1}`)
+        setSearchParams(searchParams)
     }
 
-    const toNextPage = () =>[
-        navigate(`/catalog?page=${page+1}`)
-    ]
+    const toNextPage = () => {
+        searchParams.set('page', `${page + 1}`)
+        setSearchParams(searchParams)
+    }
     return(
         <div className='catalog__page-slider'>
             <div onClick={toPrevPage}  className={'catalog__left-arrow-wrapper ' + (page === 1 ? 'catalog__left-arrow-wrapper_hidden':'')}>
@@ -33,10 +35,10 @@ const PageSlider = ({page, maxPage}) =>{
     )
 }
 
-const DropdownPriceMenu = ({className, header, priceFrom, priceTo, setPriceFrom, setPriceTo}) =>{
+const DropdownPriceMenu = ({className, defaultHeader, priceFrom, priceTo, setPriceFrom, setPriceTo}) =>{
 
-    const [currentIcon, setCurrentIcon] = useState()
-    const [currentHeader, setCurrentHeader] = useState(header);
+    const [headerIcon, setHeaderIcon] = useState()
+    const [header, setHeader] = useState(defaultHeader);
     const [isOpen, setOpen] = useState(false);
 
     const toggleOpen = () =>{
@@ -45,27 +47,27 @@ const DropdownPriceMenu = ({className, header, priceFrom, priceTo, setPriceFrom,
 
     useEffect(() => {
         if(priceFrom === '' && priceTo === ''){
-            setCurrentIcon(faChevronDown)
-            setCurrentHeader(header)
+            setHeaderIcon(faChevronDown)
+            setHeader(defaultHeader)
         }
         else{
-            setCurrentIcon(faXmark)
+            setHeaderIcon(faXmark)
             if(priceFrom === '' ){
-                setCurrentHeader(header + ' < '+priceTo+'₽')
+                setHeader(defaultHeader + ' < '+priceTo+'₽')
             }
             else if(priceTo === ''){
-                setCurrentHeader(header + ' > '+priceFrom+'₽')
+                setHeader(defaultHeader + ' > '+priceFrom+'₽')
             }
             else
-            setCurrentHeader(priceFrom+" - "+priceTo+"₽")
+            setHeader(priceFrom+" - "+priceTo+"₽")
         }
     }, [priceFrom, priceTo]);
 
     return(
         <div className={'dropdown ' + className}>
             <div className={'dropdown__header ' + (isOpen? 'dropdown__header_open' : '')} onClick={toggleOpen}>
-                <div className='dropdown__header-name'>{currentHeader}</div>
-                <FontAwesomeIcon className='dropdown__header-icon'   icon={currentIcon} onClick={()=>{
+                <div className='dropdown__header-name'>{header}</div>
+                <FontAwesomeIcon className='dropdown__header-icon'   icon={headerIcon} onClick={()=>{
                     setPriceTo('')
                     setPriceFrom('')
                 }
@@ -107,11 +109,11 @@ const DropdownPriceMenu = ({className, header, priceFrom, priceTo, setPriceFrom,
     )
 }
 
-const DropdownSelectMenu = ({className, header, items, selectedItem, setSelectedItem}) =>{
+const DropdownSelectMenu = ({className, defaultHeader, items, itemId, setItemId}) =>{
 
-
-    const [currentIcon, setCurrentIcon] = useState()
-    const [currentHeader, setCurrentHeader] = useState(header);
+    const [headerIcon, setHeaderIcon] = useState()
+    const [header, setHeader] = useState(defaultHeader);
+    const [item, setItem] = useState();
     const [isOpen, setOpen] = useState(false);
 
     const toggleOpen = () =>{
@@ -119,35 +121,42 @@ const DropdownSelectMenu = ({className, header, items, selectedItem, setSelected
     }
 
     useEffect(() => {
-        if(selectedItem.name === ''){
-            setCurrentIcon(faChevronDown)
-            setCurrentHeader(header)
+        if(itemId !== '')
+            setItem(items.find(item => item.id === itemId))
+        else
+            setItem(undefined)
+    }, [itemId]);
+
+    useEffect(() => {
+        if(item === undefined){
+            setHeaderIcon(faChevronDown)
+            setHeader(defaultHeader)
         }
         else{
-            setCurrentIcon(faXmark)
-            setCurrentHeader(selectedItem.name)
+            setHeaderIcon(faXmark)
+            setHeader(item.name)
         }
-    }, [selectedItem]);
+    }, [item]);
 
     return(
         <div className={'dropdown ' + className}>
             <div className={'dropdown__header ' + (isOpen? 'dropdown__header_open' : '')} onClick={toggleOpen}>
-                <div className='dropdown__header-name'>{currentHeader}</div>
+                <div className='dropdown__header-name'>{header}</div>
                 <FontAwesomeIcon className='dropdown__header-icon' onClick={()=>{
-                    setSelectedItem({id: '', name: ''})
-                }}  icon={currentIcon}/>
+                    setItemId('')
+                }}  icon={headerIcon}/>
             </div>
             <div className={'dropdown__menu ' + (!isOpen? 'dropdown__menu_hidden' : '')}>
                 {
                     items !== undefined?
                     items.map((item) =>
-                    <div className='dropdown__menu-item' onClick={() => setSelectedItem(item)
+                    <div className='dropdown__menu-item' onClick={() => setItemId(item.id)
                     }>
-                        <FontAwesomeIcon className='dropdown__menu-item-icon' icon={(item.id === selectedItem.id ? solidCircle : regularCircle)}/>
+                        <FontAwesomeIcon className='dropdown__menu-item-icon' icon={(item.id === itemId ? solidCircle : regularCircle)}/>
                         <div className='dropdown__menu-item-name'>{item.name}</div>
                     </div>)
                         :
-                        ''
+                        <></>
                 }
             </div>
         </div>
@@ -157,7 +166,7 @@ const DropdownSelectMenu = ({className, header, items, selectedItem, setSelected
 const Search = ({search, setSearch, submitSearch}) => {
 
     return (
-        <div className='catalog__search'>
+        <form className='catalog__search' onSubmit={submitSearch}>
             <input className='catalog__search-input'
                    placeholder='Найти на KION Маркет'
                    type="text"
@@ -165,24 +174,24 @@ const Search = ({search, setSearch, submitSearch}) => {
                        setSearch(e.target.value)
                    }}
                    value={search}/>
-            <div className='catalog__search-icon-wrapper' onClick={submitSearch}>
+            <div className='catalog__search-icon-wrapper' onClick={submitSearch} >
                 <FontAwesomeIcon className='catalog__search-icon' icon={faSearch} />
             </div>
-        </div>
+        </form>
     )
 }
 
 const Catalog = () => {
-    const ANY = '';
+
     const Order = {
         ASC: 'asc',
         DESC: 'desc'
     }
-    const SortBy = {
-        PRICE: 'price.price',
-        DATE: 'id'
+    const Sort = {
+        BY_PRICE: 'price.price',
+        BY_DATE: 'id'
     }
-    const LIMIT = 10;
+    const LIMIT = 20;
 
     const orders = [
         {id: Order.ASC, name: 'По возрастанию'},
@@ -190,174 +199,179 @@ const Catalog = () => {
     ]
 
     const sorts =[
-        {id: SortBy.DATE, name: 'По новизне'},
-        {id: SortBy.PRICE, name: 'По цене'}
+        {id: Sort.BY_DATE, name: 'По новизне'},
+        {id: Sort.BY_PRICE, name: 'По цене'}
     ]
 
-    const Default ={
-        id: '',
-        name: ''
-    }
-
-    const [selectedPage, setSelectedPage] = useState(1);
-    const [selectedSort, setSelectedSort] = useState(sorts[0]);
-    const [selectedOrder, setSelectedOrder] = useState(orders[0]);
-    const [selectedCategory, setSelectedCategory] = useState(Default);
-    const [selectedSubcategory, setSelectedSubcategory] = useState(Default);
-    const [selectedPriceFrom, setSelectedPriceFrom] = useState(ANY);
-    const [selectedPriceTo, setSelectedPriceTo] = useState(ANY);
-    const [selectedShop, setSelectedShop] = useState(Default);
-    const [selectedSearch, setSelectedSearch] = useState(ANY);
-
-    const [sort, setSort] = useState(selectedSort.id);
-    const [order, setOrder] = useState(selectedOrder.id);
-    const [category, setCategory] = useState(selectedCategory.id);
-    const [subcategory, setSubcategory] = useState(selectedSubcategory.id);
-    const [priceFrom, setPriceFrom] = useState(selectedPriceFrom);
-    const [priceTo, setPriceTo] = useState(selectedPriceTo);
-    const [shop, setShop] = useState(selectedShop.id);
-    const [search, setSearch] = useState(selectedSearch);
-
-
-
-    const setPage = (page) => {
-        setSearchParams({['page'] : page})
-    }
-
+    const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log('Search params: ' + searchParams);
-    // const params = Object.fromEntries([...searchParams]);
 
+    const [selectedPage, setSelectedPage] = useState('1');
+    const [selectedSortId, setSelectedSortId] = useState(Sort.BY_DATE);
+    const [selectedOrderId, setSelectedOrderId] = useState(Order.ASC);
+    const [selectedCategoryId, setSelectedCategoryId] = useState('');
+    const [selectedSubcategoryId, setSelectedSubcategoryId] = useState('');
+    const [selectedShopId, setSelectedShopId] = useState('');
+    const [selectedPriceFrom, setSelectedPriceFrom] = useState('');
+    const [selectedPriceTo, setSelectedPriceTo] = useState('');
+    const [selectedSearch, setSelectedSearch] = useState('');
+
+
+    const getUrlParam = (name) => {
+        const param = searchParams.get(name);
+        return param !== null ? param : '';
+    }
+
+    const setUrlParam = (name, value) =>{
+        if(value !== ''){
+            searchParams.set(name, value)
+            setSearchParams(searchParams)
+        }
+    }
+
+    const deleteUrlParam = (name) =>{
+        searchParams.delete(name)
+        setSearchParams(searchParams)
+    }
+
+    const setValueFromUrl = (urlParamName, setValue) =>{
+        const param = searchParams.get(urlParamName);
+        setValue(param === null ? '' : param)
+    }
+
+
+
+    let products = useGetProductsQuery({
+        page: getUrlParam('page') === '' ? '1' : getUrlParam('page'),
+        limit: LIMIT,
+        sort: getUrlParam('sort') === '' ? Sort.BY_DATE : getUrlParam('sort'),
+        order: getUrlParam('order') === '' ? Order.ASC : getUrlParam('order'),
+        category: getUrlParam('category'),
+        subcategory: getUrlParam('subcategory'),
+        priceFrom: getUrlParam('priceFrom'),
+        priceTo: getUrlParam('priceTo'),
+        shop: getUrlParam('shop'),
+        search: getUrlParam('search')
+    });
+
+    const categories = useGetCategoriesQuery();
+    const subcategories = useGetSubcategoriesQuery(selectedCategoryId);
+    const shops = useGetShopsQuery();
 
     useEffect(()=>{
-        if(searchParams.get('page') === null){
-            setPage(1)
+        if(getUrlParam('page') === ''){
+            setUrlParam('page',1)
         }
-        const categoryParam = searchParams.get('category');
-        if(categoryParam !== null){
-            setCategory(categoryParam)
+        if(getUrlParam('sort') === ''){
+            setUrlParam('sort', Sort.BY_DATE)
         }
-        let search = searchParams.get('search');
-        if(search !== null){
-            setSearch(search)
+        if(getUrlParam('order') === ''){
+            setUrlParam('order', Order.ASC)
         }
+
+        setSelectedPage(getUrlParam('page'))
+        setSelectedSortId(getUrlParam('sort'))
+        setSelectedOrderId(getUrlParam('order'))
+        setSelectedCategoryId(getUrlParam('category'))
+        setSelectedSubcategoryId(getUrlParam('subcategory'))
+        setSelectedPriceFrom(getUrlParam('priceFrom'))
+        setSelectedPriceTo(getUrlParam('priceTo'))
+        setSelectedShopId(getUrlParam('shop'))
+        setSelectedSearch(getUrlParam('search'))
+
     },[])
 
 
-    const products = useGetProductsQuery({
-        page: searchParams.get('page'),
-        limit: LIMIT,
-        sort: sort,
-        order: order,
-        category: category,
-        subcategory: subcategory,
-        priceFrom: priceFrom,
-        priceTo: priceTo,
-        shop: shop,
-        search: search
-    });
-
+    useEffect(() => {
+        if(selectedCategoryId === ''){
+            setSelectedSubcategoryId('')
+        }
+    }, [selectedCategoryId]);
 
 
     const applyFilters = () =>{
-        setPage(1)
-
-        setSelectedSort(selectedSort)
-        setSelectedOrder(selectedOrder)
-        setSelectedCategory(selectedCategory)
-        setSelectedSubcategory(selectedSubcategory)
-        setSelectedShop(selectedShop)
-
-        setSort(selectedSort.id)
-        setOrder(selectedOrder.id)
-        setCategory(selectedCategory.id)
-        setSubcategory(selectedSubcategory.id)
-        setShop(selectedShop.id)
-
-
-        setPriceFrom(selectedPriceFrom)
-        setPriceTo(selectedPriceTo)
-
-
+        setUrlParam('page','1')
+        setUrlParam('sort', selectedSortId)
+        setUrlParam('order',selectedOrderId)
+        setUrlParam('category', selectedCategoryId)
+        setUrlParam('subcategory', selectedSubcategoryId)
+        setUrlParam('shop',selectedShopId)
+        setUrlParam('priceFrom', selectedPriceFrom)
+        setUrlParam('priceTo', selectedPriceTo)
     }
 
     const resetFilters = () =>{
-        setPage(1)
 
-        setSelectedSort(sorts[0])
-        setSelectedOrder(orders[0])
-        setSelectedCategory(Default)
-        setSelectedSubcategory(Default)
-        setSelectedShop(Default)
-        setSelectedPriceFrom(ANY)
-        setSelectedPriceTo(ANY)
+        searchParams.delete('page')
+        searchParams.delete('sort')
+        searchParams.delete('order')
+        searchParams.delete('category')
+        searchParams.delete('subcategory')
+        searchParams.delete('shop')
+        searchParams.delete('priceFrom')
+        searchParams.delete('priceTo')
 
-        setSort(sorts[0].id)
-        setOrder(orders[0].id)
-        setCategory(ANY)
-        setSubcategory(ANY)
-        setShop(ANY)
+        setUrlParam('page',1)
+        setUrlParam('sort', Sort.BY_DATE)
+        setUrlParam('order', Order.ASC)
 
-        setPriceFrom(ANY)
-        setPriceTo(ANY)
+        setSearchParams(searchParams)
     }
 
-    useEffect(() => {
-        if(selectedCategory.id === ''){
-            setSelectedSubcategory(Default)
-        }
-    }, [selectedCategory]);
+    const applySearch = () =>{
+        if(selectedSearch !== '')
+            searchParams.set('search', selectedSearch)
+        else
+            searchParams.delete('search')
+        searchParams.set('page','1')
+        setSearchParams(searchParams)
 
-    const categories = useGetCategoriesQuery();
-    const subcategories = useGetSubcategoriesQuery(selectedCategory.id);
-    const shops = useGetShopsQuery();
+    }
 
-
-
-
-
-
-
+    const resetSearch = () => {
+        searchParams.delete('search')
+        setSearchParams(searchParams)
+    }
 
 
 return (
     products.isSuccess ?
             <div className='catalog'>
-                <Search search={selectedSearch} setSearch={setSelectedSearch} submitSearch={null}/>
+                <Search search={selectedSearch} setSearch={setSelectedSearch} submitSearch={applySearch}/>
                 <div className='catalog__filters'>
                     <DropdownSelectMenu
                         className='catalog__categories'
-                        header='Категория'
+                        defaultHeader='Категория'
                         items={categories.data}
-                        selectedItem={selectedCategory}
-                        setSelectedItem={setSelectedCategory}/>
+                        itemId={selectedCategoryId}
+                        setItemId={setSelectedCategoryId}/>
                     <DropdownSelectMenu
-                        className={(selectedCategory.id === '' ? 'catalog__subcategories':'')}
-                        header='Подкатегория'
+                        className={(selectedCategoryId === '' ? 'catalog__subcategories':'')}
+                        defaultHeader='Подкатегория'
                         items={subcategories.data}
-                        selectedItem={selectedSubcategory}
-                        setSelectedItem={setSelectedSubcategory}/>
+                        itemId={selectedSubcategoryId}
+                        setItemId={setSelectedSubcategoryId}/>
                     <DropdownSelectMenu
                         className='catalog__sort'
-                        header='Сортировать'
+                        defaultHeader='Сортировать'
                         items={sorts}
-                        selectedItem={selectedSort}
-                        setSelectedItem={setSelectedSort}/>
+                        itemId={selectedSortId}
+                        setItemId={setSelectedSortId}/>
                     <DropdownSelectMenu
                         className='catalog__order'
-                        header='Упорядочить'
+                        defaultHeader='Упорядочить'
                         items={orders}
-                        selectedItem={selectedOrder}
-                        setSelectedItem={setSelectedOrder}/>
+                        itemId={selectedOrderId}
+                        setItemId={setSelectedOrderId}/>
                     <DropdownSelectMenu
                         className=''
-                        header='Магазин'
+                        defaultHeader='Магазин'
                         items={shops.data}
-                        selectedItem={selectedShop}
-                        setSelectedItem={setSelectedShop}/>
+                        itemId={selectedShopId}
+                        setItemId={setSelectedShopId}/>
                     <DropdownPriceMenu
                         className='catalog__price-range'
-                        header='Цена'
+                        defaultHeader='Цена'
                         priceTo={selectedPriceTo}
                         setPriceTo={setSelectedPriceTo}
                         priceFrom={selectedPriceFrom}
