@@ -12,4 +12,5 @@ public interface PurchaseService {
     public Purchase findById(Long purchaseId);//{purchaseId} GET
     public List<Purchase> findAll();// GET
     public void deleteById(Long purchaseId);//{purchaseId} DELETE
+    public Purchase patch(Long purchaseId, PurchaseDto purchaseDto);//{purchaseId} PATCH
 }

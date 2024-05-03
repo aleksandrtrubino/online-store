@@ -44,4 +44,9 @@ public class PurchaseController {
         purchaseService.deleteById(purchaseId);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/{purchaseId}")
+    public ResponseEntity<Purchase> patch(@PathVariable Long purchaseId, @RequestBody PurchaseDto purchaseDto){
+        return ResponseEntity.ok(purchaseService.patch(purchaseId,purchaseDto));
+    }
 }
