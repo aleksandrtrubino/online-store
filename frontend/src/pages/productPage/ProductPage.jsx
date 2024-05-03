@@ -19,7 +19,6 @@ import {
 import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
 import './ProductPage.css'
 import {selectUserId} from "../../features/auth/model/authSlice";
-import {addToCart, removeFromCart, selectCart} from "../../entities/cart/model/cartSlice";
 
 const ImageSlider = ({images}) => {
     const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(false);
@@ -74,8 +73,7 @@ const ProductPage = () =>{
     const [addFavorite] = useAddFavoriteMutation();
     const [removeFavorite] = useRemoveFavoriteMutation();
     const userId = useSelector(selectUserId);
-    const cartProductIds = useSelector(selectCart)
-    const [isInCart, setIsInCart] = useState(cartProductIds.includes(productId));
+    const [isInCart, setIsInCart] = useState(false);
 
     const {
         data: product,
@@ -95,14 +93,14 @@ const ProductPage = () =>{
     }, [product]);
 
     const toggleInCart = () =>{
-        if(!isInCart){
+       /* if(!isInCart){
             dispatch(addToCart(productId))
             setIsInCart(true)
         }
         else{
             dispatch(removeFromCart(productId))
             setIsInCart(false)
-        }
+        }*/
     }
 
     const toggleFavorite = async () =>{

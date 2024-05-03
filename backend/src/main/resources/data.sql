@@ -1,3 +1,8 @@
+
+INSERT INTO users (user_id, password, email, enabled, first_name, middle_name, last_name, created_at, updated_at)
+VALUES (1001, '$2a$10$Cf1n5VyD2C48v98CNzX8ne.tBPrFY7aE8Xgw/bRQDYMTTEk75IF6e', 'alex@mail.com', true, 'Александр', 'Владимирович', 'Трубино','2000-01-01 10:00:00.00','2000-01-01 10:00:00.00');
+
+
 INSERT INTO categories (category_id, category_name)
 VALUES (1001, 'Одежда и обувь'),
        (1002, 'Электроника'),
@@ -107,3 +112,10 @@ VALUES (1001, 1001, '2000-01-01 10:00:00.00', 3200.00),
        (1030, 1030, '2000-01-01 10:00:00.00', 550.00);
 
 ALTER SEQUENCE product_prices_seq RESTART WITH 1031;
+
+INSERT INTO purchase_statuses (purchase_status_id, purchase_status_name)
+VALUES (1001, 'added'),
+       (1002, 'ordered'),
+       (1003, 'delivered');
+
+ALTER SEQUENCE purchase_statuses_seq RESTART WITH 1004;

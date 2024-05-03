@@ -36,7 +36,8 @@ const baseQueryWithRefresh = async (args, api, extraOptions) => {
     if (result?.error?.status === 403) {
         console.log("baseApi: sending refresh token")
         const refreshResult = await baseQuery('/auth', api, extraOptions)
-        if (refreshResult?.data.token) {
+        console.log(refreshResult)
+        if (refreshResult?.data?.token) {
             api.dispatch(setToken(refreshResult.data.token));
             result = await baseQueryWithAccess(args, api, extraOptions)
         } else {

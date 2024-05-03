@@ -42,8 +42,12 @@ public class PurchaseServiceImpl implements PurchaseService {
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Address with id %1$s not found",addressId)));
         Product product = productRepository.findById(productId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Product with id %1$s not found",productId)));
-        PurchaseStatus purchaseStatus = purchaseStatusRepository.findById(purchaseStatusId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase status with id %1$s not found",purchaseStatusId)));
+        PurchaseStatus purchaseStatus;
+        if(purchaseStatusId != null)
+            purchaseStatus = purchaseStatusRepository.findById(purchaseStatusId)
+                    .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase status with id %1$s not found",purchaseStatusId)));
+        else
+            purchaseStatus = null;
         Purchase purchase = new Purchase(user, address, product, purchaseStatus);
         return purchaseRepository.save(purchase);
 
