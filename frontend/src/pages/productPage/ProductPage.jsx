@@ -1,12 +1,25 @@
 import {useParams} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {useGetProductByIdQuery} from "../../entities/product/api/ProductApi";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    useAddFavoriteMutation,
+    useGetProductByIdQuery,
+    useRemoveFavoriteMutation
+} from "../../entities/product/api/ProductApi";
 import {useEffect, useState} from "react";
 import React from "react";
 import ProductCard from "../../entities/product/ui/productCard/ProductCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faChevronLeft, faShop} from '@fortawesome/free-solid-svg-icons'
+import {
+    faChevronRight,
+    faChevronLeft,
+    faShop,
+    faCircle as solidCircle,
+    faHeart
+} from '@fortawesome/free-solid-svg-icons'
+import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
 import './ProductPage.css'
+import {selectUserId} from "../../features/auth/model/authSlice";
+import {addToCart, removeFromCart, selectCart} from "../../entities/cart/model/cartSlice";
 
 const ImageSlider = ({images}) => {
     const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(false);
@@ -58,13 +71,65 @@ const ProductPage = () =>{
     const {productId} = useParams()
     const dispatch = useDispatch();
 
+    const [addFavorite] = useAddFavoriteMutation();
+    const [removeFavorite] = useRemoveFavoriteMutation();
+    const userId = useSelector(selectUserId);
+    const cartProductIds = useSelector(selectCart)
+    const [isInCart, setIsInCart] = useState(cartProductIds.includes(productId));
+
     const {
-        data,
+        data: product,
         isLoading,
         isSuccess,
         isError,
         error,
+        refetch
     } = useGetProductByIdQuery({productId: productId});
+
+    const [isFavorite, setIsFavorite] = useState(undefined);
+
+    useEffect(() => {
+        if(isSuccess){
+            setIsFavorite(product.isFavorite)
+        }
+    }, [product]);
+
+    const toggleInCart = () =>{
+        if(!isInCart){
+            dispatch(addToCart(productId))
+            setIsInCart(true)
+        }
+        else{
+            dispatch(removeFromCart(productId))
+            setIsInCart(false)
+        }
+    }
+
+    const toggleFavorite = async () =>{
+        if(!isFavorite){
+            try{
+                const response = await addFavorite({userId, productId}).unwrap();
+                setIsFavorite(true)
+            }
+            catch(error){
+                console.log(error)
+            }
+
+        }
+        else{
+            const response = await removeFavorite({userId, productId}).unwrap();
+            setIsFavorite(false)
+            console.log(response)
+        }
+
+    }
+
+    const getIsFavorite = () =>{
+        if(isFavorite === undefined) {
+            return product.isFavorite;
+        }
+        return isFavorite
+    }
 
     return(
     isSuccess ?
@@ -72,13 +137,13 @@ const ProductPage = () =>{
             <div className='product-page'>
             <div className='product-page__image-area'>
                 <div className='product-page__image-wrapper'>
-                <ImageSlider images={data.images}/>
+                <ImageSlider images={product.images}/>
                 </div>
             </div>
             <div className='product-page__name-area'>
                 <div className='product-page__name-wrapper'>
                     <div className='product-page__name'>
-                        {data.name}
+                        {product.name}
                     </div>
                     <div className='product-page__rating-reviews'>
 
@@ -91,7 +156,7 @@ const ProductPage = () =>{
                                     Категория:
                                 </span>
                                 <span className='product-page__details-item-content'>
-                                {data.subcategory.category.name}
+                                {product.subcategory.category.name}
                                 </span>
                             </div>
                             <div className='product-page__details-item'>
@@ -99,7 +164,7 @@ const ProductPage = () =>{
                                     Подкатегория:
                                 </span>
                                 <span className='product-page__details-item-content'>
-                                {data.subcategory.name}
+                                {product.subcategory.name}
                                 </span>
                             </div>
                         </div>
@@ -108,7 +173,7 @@ const ProductPage = () =>{
                     <div className='product-page__shop-wrapper'>
                         <FontAwesomeIcon className='product-page__shop-logo ' icon={faShop}/>
                         <div className='product-page__shop-name'>
-                            {data.shop.name}
+                            {product.shop.name}
                         </div>
                         <div className='product-page__shop'>
                             Магазин
@@ -118,11 +183,27 @@ const ProductPage = () =>{
             </div>
             <div className='product-page__price-area'>
                 <div className='product-page__price-wrapper'>
-                    <div className='product-page__price'>{data.price}₽</div>
-                    <button className='product-page__button-to-cart'>Добавить в корзину</button>
+                    <div className='product-page__price'>{product.price}₽</div>
+                    <button className={
+                        'product-page__button-to-cart ' +
+                        (isInCart? 'product-page__button-to-cart_true' : '')}
+                            onClick={toggleInCart}
+                    >{!isInCart ? 'Добавить в корзину' : 'В корзине'}</button>
+                    <button className='product-page__button-to-favorites'>
+                        <FontAwesomeIcon className=
+                                             {
+                            'product-page__to-favorite-icon '
+                                                 + ((isFavorite === undefined ? product.isFavorite : isFavorite) ?
+                                                     'product-page__to-favorite-icon_true'
+                                                     :
+                                                     'product-page__to-favorite-icon_false')}
+                                         icon={faHeart}
+                                         onClick={toggleFavorite}
+                        />
+                    </button>
                 </div>
             </div>
-            <div className='product-page__description-area'>{data.description}</div>
+            <div className='product-page__description-area'>{product.description}</div>
             </div>
         </div>
         :

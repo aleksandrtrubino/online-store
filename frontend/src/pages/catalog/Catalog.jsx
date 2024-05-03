@@ -259,6 +259,7 @@ const Catalog = () => {
     const shops = useGetShopsQuery();
 
     useEffect(()=>{
+        products.refetch()
         if(getUrlParam('page') === ''){
             setUrlParam('page',1)
         }

@@ -98,8 +98,8 @@
 }
 
 .product-card__is-favorite-icon_true{
-    color: #c8014e;
-    stroke: #c8014e;
+    color: #c50090;
+    stroke: #c50090;
     stroke-width: 2.5rem;
 
     transition: All 0.3s ease-in;

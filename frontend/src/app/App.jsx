@@ -9,14 +9,16 @@ import MainLayout from "../widgets/layout/MainLayout";
 import RequireAuth from "../features/auth/model/ReqiureAuth";
 import React from "react";
 import { Provider } from "react-redux";
-import store from "./store";
+import store, {persistor} from "./store";
 
 import { CreateProductImage } from "../entities/product/CreateProductImage";
+import {PersistGate} from "redux-persist/integration/react";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
         <Routes>
 
           <Route element={<AuthLayout />}>
@@ -35,6 +37,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/catalog"/>}/>
 
         </Routes>
+              </PersistGate>
       </Provider>
     </BrowserRouter>
   );
