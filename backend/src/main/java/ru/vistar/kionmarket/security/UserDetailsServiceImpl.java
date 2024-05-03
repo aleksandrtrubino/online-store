@@ -1,15 +1,13 @@
 package ru.vistar.kionmarket.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import ru.vistar.kionmarket.domain.User;
+import ru.vistar.kionmarket.repository.UserRepository;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
-import ru.vistar.kionmarket.user.User;
-import ru.vistar.kionmarket.user.UserRepository;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
