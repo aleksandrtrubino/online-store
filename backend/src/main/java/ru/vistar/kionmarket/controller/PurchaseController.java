@@ -35,13 +35,21 @@ public class PurchaseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Purchase>> findAll(){
-        return ResponseEntity.ok(purchaseService.findAll());
+    public ResponseEntity<List<Purchase>> findAll(@RequestParam Long purchaseStatusId){
+        return ResponseEntity.ok(purchaseService.findAllByPurchaseStatusId(purchaseStatusId));
     }
 
     @DeleteMapping("/{purchaseId}")
     public ResponseEntity<Void> deleteById(@PathVariable Long purchaseId){
         purchaseService.deleteById(purchaseId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(
+            @RequestParam Long productId,
+            @RequestParam Long purchaseStatusId){
+        purchaseService.delete(productId, purchaseStatusId);
         return ResponseEntity.ok().build();
     }
 

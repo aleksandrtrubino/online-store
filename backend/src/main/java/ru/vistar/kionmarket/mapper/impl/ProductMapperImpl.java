@@ -4,17 +4,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import ru.vistar.kionmarket.domain.*;
 import ru.vistar.kionmarket.dto.ProductResponseDto;
 import ru.vistar.kionmarket.mapper.ProductMapper;
+import ru.vistar.kionmarket.repository.PurchaseRepository;
 import ru.vistar.kionmarket.repository.UserRepository;
 import ru.vistar.kionmarket.util.FileStorageUtil;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
-import ru.vistar.kionmarket.domain.Product;
-import ru.vistar.kionmarket.domain.ProductDiscount;
-import ru.vistar.kionmarket.domain.ProductPrice;
-import ru.vistar.kionmarket.domain.Shop;
-import ru.vistar.kionmarket.domain.Subcategory;
-import ru.vistar.kionmarket.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +25,13 @@ public class ProductMapperImpl implements ProductMapper {
 
     private final FileStorageUtil fileStorageUtil;
     private final UserRepository userRepository;
+    private final PurchaseRepository purchaseRepository;
 
 
-    public ProductMapperImpl(FileStorageUtil fileStorageUtil, UserRepository userRepository) {
+    public ProductMapperImpl(FileStorageUtil fileStorageUtil, UserRepository userRepository, PurchaseRepository purchaseRepository) {
         this.fileStorageUtil = fileStorageUtil;
         this.userRepository = userRepository;
+        this.purchaseRepository = purchaseRepository;
     }
 
     @Override
@@ -74,6 +72,7 @@ public class ProductMapperImpl implements ProductMapper {
         Set<Product> favorites = user.getFavorites();
 
         Boolean isFavorite = favorites.contains(product);
+        Boolean isInCart = !purchaseRepository.findAllByUserIdAndPurchaseStatusIdAndProductId(userId, 1001L,id).isEmpty();
 
         List<byte[]> images = new ArrayList<>();
 
@@ -95,6 +94,7 @@ public class ProductMapperImpl implements ProductMapper {
         responseDto.setDiscount(discountValue);
         responseDto.setIsDiscount(isDiscount);
         responseDto.setIsFavorite(isFavorite);
+        responseDto.setIsInCart(isInCart);
         responseDto.setSubcategory(subcategory);
         responseDto.setShop(shop);
         responseDto.setImages(images);

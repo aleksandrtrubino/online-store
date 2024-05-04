@@ -14,13 +14,14 @@ public class ProductResponseDto {
     private Integer discount;
     private Boolean isDiscount;
     private Boolean isFavorite;
+    private Boolean isInCart;
     private Subcategory subcategory;
     private Shop shop;
     private List<byte[]> images;
 
     public ProductResponseDto(){}
 
-    public ProductResponseDto(Long id, String name, String description, Double price, Integer discount, Boolean isDiscount, Boolean isFavorite, Subcategory subcategory, Shop shop, List<byte[]> images) {
+    public ProductResponseDto(Long id, String name, String description, Double price, Integer discount, Boolean isDiscount, Boolean isFavorite, Boolean isInCart, Subcategory subcategory, Shop shop, List<byte[]> images) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -28,6 +29,7 @@ public class ProductResponseDto {
         this.discount = discount;
         this.isDiscount = isDiscount;
         this.isFavorite = isFavorite;
+        this.isInCart = isInCart;
         this.subcategory = subcategory;
         this.shop = shop;
         this.images = images;
@@ -103,6 +105,14 @@ public class ProductResponseDto {
 
     public void setIsFavorite(Boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public Boolean getIsInCart() {
+        return isInCart;
+    }
+
+    public void setIsInCart(Boolean inCart) {
+        isInCart = inCart;
     }
 
     public Boolean getIsDiscount(){

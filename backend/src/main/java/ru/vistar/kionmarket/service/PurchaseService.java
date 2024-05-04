@@ -10,7 +10,8 @@ public interface PurchaseService {
     public Purchase create(PurchaseDto purchaseDto);// POST
     public Purchase update(Long purchaseId, PurchaseDto purchaseDto);//{purchaseId} PUT
     public Purchase findById(Long purchaseId);//{purchaseId} GET
-    public List<Purchase> findAll();// GET
+    public List<Purchase> findAllByPurchaseStatusId(Long purchaseStatus);//?purchaseStatus={} GET
     public void deleteById(Long purchaseId);//{purchaseId} DELETE
+    public void delete(Long productId, Long purchaseStatusId);//?productId={} DELETE
     public Purchase patch(Long purchaseId, PurchaseDto purchaseDto);//{purchaseId} PATCH
 }

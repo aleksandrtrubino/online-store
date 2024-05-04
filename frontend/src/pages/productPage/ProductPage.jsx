@@ -19,6 +19,7 @@ import {
 import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
 import './ProductPage.css'
 import {selectUserId} from "../../features/auth/model/authSlice";
+import {useAddToCartMutation, useRemoveFromCartMutation} from "../../entities/cart/api/CartApi";
 
 const ImageSlider = ({images}) => {
     const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(false);
@@ -72,8 +73,10 @@ const ProductPage = () =>{
 
     const [addFavorite] = useAddFavoriteMutation();
     const [removeFavorite] = useRemoveFavoriteMutation();
+    const [addToCart] = useAddToCartMutation();
+    const [removeFromCart] = useRemoveFromCartMutation();
     const userId = useSelector(selectUserId);
-    const [isInCart, setIsInCart] = useState(false);
+    const [isInCart, setIsInCart] = useState(undefined);
 
     const {
         data: product,
@@ -89,18 +92,30 @@ const ProductPage = () =>{
     useEffect(() => {
         if(isSuccess){
             setIsFavorite(product.isFavorite)
+            setIsInCart(product.isInCart)
         }
     }, [product]);
 
-    const toggleInCart = () =>{
-       /* if(!isInCart){
-            dispatch(addToCart(productId))
-            setIsInCart(true)
+
+    const toggleInCart = async () =>{
+        if(!isInCart){
+            try{
+                const response = await addToCart({productId, userId}).unwrap();
+                setIsInCart(true)
+            }
+            catch(error){
+                console.log(error)
+            }
         }
         else{
-            dispatch(removeFromCart(productId))
-            setIsInCart(false)
-        }*/
+            try{
+                const response = await removeFromCart({productId, userId}).unwrap();
+                setIsInCart(false)
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
     }
 
     const toggleFavorite = async () =>{
@@ -184,9 +199,9 @@ const ProductPage = () =>{
                     <div className='product-page__price'>{product.price}₽</div>
                     <button className={
                         'product-page__button-to-cart ' +
-                        (isInCart? 'product-page__button-to-cart_true' : '')}
+                        ((isInCart === undefined ? product.isInCart : isInCart) ? 'product-page__button-to-cart_true' : '')}
                             onClick={toggleInCart}
-                    >{!isInCart ? 'Добавить в корзину' : 'В корзине'}</button>
+                    >{!(isInCart === undefined ? product.isInCart : isInCart) ? 'Добавить в корзину' : 'В корзине'}</button>
                     <button className='product-page__button-to-favorites'>
                         <FontAwesomeIcon className=
                                              {
