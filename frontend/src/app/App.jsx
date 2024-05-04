@@ -13,6 +13,7 @@ import store, {persistor} from "./store";
 
 import { CreateProductImage } from "../entities/product/CreateProductImage";
 import {PersistGate} from "redux-persist/integration/react";
+import Favorites from "../pages/favorites/Favorites";
 
 const App = () => {
   return (
@@ -29,7 +30,8 @@ const App = () => {
            <Route element={<RequireAuth />}>
             <Route element={<MainLayout />}>
               <Route path="/catalog" element={<Catalog />} />
-              <Route path="/catalog/:productId" element={<ProductPage />}/>
+              <Route path='/favorites' element={<Favorites />}/>
+              <Route path="/product/:productId" element={<ProductPage />}/>
               <Route path="/product-image" element={<CreateProductImage/>}/>
             </Route>
            </Route>

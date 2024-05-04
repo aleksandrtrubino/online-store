@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
 .catalog{
     display: flex;
@@ -9,6 +10,14 @@
     width: 100%;
 
     flex-grow: 1;
+}
+
+.favorites__header{
+    color: #c50090;
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-left: 6rem;
 }
 
 .catalog__filters{
@@ -70,10 +79,6 @@
 }
 
 .catalog__order{
-    width: 10rem;
-}
-
-.catalog__shop{
     width: 10rem;
 }
 

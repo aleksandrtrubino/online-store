@@ -59,8 +59,9 @@ public class ProductController {
             @RequestParam(required = false) Integer priceFrom,
             @RequestParam(required = false) Integer priceTo,
             @RequestParam(required = false) Long shop,
-            @RequestParam(required = false) String search){
-        return ResponseEntity.ok(productService.findAll(page, limit,sort, order, category, subcategory,priceFrom,priceTo, shop, search));
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Boolean isFavorite){
+        return ResponseEntity.ok(productService.findAll(page, limit,sort, order, category, subcategory,priceFrom,priceTo, shop, search, isFavorite));
     }
 
     @GetMapping("/{productId}/reviews")

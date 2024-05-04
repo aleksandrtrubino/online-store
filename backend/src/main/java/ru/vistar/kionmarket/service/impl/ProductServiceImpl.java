@@ -6,12 +6,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.vistar.kionmarket.domain.Purchase;
-import ru.vistar.kionmarket.domain.Review;
-import ru.vistar.kionmarket.domain.Shop;
-import ru.vistar.kionmarket.domain.Subcategory;
+import ru.vistar.kionmarket.domain.*;
 import ru.vistar.kionmarket.dto.ProductRequestDto;
 import ru.vistar.kionmarket.dto.ProductResponseDto;
 import ru.vistar.kionmarket.mapper.ProductMapper;
@@ -19,11 +19,11 @@ import ru.vistar.kionmarket.mapper.impl.ProductMapperImpl;
 import ru.vistar.kionmarket.repository.ProductRepository;
 import ru.vistar.kionmarket.repository.ShopRepository;
 import ru.vistar.kionmarket.repository.SubcategoryRepository;
+import ru.vistar.kionmarket.repository.UserRepository;
 import ru.vistar.kionmarket.service.ProductService;
 import ru.vistar.kionmarket.util.FileStorageUtil;
 import ru.vistar.kionmarket.exception.ResourceAlreadyExistsException;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
-import ru.vistar.kionmarket.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
     private final ShopRepository shopRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final ProductMapper productMapper;
+    private final UserRepository userRepository;
     private final FileStorageUtil fileStorageUtil;
 
 
@@ -44,10 +45,11 @@ public class ProductServiceImpl implements ProductService {
     private final String IMAGE_NAME_PREFIX = "product_";
     private final int MAX_IMAGES = 10;
 
-    public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository, FileStorageUtil fileStorageUtil, ProductMapperImpl productMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, ShopRepository shopRepository, SubcategoryRepository subcategoryRepository,UserRepository userRepository, FileStorageUtil fileStorageUtil, ProductMapperImpl productMapper) {
         this.productRepository = productRepository;
         this.shopRepository = shopRepository;
         this.subcategoryRepository = subcategoryRepository;
+        this.userRepository = userRepository;
         this.fileStorageUtil = fileStorageUtil;
         this.productMapper = productMapper;
     }
@@ -133,10 +135,17 @@ public class ProductServiceImpl implements ProductService {
             @Nullable Integer priceFrom,
             @Nullable Integer priceTo,
             @Nullable Long shopFilter,
-            @Nullable String search) {
+            @Nullable String search,
+            @Nullable Boolean isFavorite) {
 
         Sort.Direction direction = order.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
         Pageable pageable = PageRequest.of(page, limit, direction, sort);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Long userId = Long.parseLong(userDetails.getUsername());
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %1$s not found", userId)));
 
 
         Specification<Product> spec = Specification.where(null);
@@ -164,6 +173,10 @@ public class ProductServiceImpl implements ProductService {
                             criteriaBuilder.like(criteriaBuilder.lower(root.get("subcategory").get("name")), "%" + searchLowerCase + "%"),
                             criteriaBuilder.like(criteriaBuilder.lower(root.get("subcategory").get("category").get("name")), "%" + searchLowerCase + "%")
                     ));
+        }
+        if(isFavorite != null && isFavorite){
+            spec = spec.and((root, query, criteriaBuilder) ->
+                    criteriaBuilder.isMember(user, root.get("usersAddedToFavorites")));
         }
 
         return productRepository.findAll(spec, pageable).map(new Function<Product,ProductResponseDto>(){

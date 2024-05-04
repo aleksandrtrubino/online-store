@@ -28,7 +28,8 @@ public interface ProductService {
             @Nullable Integer priceFrom,
             @Nullable Integer priceTo,
             @Nullable Long shopFilter,
-            @Nullable String search);// GET
+            @Nullable String search,
+            @Nullable Boolean isFavorite);// GET
     public void deleteById(Long productId);//{productId} DELETE
 
     public Set<Review> getReviews(Long productId);//{productId}/reviews GET

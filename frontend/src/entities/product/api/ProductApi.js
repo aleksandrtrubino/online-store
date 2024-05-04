@@ -7,11 +7,11 @@ const ProductApi = baseApi.injectEndpoints({
     tagTypes: ['Product'],
     endpoints: (build) => ({
     getProducts: build.query({
-      query: ({page, limit, sort, order, category, subcategory, priceFrom, priceTo, shop, search}) => ({
-        url: `/products?page=${page - 1}&limit=${limit}&sort=${sort}&order=${order}&category=${category}&subcategory=${subcategory}&priceFrom=${priceFrom}&priceTo=${priceTo}&shop=${shop}&search=${search}`,
+      query: ({page, limit, sort, order, category, subcategory, priceFrom, priceTo, shop, search, isFavorite}) => ({
+        url: `/products?page=${page - 1}&limit=${limit}&sort=${sort}&order=${order}&category=${category}&subcategory=${subcategory}&priceFrom=${priceFrom}&priceTo=${priceTo}&shop=${shop}&search=${search}&isFavorite=${isFavorite}`,
         method: "GET",
       }),
-        providesTags: ['Product']
+        providesTags: (result, error, {isFavorite}) => [!isFavorite? 'Product' : 'Favorite']
     }),
       getProductById: build.query({
           query: ({productId}) => ({

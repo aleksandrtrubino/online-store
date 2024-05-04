@@ -39,7 +39,7 @@ const userId = useSelector(selectUserId);
   }
 
   const courseProductPage = () => {
-      navigate(`/catalog/${product.id}`)
+      navigate(`/product/${product.id}`)
   }
 
   return (

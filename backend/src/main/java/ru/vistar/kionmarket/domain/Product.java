@@ -56,6 +56,10 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<Purchase> purchases;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "favorites")
+    private Set<User> usersAddedToFavorites;
+
     public Product(){}
 
     public Product(String name, String description, Subcategory subcategory, Shop shop) {
@@ -141,5 +145,9 @@ public class Product {
 
     public void setPurchases(Set<Purchase> purchases) {
         this.purchases = purchases;
+    }
+
+    public Set<User> getUsersAddedToFavorites() {
+        return usersAddedToFavorites;
     }
 }

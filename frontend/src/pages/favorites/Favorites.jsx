@@ -7,7 +7,7 @@ import {useGetShopsQuery} from "../../entities/shop/api/ShopApi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faChevronLeft, faChevronDown, faXmark, faSearch, faCircle as solidCircle} from '@fortawesome/free-solid-svg-icons'
 import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
-import './Catalog.css'
+import './Favorites.css'
 
 import PageSlider from "../../widgets/pageSlider/PageSlider";
 import DropdownPriceMenu from "../../widgets/dropdownPriceMenu/DropdownPriceMenu";
@@ -16,7 +16,7 @@ import SearchBar from "../../widgets/searchBar/SearchBar";
 
 
 
-const Catalog = () => {
+const Favorites = () => {
 
     const Order = {
         ASC: 'asc',
@@ -85,7 +85,7 @@ const Catalog = () => {
         priceTo: getUrlParam('priceTo'),
         shop: getUrlParam('shop'),
         search: getUrlParam('search'),
-        isFavorite: false
+        isFavorite: true
     });
 
     const categories = useGetCategoriesQuery();
@@ -165,26 +165,11 @@ const Catalog = () => {
         setSearchParams(searchParams)
     }
 
-    const applySearch = () =>{
-        if(selectedSearch !== '')
-            searchParams.set('search', selectedSearch)
-        else
-            searchParams.delete('search')
-        searchParams.set('page','1')
-        setSearchParams(searchParams)
 
-    }
-
-    const resetSearch = () => {
-        searchParams.delete('search')
-        setSearchParams(searchParams)
-    }
-
-
-return (
-    products.isSuccess ?
+    return (
+        products.isSuccess ?
             <div className='catalog'>
-                <SearchBar search={selectedSearch} setSearch={setSelectedSearch} submitSearch={applySearch}/>
+                <h1 className='favorites__header'>Избранное</h1>
                 <div className='catalog__filters'>
                     <DropdownSelectMenu
                         className='catalog__categories'
@@ -211,7 +196,7 @@ return (
                         itemId={selectedOrderId}
                         setItemId={setSelectedOrderId}/>
                     <DropdownSelectMenu
-                        className='catalog__shop'
+                        className=''
                         defaultHeader='Магазин'
                         items={shops.data}
                         itemId={selectedShopId}
@@ -229,16 +214,16 @@ return (
                 <ProductList products={products.data.content}/>
                 <PageSlider page={Number(searchParams.get('page'))} maxPage={products.data.totalPages}/>
             </div>
-        :
-        products.isLoading ? 'loading...'
             :
-            products.isError ?
-                'error'
+            products.isLoading ? 'loading...'
                 :
-                'undefined '
+                products.isError ?
+                    'error'
+                    :
+                    'undefined '
 
-  
-)  
+
+    )
 }
 
-export default Catalog
+export default Favorites
