@@ -110,7 +110,7 @@
 
 .product-card__is-favorite-icon_false{
     color: white;
-    stroke: black;
+    stroke: grey;
     stroke-width: 2.5rem;
 
     transition: All 0.3s ease-in;

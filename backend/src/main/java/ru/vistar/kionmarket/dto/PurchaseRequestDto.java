@@ -1,15 +1,15 @@
 package ru.vistar.kionmarket.dto;
 
-public class PurchaseDto {
+public class PurchaseRequestDto {
     private Long userId;
     private Long addressId;
     private Long productId;
     private Long purchaseStatusId;
 
-    public PurchaseDto() {
+    public PurchaseRequestDto() {
     }
 
-    public PurchaseDto(Long userId, Long addressId, Long productId, Long purchaseStatusId) {
+    public PurchaseRequestDto(Long userId, Long addressId, Long productId, Long purchaseStatusId) {
         this.userId = userId;
         this.addressId = addressId;
         this.productId = productId;

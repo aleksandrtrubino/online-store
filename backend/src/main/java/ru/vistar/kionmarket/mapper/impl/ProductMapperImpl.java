@@ -19,10 +19,6 @@ import java.util.Set;
 @Component
 public class ProductMapperImpl implements ProductMapper {
 
-    private final String IMAGE_DIRECTORY = "backend/src/main/resources/images/";
-    private final String IMAGE_NAME_PREFIX = "product_";
-    private final int MAX_IMAGES = 10;
-
     private final FileStorageUtil fileStorageUtil;
     private final UserRepository userRepository;
     private final PurchaseRepository purchaseRepository;
@@ -76,8 +72,11 @@ public class ProductMapperImpl implements ProductMapper {
 
         List<byte[]> images = new ArrayList<>();
 
+        int MAX_IMAGES = 10;
         for(int i = 0; i < MAX_IMAGES; ++i){
+            String IMAGE_NAME_PREFIX = "product_";
             String fileName = IMAGE_NAME_PREFIX + id + "_" + i +".webp";
+            String IMAGE_DIRECTORY = "backend/src/main/resources/images/";
             if(fileStorageUtil.isFileExist(IMAGE_DIRECTORY,fileName)){
                 byte[] image = fileStorageUtil.findFile(IMAGE_DIRECTORY, fileName);
                 images.add(image);

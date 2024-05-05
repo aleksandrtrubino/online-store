@@ -3,7 +3,8 @@ package ru.vistar.kionmarket.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vistar.kionmarket.domain.Purchase;
-import ru.vistar.kionmarket.dto.PurchaseDto;
+import ru.vistar.kionmarket.dto.PurchaseRequestDto;
+import ru.vistar.kionmarket.dto.PurchaseResponseDto;
 import ru.vistar.kionmarket.service.PurchaseService;
 import ru.vistar.kionmarket.service.impl.PurchaseServiceImpl;
 
@@ -20,22 +21,22 @@ public class PurchaseController {
     }
 
     @PostMapping
-    public ResponseEntity<Purchase> create(@RequestBody PurchaseDto purchaseDto){
-        return ResponseEntity.ok(purchaseService.create(purchaseDto));
+    public ResponseEntity<PurchaseResponseDto> create(@RequestBody PurchaseRequestDto purchaseRequestDto){
+        return ResponseEntity.ok(purchaseService.create(purchaseRequestDto));
     }
 
     @PutMapping("/{purchaseId}")
-    public ResponseEntity<Purchase> update(@PathVariable Long purchaseId, @RequestBody PurchaseDto purchaseDto){
-        return ResponseEntity.ok(purchaseService.update(purchaseId,purchaseDto));
+    public ResponseEntity<PurchaseResponseDto> update(@PathVariable Long purchaseId, @RequestBody PurchaseRequestDto purchaseRequestDto){
+        return ResponseEntity.ok(purchaseService.update(purchaseId, purchaseRequestDto));
     }
 
     @GetMapping("/{purchaseId}")
-    public ResponseEntity<Purchase> findById(@PathVariable Long purchaseId){
+    public ResponseEntity<PurchaseResponseDto> findById(@PathVariable Long purchaseId){
         return ResponseEntity.ok(purchaseService.findById(purchaseId));
     }
 
     @GetMapping
-    public ResponseEntity<List<Purchase>> findAll(@RequestParam Long purchaseStatusId){
+    public ResponseEntity<List<PurchaseResponseDto>> findAll(@RequestParam Long purchaseStatusId){
         return ResponseEntity.ok(purchaseService.findAllByPurchaseStatusId(purchaseStatusId));
     }
 
@@ -54,7 +55,7 @@ public class PurchaseController {
     }
 
     @PatchMapping("/{purchaseId}")
-    public ResponseEntity<Purchase> patch(@PathVariable Long purchaseId, @RequestBody PurchaseDto purchaseDto){
-        return ResponseEntity.ok(purchaseService.patch(purchaseId,purchaseDto));
+    public ResponseEntity<PurchaseResponseDto> patch(@PathVariable Long purchaseId, @RequestBody PurchaseRequestDto purchaseRequestDto){
+        return ResponseEntity.ok(purchaseService.patch(purchaseId, purchaseRequestDto));
     }
 }

@@ -10,7 +10,10 @@ import ru.vistar.kionmarket.domain.Address;
 import ru.vistar.kionmarket.domain.Purchase;
 import ru.vistar.kionmarket.domain.PurchaseStatus;
 import ru.vistar.kionmarket.domain.User;
-import ru.vistar.kionmarket.dto.PurchaseDto;
+import ru.vistar.kionmarket.dto.PurchaseRequestDto;
+import ru.vistar.kionmarket.dto.PurchaseResponseDto;
+import ru.vistar.kionmarket.mapper.PurchaseMapper;
+import ru.vistar.kionmarket.mapper.impl.PurchaseMapperImpl;
 import ru.vistar.kionmarket.service.PurchaseService;
 import ru.vistar.kionmarket.repository.AddressRepository;
 import ru.vistar.kionmarket.exception.ResourceNotFoundException;
@@ -21,7 +24,6 @@ import ru.vistar.kionmarket.repository.PurchaseStatusRepository;
 import ru.vistar.kionmarket.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -32,22 +34,24 @@ public class PurchaseServiceImpl implements PurchaseService {
     private final AddressRepository addressRepository;
     private final ProductRepository productRepository;
     private final PurchaseStatusRepository purchaseStatusRepository;
+    private final PurchaseMapper purchaseMapper;
 
-    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, UserRepository userRepository, AddressRepository addressRepository, ProductRepository productRepository, PurchaseStatusRepository purchaseStatusRepository) {
+    public PurchaseServiceImpl(PurchaseRepository purchaseRepository, UserRepository userRepository, AddressRepository addressRepository, ProductRepository productRepository, PurchaseStatusRepository purchaseStatusRepository, PurchaseMapperImpl purchaseMapper) {
         this.purchaseRepository = purchaseRepository;
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.productRepository = productRepository;
         this.purchaseStatusRepository = purchaseStatusRepository;
+        this.purchaseMapper = purchaseMapper;
     }
 
     @Override
-    public Purchase create(PurchaseDto purchaseDto) {
-        Long userId = purchaseDto.getUserId();
-        Long addressId = purchaseDto.getAddressId();
-        Long productId = purchaseDto.getProductId();
-        Long purchaseStatusId = purchaseDto.getPurchaseStatusId();
-        User user = userRepository.findById(purchaseDto.getUserId())
+    public PurchaseResponseDto create(PurchaseRequestDto purchaseRequestDto) {
+        Long userId = purchaseRequestDto.getUserId();
+        Long addressId = purchaseRequestDto.getAddressId();
+        Long productId = purchaseRequestDto.getProductId();
+        Long purchaseStatusId = purchaseRequestDto.getPurchaseStatusId();
+        User user = userRepository.findById(purchaseRequestDto.getUserId())
                 .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
         Address address;
         if(addressId != null)
@@ -61,19 +65,19 @@ public class PurchaseServiceImpl implements PurchaseService {
                     .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase status with id %1$s not found",purchaseStatusId)));
 
         Purchase purchase = new Purchase(user, address, product, purchaseStatus);
-        return purchaseRepository.save(purchase);
+        return purchaseMapper.toDto(purchaseRepository.save(purchase));
 
     }
 
     @Override
-    public Purchase update(Long purchaseId, PurchaseDto purchaseDto) {
+    public PurchaseResponseDto update(Long purchaseId, PurchaseRequestDto purchaseRequestDto) {
         Purchase purchase = purchaseRepository.findById(purchaseId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase with id %1$s not found",purchaseId)));
-        Long userId = purchaseDto.getUserId();
-        Long addressId = purchaseDto.getAddressId();
-        Long productId = purchaseDto.getProductId();
-        Long purchaseStatusId = purchaseDto.getPurchaseStatusId();
-        User user = userRepository.findById(purchaseDto.getUserId())
+        Long userId = purchaseRequestDto.getUserId();
+        Long addressId = purchaseRequestDto.getAddressId();
+        Long productId = purchaseRequestDto.getProductId();
+        Long purchaseStatusId = purchaseRequestDto.getPurchaseStatusId();
+        User user = userRepository.findById(purchaseRequestDto.getUserId())
                 .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
         Address address = addressRepository.findById(addressId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Address with id %1$s not found",addressId)));
@@ -85,24 +89,24 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchase.setAddress(address);
         purchase.setProduct(product);
         purchase.setPurchaseStatus(purchaseStatus);
-        return purchaseRepository.save(purchase);
+        return purchaseMapper.toDto(purchaseRepository.save(purchase));
     }
 
     @Override
-    public Purchase findById(Long purchaseId) {
-        return purchaseRepository.findById(purchaseId)
-                .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase with id %1$s not found",purchaseId)));
+    public PurchaseResponseDto findById(Long purchaseId) {
+        return purchaseMapper.toDto(purchaseRepository.findById(purchaseId)
+                .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase with id %1$s not found",purchaseId))));
     }
 
     @Override
-    public List<Purchase> findAllByPurchaseStatusId(Long purchaseStatusId) {
+    public List<PurchaseResponseDto> findAllByPurchaseStatusId(Long purchaseStatusId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Long userId = Long.parseLong(userDetails.getUsername());
         if(!userRepository.existsById(userId))
             throw new ResourceNotFoundException(String.format("User with id %1$s not found", userId));
 
-        return purchaseRepository.findAllByUserIdAndPurchaseStatusId(userId, purchaseStatusId);
+        return purchaseMapper.toDto(purchaseRepository.findAllByUserIdAndPurchaseStatusId(userId, purchaseStatusId));
     }
 
     @Override
@@ -132,18 +136,18 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public Purchase patch(Long purchaseId, @Nullable PurchaseDto purchaseDto) {
+    public PurchaseResponseDto patch(Long purchaseId, @Nullable PurchaseRequestDto purchaseRequestDto) {
         Purchase purchase = purchaseRepository.findById(purchaseId)
                 .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase with id %1$s not found",purchaseId)));
 
-        if(purchaseDto != null){
-            Long userId = purchaseDto.getUserId();
-            Long addressId = purchaseDto.getAddressId();
-            Long productId = purchaseDto.getProductId();
-            Long purchaseStatusId = purchaseDto.getPurchaseStatusId();
+        if(purchaseRequestDto != null){
+            Long userId = purchaseRequestDto.getUserId();
+            Long addressId = purchaseRequestDto.getAddressId();
+            Long productId = purchaseRequestDto.getProductId();
+            Long purchaseStatusId = purchaseRequestDto.getPurchaseStatusId();
 
             if(userId != null){
-                User user = userRepository.findById(purchaseDto.getUserId())
+                User user = userRepository.findById(purchaseRequestDto.getUserId())
                         .orElseThrow(()->new ResourceNotFoundException(String.format("User with id %1$s not found",userId)));
                 purchase.setUser(user);
             }
@@ -162,10 +166,10 @@ public class PurchaseServiceImpl implements PurchaseService {
                         .orElseThrow(()->new ResourceNotFoundException(String.format("Purchase status with id %1$s not found",purchaseStatusId)));
                 purchase.setPurchaseStatus(purchaseStatus);
             }
-            return purchaseRepository.save(purchase);
+            return purchaseMapper.toDto(purchaseRepository.save(purchase));
         }
         else
-            return purchase;
+            return purchaseMapper.toDto(purchase);
 
     }
 }

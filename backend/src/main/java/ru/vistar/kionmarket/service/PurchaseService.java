@@ -1,17 +1,18 @@
 package ru.vistar.kionmarket.service;
 
 import ru.vistar.kionmarket.domain.Purchase;
-import ru.vistar.kionmarket.dto.PurchaseDto;
+import ru.vistar.kionmarket.dto.PurchaseRequestDto;
+import ru.vistar.kionmarket.dto.PurchaseResponseDto;
 
 import java.util.List;
 
 //purchases
 public interface PurchaseService {
-    public Purchase create(PurchaseDto purchaseDto);// POST
-    public Purchase update(Long purchaseId, PurchaseDto purchaseDto);//{purchaseId} PUT
-    public Purchase findById(Long purchaseId);//{purchaseId} GET
-    public List<Purchase> findAllByPurchaseStatusId(Long purchaseStatus);//?purchaseStatus={} GET
+    public PurchaseResponseDto create(PurchaseRequestDto purchaseRequestDto);// POST
+    public PurchaseResponseDto update(Long purchaseId, PurchaseRequestDto purchaseRequestDto);//{purchaseId} PUT
+    public PurchaseResponseDto findById(Long purchaseId);//{purchaseId} GET
+    public List<PurchaseResponseDto> findAllByPurchaseStatusId(Long purchaseStatus);//?purchaseStatus={} GET
     public void deleteById(Long purchaseId);//{purchaseId} DELETE
     public void delete(Long productId, Long purchaseStatusId);//?productId={} DELETE
-    public Purchase patch(Long purchaseId, PurchaseDto purchaseDto);//{purchaseId} PATCH
+    public PurchaseResponseDto patch(Long purchaseId, PurchaseRequestDto purchaseRequestDto);//{purchaseId} PATCH
 }
