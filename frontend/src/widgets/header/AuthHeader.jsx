@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSignIn, faUser, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 const AuthHeader = () => {
   return (
@@ -14,10 +16,13 @@ const AuthHeader = () => {
             <div className='header__logo-text'>Маркет</div>
         </Link>
       <Link className="header__link" to="/login">
-        Вход
+          <FontAwesomeIcon className='header__link-icon' icon={faSignIn} />
+          <span className='header__link-name'>Вход</span>
+
       </Link>
       <Link className="header__link" to="/register">
-        Регистрация
+          <FontAwesomeIcon className='header__link-icon' icon={faUserPlus} />
+          <span className='header__link-name'>Регистрация</span>
       </Link>
     </header>
   );

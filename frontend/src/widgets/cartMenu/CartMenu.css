@@ -37,7 +37,17 @@
     width: 7rem;
     height: 3rem;
 
+    cursor: pointer;
+
     align-self: center;
+}
+
+.cart-menu__button:hover{
+    opacity: 80%;
+}
+
+.cart-menu__button:active{
+    opacity: 90%;
 }
 
 .product-page__button-to-cart{

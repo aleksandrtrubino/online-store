@@ -17,7 +17,7 @@ const PageSlider = ({page, maxPage}) =>{
         setSearchParams(searchParams)
     }
     return(
-        <div className='page-slider'>
+        <div className={(maxPage === 1 ? 'page-slider_hidden' : '') + ' page-slider'}>
             <div onClick={toPrevPage}  className={'page-slider__left-arrow-wrapper ' + (page === 1 ? 'page-slider__left-arrow-wrapper_hidden':'')}>
                 <FontAwesomeIcon className='page-slider__left-arrow ' icon={faChevronLeft}/>
             </div>

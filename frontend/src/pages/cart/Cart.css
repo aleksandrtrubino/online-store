@@ -14,7 +14,7 @@
     flex-grow: 1;
 }
 
-.cart-header{
+.cart__header{
     color: #c50090;
     font-family: "PT Sans Narrow", sans-serif;
     font-weight: 700;
@@ -43,5 +43,5 @@
     margin-top: 1rem;
     margin-left: 2rem;
     position: sticky;
-    top: 2rem;
+    top: 7rem;
 }

@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux'
-import { useLoginMutation } from "../../features/auth/api/authApi";
+import {useLoginMutation, useLogoutMutation} from "../../features/auth/api/authApi";
 import { useNavigate } from 'react-router-dom'
 
 
-import { setToken } from "../../features/auth/model/authSlice";
+import {logout, setToken} from "../../features/auth/model/authSlice";
 
 import "./Login.css";
 
@@ -22,7 +22,23 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(true);
 
+
   const [login] = useLoginMutation()
+  const [logoutMutation] = useLogoutMutation()
+
+  const doLogout = async () =>{
+    try{
+      dispatch(logout());
+      const response = await logoutMutation().unwrap();
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+
+  useEffect(()=> {
+    doLogout()
+  },[])
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email) || email === "" ? true : false);

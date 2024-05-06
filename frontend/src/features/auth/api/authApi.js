@@ -1,23 +1,28 @@
 import { baseApi } from "../../../shared/api/baseApi";
 
 export const loginApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    login: builder.mutation({
+  endpoints: (build) => ({
+    login: build.mutation({
       query: (credentials) => ({
         url: "/auth",
         method: "POST",
-        body: { ...credentials },
-        withCredentials: true,
+        body: { ...credentials }
       }),
     }),
-    authenticate: builder.query({
+    register: build.mutation({
+      query: (user) =>({
+        url: '/users',
+        method: 'POST',
+        body: {...user}
+      })
+    }),
+    logout: build.mutation({
       query: () =>({
-        url: "/auth",
-        method: "GET",
-        withCredentials: true
+        url: '/auth',
+        method: 'DELETE'
       })
     })
   }),
 });
 
-export const { useLoginMutation, useAuthenticateQuery } = loginApi;
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = loginApi;

@@ -8,9 +8,11 @@
 }
 
 .register__section {
-  border-style: solid;
+/*  border-style: solid;
   border-width: 2px;
-  border-color: #020319;
+  border-color: #020319;*/
+  border-radius: 1rem;
+  background-color: #dee5ee;
 
   width: fit-content;
   height: fit-content;
@@ -28,6 +30,7 @@
 .register__header {
   margin-bottom: 2rem;
   align-self: center;
+  color: #020319;
 }
 
 .register__form {
@@ -56,13 +59,19 @@
 
   padding: 0.5rem 1rem 0.5rem 1rem;
 
-  border: 1px solid #020319;
-  border-radius: 0px;
+ /* border: 1px solid #020319;*/
+  outline: none;
+  border: none;
+  border-radius: 1rem;
 
   transition: All 0.3s ease-in;
   -webkit-transition: All 0.3s ease-in;
   -moz-transition: All 0.3s ease-in;
   -o-transition: All 0.3s ease-in;
+}
+
+.register__input:focus {
+  outline: none;
 }
 
 .register__input_box-shadow_red {
@@ -87,44 +96,34 @@
   -o-transition: All 0.3s ease-in;
 }
 
-.register__input:focus {
-  outline: none;
-  /* box-shadow: 0.1rem 0.1rem 0.2rem #c50090;
 
-  outline-width: 0;
-
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in; */
-}
 
 .register__button {
-  font-size: 1rem;
   align-self: center;
-
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
 
-  border: 1px solid #020319;
-  outline: 0;
+  background-color: #c50090;
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+
+  cursor: pointer;
 
   height: 3rem;
   width: 12rem;
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+
 }
 
 .register__button:hover {
-  box-shadow: 0.1rem 0.1rem 0.2rem #020319;
+  opacity: 80%;
+}
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+.register__button:active{
+  opacity: 90%;
 }
 
 .register__error-message {
@@ -132,6 +131,7 @@
   padding: 0.4rem;
   background-color: #ff6767;
   position: absolute;
+  border-radius: 0.5rem;
 
   transition: All 0.3s ease-in;
   -webkit-transition: All 0.3s ease-in;

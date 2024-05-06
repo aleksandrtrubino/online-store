@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Register.css";
+import {useRegisterMutation} from "../../features/auth/api/authApi";
+import {useNavigate} from "react-router-dom";
 
 const NAME_REGEX = /^([а-яёА-ЯЁ]){1,23}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[0-9]).{8,24}$/;
@@ -24,6 +26,9 @@ const Register = () => {
 
   const [matchingPassword, setMatchingPassword] = useState("");
   const [validMatchingPassword, setValidMatchingPassword] = useState(true);
+
+  const [register] = useRegisterMutation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValidLastName(
@@ -59,6 +64,15 @@ const Register = () => {
     );
   }, [password, matchingPassword]);
 
+  const validFields = () =>{
+    return validEmail
+        && validPassword
+        && validMatchingPassword
+        && validFirstName
+        && validMiddleName
+        &&validLastName;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,6 +93,21 @@ const Register = () => {
     }
     if (matchingPassword === "") {
       setValidMatchingPassword(false);
+    }
+
+    if(validFields()){
+      try{
+        const response = await register({
+          email: email,
+          password: password,
+          firstName: firstName,
+          middleName: middleName,
+          lastName: lastName}).unwrap();
+        navigate('/login')
+      }
+      catch(error){
+        console.log(error);
+      }
     }
   };
 

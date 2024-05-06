@@ -18,7 +18,7 @@ const Cart = () =>{
     return (
             cart.isSuccess ?
                 <div className='cart'>
-                    <h1 className='cart-header'>Корзина</h1>
+                    <h1 className='cart__header'>Корзина</h1>
                     <span className='cart__item-count'>Товары({cart?.data?.length})</span>
                     <div className='cart__grid'>
                         <CartList className='cart__item-list' purchases={cart.data}/>

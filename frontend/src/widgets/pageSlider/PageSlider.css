@@ -14,6 +14,10 @@
     align-self: center;
 }
 
+.page-slider_hidden{
+    display: none;
+}
+
 .page-slider__page-number{
     text-align: center;
     background-color: #f5f7fa;
