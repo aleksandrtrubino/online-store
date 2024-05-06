@@ -15,7 +15,6 @@ import DropdownSelectMenu from "../../widgets/dropdownSelectMenu/DropdownSelectM
 import SearchBar from "../../widgets/searchBar/SearchBar";
 
 
-
 const Catalog = () => {
 
     const Order = {
@@ -199,6 +198,7 @@ return (
                         itemId={selectedSubcategoryId}
                         setItemId={setSelectedSubcategoryId}/>
                     <DropdownSelectMenu
+                        style={{width: '10rem'}}
                         className='catalog__sort'
                         defaultHeader='Сортировать'
                         items={sorts}
@@ -226,7 +226,7 @@ return (
                     <button className='catalog__filters-apply-button' onClick={applyFilters}>Применить</button>
                     <button className='catalog__filters-reset-button' onClick={resetFilters}>Сбросить</button>
                 </div>
-                <ProductList products={products.data.content}/>
+                <ProductList className='catalog__product-list' products={products.data.content}/>
                 <PageSlider page={Number(searchParams.get('page'))} maxPage={products.data.totalPages}/>
             </div>
         :

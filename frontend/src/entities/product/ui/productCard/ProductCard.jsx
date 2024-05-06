@@ -43,13 +43,13 @@ const userId = useSelector(selectUserId);
   }
 
   return (
-    <div className="product-card">
+    <div className="product-card" >
 
-        <div className='product-card__image-wrapper'>
-            <img className="product-card__image" onClick={courseProductPage} src={product.images[0]?`data:image/webp;base64,${product.images[0]}`:"/images/default-product-image.jpg"} alt="Изображение продукта"/>
+        <div className='product-card__image-wrapper' onClick={courseProductPage}>
+            <img className="product-card__image"  src={product.images[0]?`data:image/webp;base64,${product.images[0]}`:"/images/default-product-image.jpg"} alt="Изображение продукта"/>
         </div>
-        <div className="product-card__price">{product.price}₽</div>
-        <div className="product-card__name">{product.name}</div>
+        <div className="product-card__price" onClick={courseProductPage}>{product.price}₽</div>
+        <div className="product-card__name" onClick={courseProductPage}>{product.name}</div>
         <FontAwesomeIcon onClick={toggleFavorite} className={'product-card__is-favorite-icon ' + (isFavorite ? 'product-card__is-favorite-icon_true':'product-card__is-favorite-icon_false')} icon={faHeart}/>
       
     </div>

@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
 import './DropdownSelectMenu.css'
 
-const DropdownSelectMenu = ({className, defaultHeader, items, itemId, setItemId}) =>{
+const DropdownSelectMenu = ({style, className, defaultHeader, items, itemId, setItemId}) =>{
 
     const [headerIcon, setHeaderIcon] = useState()
     const [header, setHeader] = useState(defaultHeader);
@@ -34,7 +34,7 @@ const DropdownSelectMenu = ({className, defaultHeader, items, itemId, setItemId}
     }, [item]);
 
     return(
-        <div className={className + ' dropdown-select-menu'}>
+        <div style={style} className={className + ' dropdown-select-menu'}>
             <div className={'dropdown-select-menu__header ' + (isOpen? 'dropdown-select-menu__header_open' : '')} onClick={toggleOpen}>
                 <div className='dropdown-select-menu__header-name'>{header}</div>
                 <FontAwesomeIcon className='dropdown-select-menu__header-icon' onClick={()=>{

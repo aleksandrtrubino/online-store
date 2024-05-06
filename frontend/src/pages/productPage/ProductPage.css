@@ -69,6 +69,8 @@
     position: absolute;
     font-size: 3rem;
     align-self: center;
+
+    cursor: pointer;
 }
 
 .product-page__right-arrow{
@@ -78,6 +80,8 @@
     position: absolute;
     font-size: 3rem;
     align-self: center;
+
+    cursor: pointer;
 }
 
 .product-page__left-arrow_hidden{
@@ -262,6 +266,8 @@
     width: 3rem;
     height: 3rem;
 
+    cursor: pointer;
+
     border-radius: 1rem;
 }
 
@@ -277,6 +283,7 @@
     border: none;
     border-radius: 1rem;
     outline: 0;
+    cursor: pointer;
 
 
 }
@@ -293,10 +300,6 @@
 
 .product-page__button-to-cart:active{
     opacity: 90%;
-    /*background-color: #f5f7fa;*/
-    /*color:  #c50090;*/
-    /*border: 3px solid #c50090;*/
-
 }
 
 .product-page__description-area {

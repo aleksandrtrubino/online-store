@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
+
+
+.cart{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    padding-left: 8rem;
+
+    width: fit-content;
+    flex-grow: 1;
+}
+
+.cart-header{
+    color: #c50090;
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+
+}
+
+.cart__item-count{
+    color: grey;
+    font-size: 2rem;
+    font-weight: 600;
+
+    margin-top: 1rem;
+}
+
+.cart__grid{
+    display: flex;
+    flex-direction: row;
+}
+
+.cart__item-list{
+    margin-top: 1rem;
+}
+
+.cart__item-menu{
+    margin-top: 1rem;
+    margin-left: 2rem;
+    position: sticky;
+    top: 2rem;
+}

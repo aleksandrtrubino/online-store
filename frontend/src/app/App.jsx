@@ -1,4 +1,8 @@
+import React from "react";
+import { Provider } from "react-redux";
+import store, {persistor} from "./store";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {PersistGate} from "redux-persist/integration/react";
 
 import Register from "../pages/register";
 import Login from "../pages/login";
@@ -7,13 +11,12 @@ import ProductPage from "../pages/productPage/ProductPage";
 import AuthLayout from "../widgets/layout/AuthLayout";
 import MainLayout from "../widgets/layout/MainLayout";
 import RequireAuth from "../features/auth/model/ReqiureAuth";
-import React from "react";
-import { Provider } from "react-redux";
-import store, {persistor} from "./store";
+import Favorites from "../pages/favorites/Favorites";
+import Cart from "../pages/cart/Cart";
 
 import { CreateProductImage } from "../entities/product/CreateProductImage";
-import {PersistGate} from "redux-persist/integration/react";
-import Favorites from "../pages/favorites/Favorites";
+import Orders from "../pages/orders/Orders";
+
 
 const App = () => {
   return (
@@ -29,9 +32,12 @@ const App = () => {
 
            <Route element={<RequireAuth />}>
             <Route element={<MainLayout />}>
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path='/favorites' element={<Favorites />}/>
-              <Route path="/product/:productId" element={<ProductPage />}/>
+                <Route path="/catalog" element={<Catalog />} />
+                <Route path='/favorites' element={<Favorites />}/>
+                <Route path="/product/:productId" element={<ProductPage />}/>
+                <Route path="/cart" element={<Cart />}/>
+                <Route path='/orderlist' element={<Orders />}/>
+
               <Route path="/product-image" element={<CreateProductImage/>}/>
             </Route>
            </Route>

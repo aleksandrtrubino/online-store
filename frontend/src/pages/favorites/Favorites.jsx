@@ -168,29 +168,29 @@ const Favorites = () => {
 
     return (
         products.isSuccess ?
-            <div className='catalog'>
+            <div className='favorites'>
                 <h1 className='favorites__header'>Избранное</h1>
-                <div className='catalog__filters'>
+                <div className='favorites__filters'>
                     <DropdownSelectMenu
-                        className='catalog__categories'
+                        className='favorites__categories'
                         defaultHeader='Категория'
                         items={categories.data}
                         itemId={selectedCategoryId}
                         setItemId={setSelectedCategoryId}/>
                     <DropdownSelectMenu
-                        className={(selectedCategoryId === '' ? 'catalog__subcategories':'')}
+                        className={(selectedCategoryId === '' ? 'favorites__subcategories':'')}
                         defaultHeader='Подкатегория'
                         items={subcategories.data}
                         itemId={selectedSubcategoryId}
                         setItemId={setSelectedSubcategoryId}/>
                     <DropdownSelectMenu
-                        className='catalog__sort'
+                        className='favorites__sort'
                         defaultHeader='Сортировать'
                         items={sorts}
                         itemId={selectedSortId}
                         setItemId={setSelectedSortId}/>
                     <DropdownSelectMenu
-                        className='catalog__order'
+                        className='favorites__order'
                         defaultHeader='Упорядочить'
                         items={orders}
                         itemId={selectedOrderId}
@@ -202,16 +202,16 @@ const Favorites = () => {
                         itemId={selectedShopId}
                         setItemId={setSelectedShopId}/>
                     <DropdownPriceMenu
-                        className='catalog__price-range'
+                        className='favorites__price-range'
                         defaultHeader='Цена'
                         priceTo={selectedPriceTo}
                         setPriceTo={setSelectedPriceTo}
                         priceFrom={selectedPriceFrom}
                         setPriceFrom={setSelectedPriceFrom}/>
-                    <button className='catalog__filters-apply-button' onClick={applyFilters}>Применить</button>
-                    <button className='catalog__filters-reset-button' onClick={resetFilters}>Сбросить</button>
+                    <button className='favorites__filters-apply-button' onClick={applyFilters}>Применить</button>
+                    <button className='favorites__filters-reset-button' onClick={resetFilters}>Сбросить</button>
                 </div>
-                <ProductList products={products.data.content}/>
+                <ProductList className='favorites__product-list' products={products.data.content}/>
                 <PageSlider page={Number(searchParams.get('page'))} maxPage={products.data.totalPages}/>
             </div>
             :

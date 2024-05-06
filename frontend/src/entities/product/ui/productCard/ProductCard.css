@@ -13,6 +13,7 @@
     padding: 0.5rem;
 
     position: relative;
+    cursor: pointer;
 
 
     transition: All 0.3s ease-in;
@@ -22,14 +23,14 @@
 
 }
 
-.product-card:hover{
-    box-shadow: 0.1rem 0.1rem 0.2rem slategray;
+.product-card:hover .product-card__image{
+    /*box-shadow: 0.1rem 0.1rem 0.2rem slategray;*/
+    transform: scale(1.02);
 
-
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 .product-card__image-wrapper{
@@ -37,6 +38,7 @@
     height: 17rem;
     background-color: #f5f7fa;
     border-radius: 1rem;
+
 
     display: flex;
     flex-direction: row;
@@ -56,11 +58,16 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 .product-card__price{
     font-weight: bolder;
-    color: black;
+    color: #020319;
 
     position: absolute;
     bottom: 3rem;
@@ -78,6 +85,8 @@
     color: black;
     font-size: 1rem;
 
+
+
     -webkit-line-clamp: 1; /* Число отображаемых строк */
     display: -webkit-box; /* Включаем флексбоксы */
     -webkit-box-orient: vertical; /* Вертикальная ориентация */
@@ -85,16 +94,17 @@
 
 }
 
+
 .product-card__is-favorite-icon{
     position: absolute;
     right: 1.5rem;
     top: 1rem;
 
     font-size: 1.5rem;
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 .product-card__is-favorite-icon_true{
@@ -102,10 +112,10 @@
     stroke: #c50090;
     stroke-width: 2.5rem;
 
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 .product-card__is-favorite-icon_false{
@@ -113,10 +123,10 @@
     stroke: grey;
     stroke-width: 2.5rem;
 
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 /*.product-card__is-favorite-icon:hover{*/

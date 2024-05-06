@@ -1,5 +1,6 @@
 package ru.vistar.kionmarket.mapper.impl;
 
+import org.springframework.stereotype.Component;
 import ru.vistar.kionmarket.domain.*;
 import ru.vistar.kionmarket.dto.ProductResponseDto;
 import ru.vistar.kionmarket.dto.PurchaseResponseDto;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PurchaseMapperImpl implements PurchaseMapper {
 
     private final ProductMapper productMapper;

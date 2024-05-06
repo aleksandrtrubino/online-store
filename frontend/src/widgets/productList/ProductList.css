@@ -8,6 +8,6 @@
     grid-template-columns: min-content min-content min-content min-content min-content;
     column-gap: 1.5rem;
     row-gap: 1rem;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    width: fit-content;
 }

@@ -1,6 +1,7 @@
 package ru.vistar.kionmarket.service.impl;
 
 import io.micrometer.common.lang.Nullable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -106,7 +107,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         if(!userRepository.existsById(userId))
             throw new ResourceNotFoundException(String.format("User with id %1$s not found", userId));
 
-        return purchaseMapper.toDto(purchaseRepository.findAllByUserIdAndPurchaseStatusId(userId, purchaseStatusId));
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        return purchaseMapper.toDto(purchaseRepository.findAllByUserIdAndPurchaseStatusId(userId, purchaseStatusId, sort));
     }
 
     @Override

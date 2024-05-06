@@ -50,11 +50,11 @@
 }
 
 .dropdown-price-menu__menu{
-    width: 100%;
+    width: 11rem;
     z-index: 1;
     position: absolute;
     background-color: #dee5ee;
-    margin-top: 2.5rem;
+
     padding-bottom: 1rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
@@ -67,7 +67,7 @@
 .dropdown-price-menu__menu-item{
 
     margin-top: 0.5rem;
-    width: 100%;
+    width: 13rem;
     display: flex;
     flex-direction: row;
     align-items: center;

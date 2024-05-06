@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
-.catalog{
+.favorites{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -17,10 +17,11 @@
     font-family: "PT Sans Narrow", sans-serif;
     font-weight: 700;
     font-size: 3rem;
-    margin-left: 6rem;
+    margin-left: 5rem;
 }
 
-.catalog__filters{
+.favorites__filters{
+    margin-left: 2rem;
     margin-top: 1rem;
     display: flex;
     flex-direction: row;
@@ -29,7 +30,7 @@
 
 }
 
-.catalog__filters-apply-button{
+.favorites__filters-apply-button{
     margin-left: 0.5rem;
     font-size: 0.85rem;
     font-weight: 700;
@@ -41,16 +42,19 @@
     height: 2.5rem;
     width: 7rem;
     border: none;
+    cursor: pointer;
+
 
     border-radius: 1rem;
 }
 
-.catalog__filters-reset-button{
+.favorites__filters-reset-button{
     margin-left: 0.5rem;
     font-size: 0.85rem;
     font-weight: 700;
     align-self: center;
     background-color: #eedddd;
+    cursor: pointer;
 
     outline: 0;
 
@@ -61,28 +65,32 @@
     border-radius: 1rem;
 }
 
-.catalog__subcategories{
+.favorites__subcategories{
     pointer-events: none;
 }
 
-.catalog__subcategories div div{
+.favorites__subcategories div div{
     color: grey;
     /*background-color: white;*/
 }
 
-.catalog__subcategories div svg{
+.favorites__subcategories div svg{
     color: grey;
 }
 
-.catalog__sort{
+.favorites__sort{
     width: 9rem;
 }
 
-.catalog__order{
+.favorites__order{
     width: 10rem;
 }
 
-.catalog__price-range{
+.favorites__price-range{
     width: 11rem;
+}
+
+.favorites__product-list{
+    margin-left: 2rem;
 }
 

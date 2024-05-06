@@ -1,9 +1,14 @@
 import { baseApi } from "../../../shared/api/baseApi";
-import {createApi} from "@reduxjs/toolkit/query/react";
-import api from "js-cookie";
 
 const CartApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
+        getCartItems: build.query({
+            query: () =>({
+                url: '/purchases?purchaseStatusId=1001',
+                method: 'GET'
+            }),
+            providesTags: ['Cart']
+        }),
         addToCart: build.mutation({
             query: ({productId, userId}) =>({
                 url: `/purchases`,
@@ -14,15 +19,17 @@ const CartApi = baseApi.injectEndpoints({
                     productId: productId,
                     purchaseStatusId: 1001
                 }
-            })
+            }),
+            invalidatesTags: ['Cart']
         }),
         removeFromCart: build.mutation({
             query: ({productId, userId}) =>({
                 url: `/purchases?productId=${productId}&purchaseStatusId=1001`,
                 method: "DELETE"
-            })
+            }),
+            invalidatesTags: ['Cart']
         })
     })
 })
 
-export const {useAddToCartMutation, useRemoveFromCartMutation} = CartApi
+export const {useAddToCartMutation, useRemoveFromCartMutation, useGetCartItemsQuery} = CartApi
