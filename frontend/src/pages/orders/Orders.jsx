@@ -1,37 +1,53 @@
 
-import CartList from "../../widgets/cartList/CartList";
-import {useNavigate} from "react-router-dom";
-import CartMenu from "../../widgets/cartMenu/CartMenu";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useGetOrdersQuery} from "../../entities/order/api/OrderApi";
 
 import './Orders.css'
+import OrderList from "../../widgets/orderList/OrderList";
+import {useEffect, useState} from "react";
+import PurchaseList from "../../widgets/purchaseList/PurchaseList";
 
 const Orders = () =>{
 
     const navigate = useNavigate();
-    const orders = useGetOrdersQuery()
-    console.log(orders.data)
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const courseProductPage = () => {
-        navigate(`/product/${orders.data.product.id}`)
+    useEffect(() => {
+        const param = searchParams.get('purchased')
+        if(param === null){
+            searchParams.set('purchased', '0')
+            setSearchParams(searchParams)
+        }
+    }, []);
+
+    const courseOrders = () =>{
+        searchParams.set('purchased', '0')
+        setSearchParams(searchParams)
+    }
+
+    const coursePurchases = () =>{
+        searchParams.set('purchased', '1')
+        setSearchParams(searchParams)
     }
 
     return (
-        orders.isSuccess ?
             <div className='orders'>
-                <h1 className='orders-header'>Заказы</h1>
-                <span className='orders__item-count'>Товары({orders?.data?.length})</span>
+                <div className='orders__headers'>
+                    <h1 className={(searchParams.get('purchased') === '0' ? 'orders-header__header_highlighted' : '') + ' orders-header__header'} onClick={courseOrders}>Заказы</h1>
+                    <h1 className={(searchParams.get('purchased') === '1' ? 'orders-header__header_highlighted' : '') + ' orders-header__header'} onClick={coursePurchases}>Купленные товары</h1>
+                </div>
                 <div className='orders__grid'>
-                    <CartList className='orders__item-list' purchases={orders.data}/>
+                    {
+                        searchParams.get('purchased') === '0' ?
+                            <OrderList />
+                            :
+                            searchParams.get('purchased') === '1' ?
+                                <PurchaseList />
+                                :
+                                'error'
+                    }
                 </div>
             </div>
-            :
-            orders.isLoading ? 'loading...'
-                :
-                orders.isError ?
-                    'error'
-                    :
-                    'undefined '
     )
 }
 

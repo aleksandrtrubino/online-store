@@ -1,0 +1,13 @@
+
+.order-list{
+    display: grid;
+    row-gap: 0.5rem;
+}
+
+.order-list__item-count{
+    color: #020319;
+    font-size: 2rem;
+    font-weight: 600;
+
+    margin-top: 1rem;
+}
