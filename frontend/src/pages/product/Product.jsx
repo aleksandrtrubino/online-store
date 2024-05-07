@@ -14,7 +14,7 @@ import {
     faChevronLeft,
     faShop,
     faCircle as solidCircle,
-    faHeart
+    faHeart, faStar
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
 import './Product.css'
@@ -137,11 +137,21 @@ const Product = () =>{
 
     }
 
-    const getIsFavorite = () =>{
-        if(isFavorite === undefined) {
-            return product.isFavorite;
+
+    const getReviewsAndName = (reviewCount) => {
+        let word = ' отзывов'
+        if(!(reviewCount > 10 && reviewCount < 20)){
+            const lastDigit = reviewCount % 10;
+            switch(lastDigit){
+                case 1:
+                    word = ' отзыв';
+                case 2:
+                case 3:
+                case 4:
+                    word = ' отзыва';
+            }
         }
-        return isFavorite
+        return reviewCount + word;
     }
 
     return(
@@ -159,7 +169,9 @@ const Product = () =>{
                         {product.name}
                     </div>
                     <div className='product-page__rating-reviews'>
-
+                        <div className={(product.averageRating === null ? 'product-page__review-count_hidden' : '') +' product-page__review-count'}>{getReviewsAndName(product.reviewCount)}</div>
+                        <FontAwesomeIcon className={(product.averageRating === null ? 'product-page__star-icon_hidden' : '') +' product-page__star-icon'} icon={faStar} />
+                        <div className={(product.averageRating === null ? 'product-page__rating_hidden' : '') +' product-page__rating'}>{(Math.round(product.averageRating * 10) / 10).toFixed(1)}</div>
                     </div>
 
                     <div className='product-page__details'>

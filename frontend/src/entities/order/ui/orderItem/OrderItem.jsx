@@ -25,7 +25,7 @@ const OrderItem = ({purchase}) =>{
         return day +'.' + month + '.' + year;
     }
 
-    const add = async () =>{
+    const receiveOrder = async () =>{
         try{
             const purchaseId = purchase.id;
             const response = await addPurchase({purchaseId}).unwrap()
@@ -49,8 +49,8 @@ const OrderItem = ({purchase}) =>{
                 <div className="order-item__name" onClick={courseProductPage}>{purchase.product.name}</div>
             </div>
             <div className='order-item__date-area'>
-                {/*<button onClick={add}>Отметить полученным</button>*/}
-                Дата заказа: {toDate(purchase.updatedAt)}
+                <button className='order-item__receive-button' onClick={receiveOrder}>Получил</button>
+                <span className='order-item__date'>{'Дата заказа: ' + toDate(purchase.updatedAt)}</span>
             </div>
 
         </div>

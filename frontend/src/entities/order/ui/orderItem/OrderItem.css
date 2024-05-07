@@ -10,7 +10,7 @@
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 13rem 30rem 12rem;
-    grid-template-rows: 11rem 2rem;
+    grid-template-rows: 8rem 5rem;
     grid-template-areas:
     "image-area name-area price-area"
     "image-area name-area icon-area";
@@ -116,8 +116,39 @@
 
 .order-item__date-area{
     font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
 }
 
+.order-item__receive-button{
+    margin-bottom: 0.5rem;
+    align-self: flex-end;
+    margin-right: 1rem;
+
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: #c50090;
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+
+    width: 7rem;
+    height: 2.5rem;
+
+    cursor: pointer;
+
+}
+
+.order-item__receive-button:hover{
+    opacity: 80%;
+}
+
+.order-item__receive-button:active{
+    opacity: 90%;
+}
 
 /*.cart-item__is-favorite-icon_true{*/
 /*    color: #c50090;*/

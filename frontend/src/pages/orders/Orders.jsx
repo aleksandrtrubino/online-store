@@ -31,6 +31,11 @@ const Orders = () =>{
     }
 
     return (
+        <>
+        {/*<div className='orders__dimmer'></div>*/}
+        {/*<div className='orders__review'>*/}
+        {/*    <div className='orders__review-product-name'>{}</div>*/}
+        {/*</div>*/}
             <div className='orders'>
                 <div className='orders__headers'>
                     <h1 className={(searchParams.get('purchased') === '0' ? 'orders-header__header_highlighted' : '') + ' orders-header__header'} onClick={courseOrders}>Заказы</h1>
@@ -48,6 +53,8 @@ const Orders = () =>{
                     }
                 </div>
             </div>
+        </>
+
     )
 }
 

@@ -65,12 +65,53 @@
     -o-transition: All 0.2s ease-in;
 }
 
+
+
+.product-card__rating{
+    font-weight: 500;
+    font-size: 1rem;
+    color: darkgrey;
+    position: absolute;
+    bottom: 3.2rem;
+    left: 13.8rem;
+}
+
+.product-card__rating_hidden{
+    display: none;
+}
+
+.product-card__star-icon{
+    font-size: 0.9rem;
+    color: #ffa800;
+    position: absolute;
+    bottom: 3.5rem;
+    left: 12.5rem;
+}
+
+.product-card__star-icon_hidden{
+    display: none;
+}
+
+.product-card__review-count{
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: darkgrey;
+    position: absolute;
+    bottom: 3.25rem;
+    left: 8rem;
+}
+
+.product-card__review-count_hidden{
+    display: none;
+}
+
 .product-card__price{
     font-weight: bolder;
     color: #020319;
 
     position: absolute;
     bottom: 3rem;
+    left: 1.21rem;
 
     -khtml-user-select: none;
     -o-user-select: none;
@@ -81,9 +122,12 @@
 
 .product-card__name{
     bottom: 2rem;
+    left: 1.2rem;
     position: absolute;
     color: black;
     font-size: 1rem;
+
+    width: 15rem;
 
 
 

@@ -8,11 +8,40 @@
     align-content: flex-start;
     justify-content: flex-start;
 
-    padding-left: 20rem;
+    margin-left: 20rem;
 
     width: fit-content;
     flex-grow: 1;
 }
+
+/*.orders_inactive{*/
+/*    pointer-events: none;*/
+/*}*/
+
+/*.orders__dimmer{*/
+/*    width: 1519px;*/
+/*    height: 100vh;*/
+
+/*    background-color: black;*/
+/*    opacity: 0.6;*/
+/*    margin-top: -6rem;*/
+/*    position: absolute;*/
+/*    z-index: 2;*/
+/*    pointer-events: none;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.orders__review{*/
+/*    position: fixed;*/
+/*    width: 20rem;*/
+/*    height: 20rem;*/
+/*    background-color: #f5f7fa;*/
+/*    align-self: center;*/
+/*    margin-top: 5rem;*/
+/*    z-index: 3;*/
+
+/*    border-radius: 1rem;*/
+/*}*/
 
 .orders__headers{
     display: flex;

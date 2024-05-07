@@ -40,6 +40,25 @@ const Login = () => {
   //   doLogout()
   // },[])
 
+  const defaultPasswordMessage = (
+      <p>
+        Пароль должен содержать не менее 8 символов
+        <br /> и включать в себя цифры и латинские буквы. <br />
+        Допускаются буквы верхнего регистра и специальные символы.
+      </p>
+  );
+
+  const invalidPasswordMessage = (
+      <p>
+        Неправильный пароль
+      </p>
+  )
+
+  const defaultEmailMessage = (
+      <p>Введите корректный адрес электронной почты.</p>
+  )
+
+
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email) || email === "" ? true : false);
   }, [email]);
@@ -141,7 +160,7 @@ const Login = () => {
                 }
                 id="email"
               >
-                <p>Введите корректный адрес электронной почты.</p>
+                {defaultEmailMessage}
               </div>
             </div>
 
@@ -172,11 +191,7 @@ const Login = () => {
                 }
                 id="password"
               >
-                <p>
-                  Пароль должен содержать не менее 8 символов
-                  <br /> и включать в себя цифры и латинские буквы. <br />
-                  Допускаются буквы верхнего регистра и специальные символы.
-                </p>
+                {defaultPasswordMessage}
               </div>
             </div>
 

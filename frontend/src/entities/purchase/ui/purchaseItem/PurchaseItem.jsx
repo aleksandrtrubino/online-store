@@ -37,7 +37,9 @@ const PurchaseItem = ({purchase}) =>{
                 <div className="purchase-item__name" onClick={courseProductPage}>{purchase.product.name}</div>
             </div>
             <div className='purchase-item__date-area'>
-                Дата покупки: {toDate(purchase.updatedAt)}
+                <button className='purchase-item__receive-button' >Оставить отзыв</button>
+                <span className='purchase-item__date'>{'Дата заказа: ' + toDate(purchase.updatedAt)}</span>
+
             </div>
 
         </div>

@@ -107,15 +107,45 @@
     background-color: #f5f7fa;
     border-radius: 1rem;
 
-    height: 28rem;
+    height: 26rem;
 
-    padding-top: 2rem;
-    padding-left: 2rem;
+    padding: 2rem;
 }
 
 .product-page__name{
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-page__rating-reviews{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+}
+
+.product-page__review-count{
+    font-weight: 500;
+    color: darkgrey;
+}
+
+.product-page__review-count_hidden{
+
+}
+
+.product-page__star-icon{
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: #ffa800;
+}
+
+.product-page__star-icon_hidden{
+  color: darkgrey;
+}
+
+.product-page__rating{
+    font-weight: 500;
+    color: darkgrey;
+    margin-left: 0.3rem;
 }
 
 .product-page__details{
