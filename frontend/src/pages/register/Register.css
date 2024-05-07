@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
+
+
 .register__wrapper {
   display: flex;
   flex-direction: column;
@@ -29,6 +32,7 @@
 
 .register__header {
   margin-bottom: 2rem;
+  font-family: "PT Sans Narrow", sans-serif;
   align-self: center;
   color: #020319;
 }
@@ -62,12 +66,14 @@
  /* border: 1px solid #020319;*/
   outline: none;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+  font-family: "Source Sans 3", sans-serif;
+
+  transition: All 0.2s ease-in;
+  -webkit-transition: All 0.2s ease-in;
+  -moz-transition: All 0.2s ease-in;
+  -o-transition: All 0.2s ease-in;
 }
 
 .register__input:focus {
@@ -79,10 +85,10 @@
 
   outline-width: 0;
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+  transition: All 0.2s ease-in;
+  -webkit-transition: All 0.2s ease-in;
+  -moz-transition: All 0.2s ease-in;
+  -o-transition: All 0.2s ease-in;
 }
 
 .register__input_box-shadow_green {
@@ -90,10 +96,10 @@
 
   outline-width: 0;
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+  transition: All 0.2s ease-in;
+  -webkit-transition: All 0.2s ease-in;
+  -moz-transition: All 0.2s ease-in;
+  -o-transition: All 0.2s ease-in;
 }
 
 
@@ -133,10 +139,10 @@
   position: absolute;
   border-radius: 0.5rem;
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+  transition: All 0.2s ease-in;
+  -webkit-transition: All 0.2s ease-in;
+  -moz-transition: All 0.2s ease-in;
+  -o-transition: All 0.2s ease-in;
 }
 
 .register__error-message_hidden {
@@ -146,10 +152,10 @@
   position: absolute;
   opacity: 0;
 
-  transition: All 0.3s ease-in;
-  -webkit-transition: All 0.3s ease-in;
-  -moz-transition: All 0.3s ease-in;
-  -o-transition: All 0.3s ease-in;
+  transition: All 0.2s ease-in;
+  -webkit-transition: All 0.2s ease-in;
+  -moz-transition: All 0.2s ease-in;
+  -o-transition: All 0.2s ease-in;
 }
 
 .register__error-message#last-name {
@@ -179,48 +185,46 @@
 
 .register__error-message#matching-password {
   margin-left: 22rem;
-  margin-top: -2.3rem;
+  margin-top: -2.4rem;
 }
 
 .register__error-message:after {
   top: 50%;
-  border: solid transparent;
   content: "";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-color: rgba(0, 0, 0, 0);
+  border: 0.4rem solid transparent;
   border-right-color: #ff6767;
-  border-width: 0.5rem;
 }
 
 .register__error-message#last-name::after {
-  margin-top: -0.5rem;
+  margin-top: -0.4rem;
   right: 18.9rem;
 }
 
 .register__error-message#first-name::after {
-  margin-top: -0.5rem;
+  margin-top: -0.4rem;
   right: 18.9rem;
 }
 
 .register__error-message#middle-name::after {
-  margin-top: -0.5rem;
+  margin-top: -0.4rem;
   right: 18.9rem;
 }
 
 .register__error-message#email::after {
-  margin-top: -0.5rem;
+  margin-top: -0.4rem;
   right: 17.6rem;
 }
 
 .register__error-message#password::after {
-  margin-top: -0.5rem;
+  margin-top: -0.4rem;
   right: 23.3rem;
 }
 
 .register__error-message#matching-password::after {
-  margin-top: -0.5rem;
+  margin-top: -0.4rem;
   right: 8.6rem;
 }

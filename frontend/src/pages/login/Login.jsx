@@ -26,19 +26,19 @@ const Login = () => {
   const [login] = useLoginMutation()
   const [logoutMutation] = useLogoutMutation()
 
-  const doLogout = async () =>{
-    try{
-      dispatch(logout());
-      const response = await logoutMutation().unwrap();
-    }
-    catch(error){
-      console.log(error)
-    }
-  }
+  // const doLogout = async () =>{
+  //   try{
+  //     dispatch(logout());
+  //     const response = await logoutMutation().unwrap();
+  //   }
+  //   catch(error){
+  //     console.log(error)
+  //   }
+  // }
 
-  useEffect(()=> {
-    doLogout()
-  },[])
+  // useEffect(()=> {
+  //   doLogout()
+  // },[])
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email) || email === "" ? true : false);
@@ -74,6 +74,13 @@ const Login = () => {
         //     withCredentials: true,
         //   }
         // );
+        try{
+          dispatch(logout());
+          const response = await logoutMutation().unwrap();
+        }
+        catch(error){
+          console.log(error)
+        }
         console.log("Login: request is sent")
         const response = await login({email, password}).unwrap();
         console.log("token: "+ response?.token)

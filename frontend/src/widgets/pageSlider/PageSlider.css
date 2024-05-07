@@ -37,6 +37,7 @@
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+    cursor: pointer;
 
     margin-right: 1rem;
     background-color: #f5f7fa;
@@ -56,6 +57,7 @@
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+    cursor: pointer;
 
     margin-left: 1rem;
     background-color: #f5f7fa;

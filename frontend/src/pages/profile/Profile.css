@@ -1,0 +1,106 @@
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.profile__section{
+    background-color: #dee5ee;
+    border-radius: 1rem;
+
+    width: fit-content;
+    height: fit-content;
+
+    padding: 4rem 2rem 2rem 3rem;
+
+    display: grid;
+    grid-template-columns: 7rem 20rem;
+    grid-template-rows: 7rem 13rem;
+    grid-template-areas:
+    "icon-area info-area"
+    "icon-area info-area";
+}
+
+.profile__icon-area{
+    grid-area: icon-area;
+    display: flex;
+}
+
+.profile__icon{
+    /*display:inline-block;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    font-size:4rem;
+    font-weight: 700;
+    color:darkgrey;
+
+    width:7rem;
+    height:7rem;
+
+    line-height:2.5em;
+    text-align:center;
+    border-radius:50%;
+
+    background-color: lightgrey;
+
+    /*vertical-align:middle;*/
+    /*margin-right:1rem;*/
+
+}
+
+.profile__info-area{
+    margin-left: 2rem;
+    grid-area: info-area;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__info{
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+
+    margin-bottom: 0.5rem;
+}
+
+.profile__info-header{
+    font-size: 1rem;
+    font-weight: 500;
+    color: grey;
+}
+
+.profile__info-content{
+    margin-top: -0.3rem;
+}
+
+.profile__logout-button{
+    margin-top: auto;
+
+    color: grey;
+
+    border: none;
+    background-color: inherit;
+
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.profile__logout-button:hover{
+    color: #c50090;
+}
+
+.profile__logout-name{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.profile__logout-icon{
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}

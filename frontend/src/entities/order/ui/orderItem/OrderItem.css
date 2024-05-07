@@ -58,10 +58,10 @@
     -webkit-user-select: none;
     user-select: none;
 
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 .order-item__image:hover{

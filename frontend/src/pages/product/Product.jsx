@@ -17,7 +17,7 @@ import {
     faHeart
 } from '@fortawesome/free-solid-svg-icons'
 import {faCircle as regularCircle} from "@fortawesome/free-regular-svg-icons";
-import './ProductPage.css'
+import './Product.css'
 import {selectUserId} from "../../features/auth/model/authSlice";
 import {useAddToCartMutation, useRemoveFromCartMutation} from "../../entities/cart/api/CartApi";
 
@@ -67,7 +67,7 @@ const ImageSlider = ({images}) => {
 
 }
 
-const ProductPage = () =>{
+const Product = () =>{
     const {productId} = useParams()
     const dispatch = useDispatch();
 
@@ -230,4 +230,4 @@ const ProductPage = () =>{
     )
 }
 
-export default ProductPage;
+export default Product;

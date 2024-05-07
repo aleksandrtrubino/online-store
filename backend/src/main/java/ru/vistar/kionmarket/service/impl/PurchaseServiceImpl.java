@@ -107,7 +107,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         if(!userRepository.existsById(userId))
             throw new ResourceNotFoundException(String.format("User with id %1$s not found", userId));
 
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        Sort sort = Sort.by(Sort.Direction.DESC, "updatedAt");
         return purchaseMapper.toDto(purchaseRepository.findAllByUserIdAndPurchaseStatusId(userId, purchaseStatusId, sort));
     }
 

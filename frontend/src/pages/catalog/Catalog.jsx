@@ -198,7 +198,7 @@ return (
                         itemId={selectedSubcategoryId}
                         setItemId={setSelectedSubcategoryId}/>
                     <DropdownSelectMenu
-                        style={{width: '10rem'}}
+                        // style={{width: '10rem'}}
                         className='catalog__sort'
                         defaultHeader='Сортировать'
                         items={sorts}

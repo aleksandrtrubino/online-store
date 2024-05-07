@@ -239,10 +239,10 @@
     stroke: #c50090;
     stroke-width: 2.5rem;
 
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2 ease-in;
 }
 
 .product-page__to-favorite-icon_false{
@@ -250,10 +250,10 @@
     stroke: #c50090;
     stroke-width: 2.5rem;
 
-    transition: All 0.3s ease-in;
-    -webkit-transition: All 0.3s ease-in;
-    -moz-transition: All 0.3s ease-in;
-    -o-transition: All 0.3s ease-in;
+    transition: All 0.2s ease-in;
+    -webkit-transition: All 0.2s ease-in;
+    -moz-transition: All 0.2s ease-in;
+    -o-transition: All 0.2s ease-in;
 }
 
 .product-page__button-to-favorites{

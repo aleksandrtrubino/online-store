@@ -83,6 +83,7 @@
     outline: none;
     border: none;
     border-radius: 0.5rem;
+    font-family: "Source Sans 3", sans-serif;
 }
 
 .dropdown-price-menu__menu-item-icon{

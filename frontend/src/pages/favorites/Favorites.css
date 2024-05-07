@@ -21,7 +21,8 @@
 }
 
 .favorites__filters{
-    margin-left: 2rem;
+    margin-left: 1rem;
+    align-self: center;
     margin-top: 1rem;
     display: flex;
     flex-direction: row;

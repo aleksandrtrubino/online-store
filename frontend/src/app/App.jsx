@@ -6,16 +6,18 @@ import {PersistGate} from "redux-persist/integration/react";
 
 import Register from "../pages/register";
 import Login from "../pages/login";
-import Catalog from "../pages/catalog";
-import ProductPage from "../pages/productPage/ProductPage";
+import Product from "../pages/product/Product";
 import AuthLayout from "../widgets/layout/AuthLayout";
 import MainLayout from "../widgets/layout/MainLayout";
 import RequireAuth from "../features/auth/model/ReqiureAuth";
+import DropdownSelectMenu from "../widgets/dropdownSelectMenu/DropdownSelectMenu";
 import Favorites from "../pages/favorites/Favorites";
+import Catalog from "../pages/catalog/Catalog";
 import Cart from "../pages/cart/Cart";
 
 import { CreateProductImage } from "../entities/product/CreateProductImage";
 import Orders from "../pages/orders/Orders";
+import Profile from "../pages/profile/Profile";
 
 
 const App = () => {
@@ -34,9 +36,10 @@ const App = () => {
             <Route element={<MainLayout />}>
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path='/favorites' element={<Favorites />}/>
-                <Route path="/product/:productId" element={<ProductPage />}/>
+                <Route path="/product/:productId" element={<Product />}/>
                 <Route path="/cart" element={<Cart />}/>
                 <Route path='/orderlist' element={<Orders />}/>
+                <Route path='/profile' element={<Profile />}/>
 
               <Route path="/product-image" element={<CreateProductImage/>}/>
             </Route>
