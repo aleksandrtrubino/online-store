@@ -154,7 +154,6 @@ const Catalog = () => {
         setSelectedShopId('');
         setSelectedPriceFrom('');
         setSelectedPriceTo('');
-        setSelectedSearch('');
 
         searchParams.set('page',1)
         searchParams.set('sort', Sort.BY_DATE)

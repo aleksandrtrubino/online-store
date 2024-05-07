@@ -15,6 +15,8 @@ public class ProductResponseDto {
     private Boolean isDiscount;
     private Boolean isFavorite;
     private Boolean isInCart;
+    private Double averageRating;
+    private Integer reviewCount;
     private Subcategory subcategory;
     private Shop shop;
     private List<byte[]> images;
@@ -113,6 +115,22 @@ public class ProductResponseDto {
 
     public void setIsInCart(Boolean inCart) {
         isInCart = inCart;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public Integer getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Integer reviewCount) {
+        this.reviewCount = reviewCount;
     }
 
     public Boolean getIsDiscount(){

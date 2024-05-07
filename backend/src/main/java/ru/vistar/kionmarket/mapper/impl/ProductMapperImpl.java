@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.vistar.kionmarket.domain.*;
 import ru.vistar.kionmarket.dto.ProductResponseDto;
 import ru.vistar.kionmarket.mapper.ProductMapper;
+import ru.vistar.kionmarket.repository.ProductRepository;
 import ru.vistar.kionmarket.repository.PurchaseRepository;
 import ru.vistar.kionmarket.repository.UserRepository;
 import ru.vistar.kionmarket.util.FileStorageUtil;
@@ -22,12 +23,14 @@ public class ProductMapperImpl implements ProductMapper {
     private final FileStorageUtil fileStorageUtil;
     private final UserRepository userRepository;
     private final PurchaseRepository purchaseRepository;
+    private final ProductRepository productRepository;
 
 
-    public ProductMapperImpl(FileStorageUtil fileStorageUtil, UserRepository userRepository, PurchaseRepository purchaseRepository) {
+    public ProductMapperImpl(FileStorageUtil fileStorageUtil, UserRepository userRepository, PurchaseRepository purchaseRepository, ProductRepository productRepository) {
         this.fileStorageUtil = fileStorageUtil;
         this.userRepository = userRepository;
         this.purchaseRepository = purchaseRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -70,6 +73,9 @@ public class ProductMapperImpl implements ProductMapper {
         Boolean isFavorite = favorites.contains(product);
         Boolean isInCart = !purchaseRepository.findAllByUserIdAndPurchaseStatusIdAndProductId(userId, 1001L,id).isEmpty();
 
+        Double averageRating = productRepository.getAverageRatingByProductId(id);
+        Integer reviewCount = productRepository.getReviewCountByProductId(id);
+
         List<byte[]> images = new ArrayList<>();
 
         int MAX_IMAGES = 10;
@@ -94,6 +100,8 @@ public class ProductMapperImpl implements ProductMapper {
         responseDto.setIsDiscount(isDiscount);
         responseDto.setIsFavorite(isFavorite);
         responseDto.setIsInCart(isInCart);
+        responseDto.setAverageRating(averageRating);
+        responseDto.setReviewCount(reviewCount);
         responseDto.setSubcategory(subcategory);
         responseDto.setShop(shop);
         responseDto.setImages(images);
