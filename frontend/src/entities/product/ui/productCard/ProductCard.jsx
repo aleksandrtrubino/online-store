@@ -54,7 +54,7 @@ const userId = useSelector(selectUserId);
           }
       }
       return reviewCount + word;
-    }
+  }
 
   const courseProductPage = () => {
       navigate(`/product/${product.id}`)

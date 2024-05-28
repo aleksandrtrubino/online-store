@@ -49,7 +49,7 @@ const OrderItem = ({purchase}) =>{
                 <div className="order-item__name" onClick={courseProductPage}>{purchase.product.name}</div>
             </div>
             <div className='order-item__date-area'>
-                <button className='order-item__receive-button' onClick={receiveOrder}>Получил</button>
+                {/*<button className='order-item__receive-button' onClick={receiveOrder}>Получил</button>*/}
                 <span className='order-item__date'>{'Дата заказа: ' + toDate(purchase.updatedAt)}</span>
             </div>
 

@@ -5,7 +5,7 @@ import './Footer.css';
 
 const Footer = () => {
 
-  const footerText = "© ООО \"Вистар\",⠀2009-2024"
+  const footerText = "© ООО \"Компания\",⠀2009-2024"
 
   return (
     <>

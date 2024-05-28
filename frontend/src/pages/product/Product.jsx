@@ -141,14 +141,16 @@ const Product = () =>{
     const getReviewsAndName = (reviewCount) => {
         let word = ' отзывов'
         if(!(reviewCount > 10 && reviewCount < 20)){
-            const lastDigit = reviewCount % 10;
+            const lastDigit = reviewCount < 10 ? reviewCount : reviewCount % 10;
             switch(lastDigit){
                 case 1:
                     word = ' отзыв';
+                    break;
                 case 2:
                 case 3:
                 case 4:
                     word = ' отзыва';
+                    break;
             }
         }
         return reviewCount + word;
