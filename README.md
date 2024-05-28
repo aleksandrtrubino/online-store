@@ -10,6 +10,10 @@
 * React Redux, React Persist
 * PostgreSQL, Liquibase
 # Скриншоты
+* Каталог
 ![catalog](https://raw.githubusercontent.com/aleksandrtrubino/online-store/73140b7473366dbcbc4e73f662f698acdcc117db/screenshots/online-store-1.png)
+* Заказы
 ![orders](https://raw.githubusercontent.com/aleksandrtrubino/online-store/73140b7473366dbcbc4e73f662f698acdcc117db/screenshots/online-store-1.png)
+* Страница продукта
 ![product](https://raw.githubusercontent.com/aleksandrtrubino/online-store/73140b7473366dbcbc4e73f662f698acdcc117db/screenshots/online-store-1.png)
+
